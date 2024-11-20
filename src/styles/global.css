@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-size: 125%; /* Default browser size (16px). */
+    /* Example of scaling: */
+    /* font-size: 62.5%; Makes 1rem = 10px for easier calculations. */
+  }
   @font-face {
     font-family: "Geist";
     src: url("/fonts/geist-variable.woff2") format("woff2");
