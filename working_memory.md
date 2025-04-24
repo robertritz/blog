@@ -44,7 +44,27 @@ Deployment still failing with the same error:
 Hypothesis: Git may not have correctly registered the file rename from `Main.astro` to `main.astro` due to macOS case-insensitivity.
 
 Debugging Steps:
+
 1. Verified the import path `../layouts/main.astro` in `src/pages/404.astro` is correct.
 2. Added `RUN ls -la /app/src/layouts` to `Dockerfile` before the `npm run build` step to check the actual file casing inside the Docker container during build.
 
 **Next Step:** Retry `kamal deploy` and examine the output of the new `ls` command in the build logs.
+
+---
+
+## Update (2024-04-24 - Attempt 2):
+
+The `ls -la /app/src/layouts` command in the Docker build log confirmed the file was still named `Main.astro` (uppercase M) inside the container.
+
+**Root Cause:** Git on macOS (case-insensitive) did not properly register the file rename from `Main.astro` to `main.astro` (lowercase m). The import in `src/pages/404.astro` was `../layouts/main.astro`.
+
+**Solution:**
+1. Forced Git to recognize the case change using a two-step `git mv` locally:
+   ```bash
+   git mv src/layouts/Main.astro src/layouts/temp_main.astro
+   git mv src/layouts/temp_main.astro src/layouts/main.astro
+   ```
+2. Committed the change.
+3. Removed the temporary `ls` command from the `Dockerfile`.
+
+**Next Step:** Retry `kamal deploy` after committing the forced rename.
