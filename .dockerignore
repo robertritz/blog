@@ -1,0 +1,34 @@
+# Git files
+.git
+.gitignore
+
+# Node modules
+node_modules
+
+# Kamal build cache / secrets
+.kamal
+/tmp/kamal-clones
+
+# Build output
+dist
+.astro
+
+# Environment variables
+.env*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode
+.idea
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Other
+working_memory.md 

@@ -1,9 +1,11 @@
 # Docker Build Issue
 
 The build consistently fails with:
+
 ```
 [vite:load-fallback] Could not load /app/src/layouts/main.astro (imported by src/pages/404.astro): ENOENT: no such file or directory, open '/app/src/layouts/main.astro'
 ```
+
 This indicates an issue resolving the `~/layouts/main.astro` path alias during the remote Docker build, despite configurations in `vite.config.js` and `astro.config.mjs`.
 
 ## Files checked:
@@ -21,11 +23,12 @@ This indicates an issue resolving the `~/layouts/main.astro` path alias during t
 4. Changed import to correct relative path `../../layouts/main.astro` in the codebase
 5. Reverted to alias `~/layouts/main.astro` and relied on project's `vite.config.js` copied into Docker
 6. Added alias config directly to `astro.config.mjs` using `path.resolve(process.cwd(), "src")`.
+7. Modified alias config in `astro.config.mjs` using relative `path.resolve("./src")`.
 
 ## Current Strategy:
 
 1. Kept `src/pages/404.astro` using the path alias `~/layouts/main.astro`
-2. **Modified alias config in `astro.config.mjs`**: Changed resolution from `path.resolve(process.cwd(), "src")` to `path.resolve("./src")`.
+2. **Modified alias config in `astro.config.mjs`**: Changed resolution to use the absolute path `/app/src`.
 
    ```javascript
    import path from "path"
@@ -37,7 +40,7 @@ This indicates an issue resolving the `~/layouts/main.astro` path alias during t
        plugins: [tailwindcss()],
        resolve: {
          alias: {
-           "~": path.resolve("./src"), // Use relative resolution from config file location
+           "~": "/app/src", // Use absolute path within the container
          },
        },
      },
@@ -47,7 +50,7 @@ This indicates an issue resolving the `~/layouts/main.astro` path alias during t
    })
    ```
 
-3. Ensured `vite.config.js` still exists in the project root (it might be redundant now, but harmless).
+3. **Removed `vite.config.js`**: Deleted the separate Vite config file as it's now redundant.
 4. Kept the simplified Dockerfile.
 
-Rationale: `process.cwd()` might behave unpredictably in the remote build environment. Using `path.resolve("./src")` resolves the path relative to the `astro.config.mjs` file itself, which should be more stable as its location (`/app/astro.config.mjs`) within the container is fixed after the `COPY . .` step.
+Rationale: Using an explicit, absolute path `/app/src` for the alias within the primary `astro.config.mjs` removes any potential ambiguity related to path resolution (`path.resolve`, `process.cwd()`) in the remote build environment. If the file exists at `/app/src/layouts/main.astro` after `COPY . .`, this alias *must* resolve correctly unless there's a fundamental issue with Vite/Astro or the build environment itself.
