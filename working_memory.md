@@ -1,12 +1,10 @@
 # Docker Build Issue
 
-The build is failing with the error:
-
+The build consistently fails with:
 ```
-[vite]: Rollup failed to resolve import "~/layouts/main.astro" from "/app/src/pages/404.astro".
+[vite:load-fallback] Could not load /app/src/layouts/main.astro (imported by src/pages/404.astro): ENOENT: no such file or directory, open '/app/src/layouts/main.astro'
 ```
-
-Issue seems related to path alias (`~`) resolution during the Docker build, even with `vite.config.js` present.
+This indicates an issue resolving the `~/layouts/main.astro` path alias during the remote Docker build, despite configurations in `vite.config.js` and `astro.config.mjs`.
 
 ## Files checked:
 
@@ -22,22 +20,24 @@ Issue seems related to path alias (`~`) resolution during the Docker build, even
 3. Attempted to create a custom 404.astro file with absolute path in Dockerfile
 4. Changed import to correct relative path `../../layouts/main.astro` in the codebase
 5. Reverted to alias `~/layouts/main.astro` and relied on project's `vite.config.js` copied into Docker
+6. Added alias config directly to `astro.config.mjs` using `path.resolve(process.cwd(), "src")`.
 
 ## Current Strategy:
 
 1. Kept `src/pages/404.astro` using the path alias `~/layouts/main.astro`
-2. **Added alias config directly to `astro.config.mjs`**: 
+2. **Modified alias config in `astro.config.mjs`**: Changed resolution from `path.resolve(process.cwd(), "src")` to `path.resolve("./src")`.
+
    ```javascript
    import path from "path"
    // ... other imports
-   
+
    export default defineConfig({
      // ... other config
      vite: {
        plugins: [tailwindcss()],
        resolve: {
          alias: {
-           "~": path.resolve(process.cwd(), "src"), // Explicitly resolve from cwd
+           "~": path.resolve("./src"), // Use relative resolution from config file location
          },
        },
      },
@@ -46,7 +46,8 @@ Issue seems related to path alias (`~`) resolution during the Docker build, even
      ],
    })
    ```
+
 3. Ensured `vite.config.js` still exists in the project root (it might be redundant now, but harmless).
 4. Kept the simplified Dockerfile.
 
-Rationale: Centralizing the Vite configuration within `astro.config.mjs` is the most standard Astro approach. Using `path.resolve(process.cwd(), "src")` ensures the path is resolved correctly relative to the project root, even within the potentially complex build environment created by Kamal's remote builder.
+Rationale: `process.cwd()` might behave unpredictably in the remote build environment. Using `path.resolve("./src")` resolves the path relative to the `astro.config.mjs` file itself, which should be more stable as its location (`/app/astro.config.mjs`) within the container is fixed after the `COPY . .` step.
