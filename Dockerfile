@@ -13,7 +13,10 @@ COPY . .
 # Modify package.json to bypass TypeScript checks during build
 RUN sed -i 's/"build": "astro check && astro build"/"build": "astro build"/g' package.json
 
-# Add explicit alias config to vite.config.js - This will help resolve the '~' path alias
+# Fix the path alias issue by modifying the import in 404.astro
+RUN sed -i 's|import MainLayout from "~/layouts/main.astro"|import MainLayout from "../layouts/main.astro"|g' src/pages/404.astro
+
+# Ensure vite knows about our aliases (as a backup)
 RUN echo 'import { defineConfig } from "vite"; import path from "path"; export default defineConfig({ resolve: { alias: { "~": path.resolve("./src") } } });' > vite.config.js
 
 # Build the Astro app
