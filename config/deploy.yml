@@ -23,7 +23,6 @@ proxy:
   forward_headers: true
   healthcheck:
     path: /
-    port: 80
 
 # Credentials for your image host.
 registry:
