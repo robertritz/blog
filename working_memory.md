@@ -82,6 +82,7 @@ Deployment now failing with a new error:
 Hypothesis: File path, existence, or casing issue with `config/en/about.mdx` inside the Docker container.
 
 Debugging Steps:
+
 1. Verified the import path `../../../config/en/about.mdx` in `src/pages/[lang]/about/index.astro` is correct.
 2. Checked `.dockerignore` - `config` directory is not excluded.
 3. Added `ls -la /app/config` and `ls -la /app/config/en` to `Dockerfile` before the `npm run build` step to check the actual file existence and casing inside the Docker container.
