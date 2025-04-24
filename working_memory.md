@@ -59,6 +59,7 @@ The `ls -la /app/src/layouts` command in the Docker build log confirmed the file
 **Root Cause:** Git on macOS (case-insensitive) did not properly register the file rename from `Main.astro` to `main.astro` (lowercase m). The import in `src/pages/404.astro` was `../layouts/main.astro`.
 
 **Solution:**
+
 1. Forced Git to recognize the case change using a two-step `git mv` locally:
    ```bash
    git mv src/layouts/Main.astro src/layouts/temp_main.astro
@@ -68,3 +69,21 @@ The `ls -la /app/src/layouts` command in the Docker build log confirmed the file
 3. Removed the temporary `ls` command from the `Dockerfile`.
 
 **Next Step:** Retry `kamal deploy` after committing the forced rename.
+
+---
+
+## Update (2024-04-24 - Attempt 3):
+
+The `git mv` fix resolved the `main.astro` issue.
+
+Deployment now failing with a new error:
+`Could not resolve "../../../config/en/about.mdx" from "src/pages/[lang]/about/index.astro"`
+
+Hypothesis: File path, existence, or casing issue with `config/en/about.mdx` inside the Docker container.
+
+Debugging Steps:
+1. Verified the import path `../../../config/en/about.mdx` in `src/pages/[lang]/about/index.astro` is correct.
+2. Checked `.dockerignore` - `config` directory is not excluded.
+3. Added `ls -la /app/config` and `ls -la /app/config/en` to `Dockerfile` before the `npm run build` step to check the actual file existence and casing inside the Docker container.
+
+**Next Step:** Retry `kamal deploy` and examine the output of the new `ls` commands in the build logs.

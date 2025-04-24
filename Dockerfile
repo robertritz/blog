@@ -16,6 +16,10 @@ RUN sed -i 's/"build": "astro check && astro build"/"build": "astro build"/g' pa
 # Verify content directory structure before build
 RUN echo "Recursive listing /app/src/content:" && ls -laR /app/src/content
 
+# Verify config directory contents before build
+RUN echo "Listing /app/config:" && ls -la /app/config
+RUN echo "Listing /app/config/en:" && ls -la /app/config/en
+
 # Build the Astro app
 RUN npm run build
 
