@@ -113,6 +113,7 @@ Debugging Steps:
 ## Update (2024-04-24 - Attempt 5):
 
 The corrected `ls` commands revealed the issue:
+
 - `/app/src/config/en` exists in the container.
 - It only contains `intro.mdx`.
 - The file `about.mdx`, imported by `src/pages/[lang]/about/index.astro`, is missing from `/app/src/config/en` both locally and in the container.
@@ -120,6 +121,7 @@ The corrected `ls` commands revealed the issue:
 **Root Cause:** The required content file `src/config/en/about.mdx` does not exist in the project.
 
 **Solution Options:**
+
 1. Create the missing `src/config/en/about.mdx` file.
 2. Correct the import path in `src/pages/[lang]/about/index.astro` if `about.mdx` is incorrect.
 
@@ -134,7 +136,26 @@ User confirmed that the `about.mdx` files were intentionally deleted as the Abou
 **Root Cause:** The page component `src/pages/[lang]/about/index.astro` still existed and was attempting to import the deleted `about.mdx` files.
 
 **Solution:**
+
 1. Deleted the unnecessary page component `src/pages/[lang]/about/index.astro`.
 2. Removed the temporary `ls` debugging commands from the `Dockerfile`.
 
 **Next Step:** User to commit the deletion and Dockerfile cleanup, then retry `kamal deploy`.
+
+---
+
+## Update (2024-04-24 - Attempt 7):
+
+Build failed again with a new error:
+`Could not resolve "../styles/twikoo.css" from "src/components/astro/twikoo.astro?astro&type=script&index=0&lang.ts"`
+
+**Root Cause:** Incorrect relative path used in the import statement within `src/components/astro/twikoo.astro`.
+  - Component location: `src/components/astro/twikoo.astro`
+  - CSS location: `src/styles/twikoo.css`
+  - Incorrect import: `../styles/twikoo.css`
+  - Correct import: `../../styles/twikoo.css`
+
+**Solution:**
+1. Corrected the import path in `src/components/astro/twikoo.astro` to `../../styles/twikoo.css`.
+
+**Next Step:** User to commit the fix and retry `kamal deploy`.
