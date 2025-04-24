@@ -78,6 +78,7 @@ Basic setup is complete. You still need to:
   - Kept existing SSL and proxy configuration
 
 The deployment setup uses a two-stage build process:
+
 1. Build stage: Uses Node.js to build the Astro static site
 2. Production stage: Uses Nginx to serve the static files
 
