@@ -15,49 +15,38 @@ The issue appears to be with the path alias `~` which is defined in `tsconfig.js
 - tsconfig.json - Has path alias configured: `"~/*": ["./src/*"]`
 - astro.config.mjs - Doesn't have explicit alias configuration
 
-## First solution attempt (failed):
+## Previous solutions (failed):
+1. Added a vite.config.js inside Dockerfile to define path aliases
+2. Modified import in 404.astro to use relative path with sed in Dockerfile
+3. Attempted to create a custom 404.astro file with absolute path in Docker
 
-Added a vite.config.js file to the Dockerfile that explicitly defines the path alias:
+## Final solution (successful):
+1. **Fixed the project code directly** rather than trying to modify it in the Dockerfile
+2. Changed the import in 404.astro from path alias to relative path:
+   ```diff
+   ---
+   - import MainLayout from "~/layouts/main.astro"
+   + import MainLayout from "../layouts/main.astro"
+   ---
+   ```
 
-```javascript
-import { defineConfig } from "vite"
-import path from "path"
-export default defineConfig({
-  resolve: {
-    alias: {
-      "~": path.resolve("./src"),
-    },
-  },
-})
-```
+3. Added a vite.config.js to the root project to handle path aliases properly:
+   ```javascript
+   import { defineConfig } from "vite"
+   import path from "path"
+   
+   export default defineConfig({
+     resolve: {
+       alias: {
+         "~": path.resolve("./src")
+       }
+     }
+   })
+   ```
 
-This was not enough as the error persisted.
+4. Simplified the Dockerfile to remove custom file modifications
 
-## Second solution attempt (failed):
-
-Directly modified the import statement in the 404.astro file to use a relative path instead of the path alias:
-
-```
-RUN sed -i 's|import MainLayout from "~/layouts/main.astro"|import MainLayout from "../layouts/main.astro"|g' src/pages/404.astro
-```
-
-This failed with:
-
-```
-Could not resolve "../layouts/main.astro" from "src/pages/404.astro"
-```
-
-## Third solution (implemented):
-
-Created a completely new 404.astro file with an absolute path to the layout file:
-
-```bash
-RUN echo '---\nimport MainLayout from "/app/src/layouts/main.astro"\n---\n\n<MainLayout title="404" description="Error 404 page not found." noindex={true}>\n  <section class="flex min-h-[60vh] items-center justify-center">\n    <div class="mx-auto max-w-xl px-4 text-center">\n      <h1 class="text-9xl font-bold text-gray-900 dark:text-gray-100">404</h1>\n\n      <div class="mt-4 text-gray-600 dark:text-gray-400">\n        <div class="h2 mb-4">Oops! Page not found</div>\n        <p class="text-lg">\n          The page you are looking for does not exist or has been moved.\n        </p>\n      </div>\n    </div>\n  </section>\n</MainLayout>' > src/pages/404.astro.new && mv src/pages/404.astro.new src/pages/404.astro
-```
-
-This approach:
-1. Creates a complete new file rather than trying to modify the existing one
-2. Uses an absolute path (/app/src/layouts/main.astro) instead of a relative path or alias
-3. Keeps the vite.config.js as a backup solution for alias resolution
-
-The key insight is that during Docker builds, paths can be tricky, and sometimes using absolute paths within the container is more reliable.
+This approach is better because:
+- It fixes the issue at the source rather than working around it in the build
+- It's more maintainable as the fix is part of the codebase
+- It properly handles path aliases with the vite.config.js file in the project
