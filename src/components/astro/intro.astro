@@ -7,6 +7,6 @@ const lang = getLangFromUrl(Astro.url)
 const IntroContent = lang === "mn" ? IntroContentMn : IntroContentEn
 ---
 
-<div class="prose max-w-3xl dark:prose-invert">
+<div class="prose dark:prose-invert max-w-3xl">
   <IntroContent />
 </div>

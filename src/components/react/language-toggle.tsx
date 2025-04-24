@@ -9,7 +9,9 @@ export function LanguageToggle() {
     // If we're on a post page
     if (currentPath.includes("/posts/")) {
       // Find the article element that contains our translation URLs
-      const article = document.querySelector('article[data-en-url], article[data-mn-url]')
+      const article = document.querySelector(
+        "article[data-en-url], article[data-mn-url]",
+      )
       if (article) {
         const translationUrl = article.getAttribute(`data-${targetLang}-url`)
         if (translationUrl) {

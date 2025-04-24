@@ -7,12 +7,14 @@ const lang = getLangFromUrl(Astro.url)
 const config = lang === "mn" ? mn : en
 ---
 
-<footer class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 py-10 text-center">
+<footer
+  class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 py-10 text-center"
+>
   <p>&copy; {currentYear} Robert Ritz</p>
   {
     config.rss && (
       <>
-        <p class="hidden sm:block">|</p> {/* Separator */} 
+        <p class="hidden sm:block">|</p> {/* Separator */}
         <a
           href={`/${lang}/rss.xml`}
           target="_blank"

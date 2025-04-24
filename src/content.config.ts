@@ -20,22 +20,22 @@ const pageSchema = z.object({
 })
 
 const postsCollection = defineCollection({
-  type: 'content',
+  type: "content",
   schema: postSchema,
 })
 
 const blogCollection = defineCollection({
-  type: 'content',
+  type: "content",
   schema: postSchema,
 })
 
 const aboutCollection = defineCollection({
-  type: 'content',
-  schema: pageSchema,  // Using the simpler page schema for about pages
+  type: "content",
+  schema: pageSchema, // Using the simpler page schema for about pages
 })
 
 export const collections = {
-  'posts': postsCollection,
-  'blog': blogCollection,
-  'about': aboutCollection,
+  posts: postsCollection,
+  blog: blogCollection,
+  about: aboutCollection,
 }

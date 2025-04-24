@@ -20,8 +20,8 @@ export const formatDate = (
 
 export const getPostsByLocale = async (locale: string) => {
   const allPosts = await getCollection("posts")
-  const localizedPosts = allPosts.filter(post => {
-    const pathParts = post.slug.split('/')
+  const localizedPosts = allPosts.filter((post) => {
+    const pathParts = post.slug.split("/")
     return pathParts[0] === locale
   })
   return localizedPosts.sort(
@@ -29,17 +29,20 @@ export const getPostsByLocale = async (locale: string) => {
   )
 }
 
-export const getTranslatedPost = async (currentSlug: string, targetLang: string) => {
+export const getTranslatedPost = async (
+  currentSlug: string,
+  targetLang: string,
+) => {
   const allPosts = await getCollection("posts")
-  const currentPost = allPosts.find(post => post.slug === currentSlug)
-  
+  const currentPost = allPosts.find((post) => post.slug === currentSlug)
+
   if (!currentPost?.data.translationId) {
     return null
   }
 
   return allPosts.find(
-    post => 
-      post.slug.startsWith(targetLang) && 
-      post.data.translationId === currentPost.data.translationId
+    (post) =>
+      post.slug.startsWith(targetLang) &&
+      post.data.translationId === currentPost.data.translationId,
   )
 }

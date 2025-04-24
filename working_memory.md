@@ -38,20 +38,24 @@
 - [ ] Deploy the blog (if needed)
 
 ## Current Step
+
 - Fixed content collection schema errors in the new English and Mongolian blog posts by adding the `description` field and renaming `date` to `pubDate`.
 
 Previously:
+
 - Deleted all sample/old blog posts from `src/content/blog/` and `src/content/posts/` directories.
 - Added a new blog post titled "8090 isn't the future" in English to `src/content/blog/en/`.
 - Added the Mongolian translation of the post to `src/content/blog/mn/`.
 - Both posts share the same `translationId` for linking.
 
 Simplified header:
+
 - Site title now links to the language-specific home page.
 - Added Archive link next to the language toggle.
 - Removed the separate navigation bar component (`nav.astro`).
 
 Configured site settings in `src/config/index.ts`:
+
 - Set domain, URL, site names, titles, descriptions.
 - Updated social links (GitHub, X).
 - Disabled Links navigation.
@@ -64,6 +68,7 @@ Basic setup is complete. You still need to:
    - `/src/config/mn/intro.mdx`
 
 ## Next Steps
+
 1. Review remaining customization tasks in `src/config/`.
 2. Run `bun run dev` (or `npm run dev`) to start the development server.
 3. Visit `http://localhost:4321` to preview your blog and verify the new post appears correctly in both languages.

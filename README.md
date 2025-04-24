@@ -11,6 +11,7 @@ A minimalism, personal blog theme for Astro.
 ## Writing Content
 
 1. Create new blog posts in one of these directories based on the language:
+
    - English posts: `src/content/posts/en/`
    - Mongolian posts: `src/content/posts/mn/`
 
