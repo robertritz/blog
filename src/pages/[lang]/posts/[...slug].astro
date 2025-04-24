@@ -6,11 +6,7 @@ import { getLangFromUrl } from "../../../i18n/utils"
 import MainLayout from "../../../layouts/main.astro"
 import "../../../styles/post.css"
 import "../../../styles/post.scss"
-import {
-  formatDate,
-  getPostsByLocale,
-  getTranslatedPost,
-} from "../../../utils"
+import { formatDate, getPostsByLocale, getTranslatedPost } from "../../../utils"
 
 export async function getStaticPaths() {
   const allPaths = []

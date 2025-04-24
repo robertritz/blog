@@ -6,8 +6,8 @@ import { SiteMetadata } from "../config"
 import { en, mn } from "../config"
 import { ClientRouter } from "astro:transitions"
 
-import "~/styles/tailwind.css"
-import "~/styles/view-transition.css"
+import "../styles/tailwind.css"
+import "../styles/view-transition.css"
 
 const lang = getLangFromUrl(Astro.url)
 const config = lang === "mn" ? mn : en

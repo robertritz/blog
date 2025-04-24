@@ -6,9 +6,9 @@ The build process failed both locally (`npm run dev`) and in Docker (`kamal depl
 
 - src/layouts/main.astro - File exists
 - tsconfig.json - Has path alias configured: `"~/*": ["./src/*"]`
-- .dockerignore - Does not exclude `src/layouts`
+- .dockerignore - Does not exclude `src/layouts` or `src/styles`
 - Dockerfile - Uses `COPY . .` which should include the layouts.
-- astro.config.mjs - Alias `~` was set to `/app/src`.
+- astro.config.mjs - Alias `~` was removed.
 
 ## Previous failed attempts:
 
@@ -21,16 +21,17 @@ The build process failed both locally (`npm run dev`) and in Docker (`kamal depl
 7. Modified alias config in `astro.config.mjs` using relative `path.resolve("./src")`.
 8. Set alias `~` in `astro.config.mjs` to absolute path `/app/src`.
 9. Partially replaced `~/layouts/main.astro` imports with relative paths (missed several other alias usages).
+10. Replaced all `~/` aliases in `.astro` files, but missed CSS imports using the alias.
 
 ## Current Strategy:
 
-Since alias resolution was consistently problematic, especially in the Docker build, the approach is to eliminate alias usage entirely for `.astro` imports.
+Since alias resolution was consistently problematic, the approach is to eliminate alias usage entirely.
 
-1.  **Removed All `~/` Alias Usage in `.astro` files:** Performed a global search for `from "~/` in `src/**/*.astro` and replaced all instances with the corresponding relative paths.
-2.  **Removed Alias Config from `astro.config.mjs`:** Removed the `vite.resolve.alias` configuration as it's no longer needed for Astro components/pages.
+1.  **Removed All `~/` Alias Usage:** Performed a global search for `~/` imports in `src/**/*.astro` (including CSS imports within `<style>` or `<script>` tags) and replaced all instances with the corresponding relative paths.
+2.  **Removed Alias Config from `astro.config.mjs`:** Confirmed the `vite.resolve.alias` configuration is removed.
 3.  **Kept Alias Config in `tsconfig.json`:** The alias in `tsconfig.json` (`"~/*": ["./src/*"]`) might still be used by TS/JS files or tooling, so it was left untouched for now.
 4.  **Kept Dockerfile:** No changes to Dockerfile.
 
-Rationale: Completely removing alias usage for Astro file imports avoids any ambiguity or environment-specific issues with path resolution during build or dev.
+Rationale: Completely removing alias usage avoids any ambiguity or environment-specific issues with path resolution during build or dev.
 
 **Next Step**: Retry `npm run dev` locally first. If successful, retry `kamal deploy`.
