@@ -1,7 +1,7 @@
 ---
-import { common } from "~/config"
-import { getLangFromUrl, useTranslations } from "~/i18n/utils"
-import { getPostsByLocale } from "~/utils"
+import { common } from "../../config"
+import { getLangFromUrl, useTranslations } from "../../i18n/utils"
+import { getPostsByLocale } from "../../utils"
 import PostList from "./post-list.astro"
 
 const lang = getLangFromUrl(Astro.url)

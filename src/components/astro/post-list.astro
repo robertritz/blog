@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { post, lang, dateFormat = "default", dateWidth = "w-36" } = Astro.props
-import { formatDate } from "~/utils"
+import { formatDate } from "../../utils"
 
 // Remove .md extension from slug for the link
 const postSlug = post.slug.replace(/\.md$/, "")

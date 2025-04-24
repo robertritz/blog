@@ -1,7 +1,8 @@
 ---
-import TagComponent from "~/components/astro/tag.astro"
-import { langs } from "~/i18n/ui"
-import { getPostsByLocale } from "~/utils"
+import TagComponent from "../../../components/astro/tag.astro"
+import { langs } from "../../../i18n/ui"
+import { getPostsByLocale } from "../../../utils"
+import { getLanguagePaths } from "../../../utils/langs"
 
 export interface Props {
   posts: any

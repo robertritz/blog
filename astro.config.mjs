@@ -17,11 +17,6 @@ export default defineConfig({
   site: "https://astro-air.guoqi.dev",
   vite: {
     plugins: [tailwindcss()],
-    resolve: {
-      alias: {
-        "~": "/app/src",
-      },
-    },
   },
   integrations: [
     react(),

@@ -1,10 +1,10 @@
 ---
-import { en, mn } from "~/config"
-import AboutContentEn from "~/config/en/about.mdx"
-import AboutContentMn from "~/config/mn/about.mdx"
-import { getLangFromUrl } from "~/i18n/utils"
+import { en, mn } from "../../../config"
+import AboutContentEn from "../../../config/en/about.mdx"
+import AboutContentMn from "../../../config/mn/about.mdx"
+import { getLangFromUrl } from "../../../i18n/utils"
 import MainLayout from "../../../layouts/main.astro"
-import { getLanguagePaths } from "~/utils/langs"
+import { getLanguagePaths } from "../../../utils/langs"
 
 export function getStaticPaths() {
   return getLanguagePaths()

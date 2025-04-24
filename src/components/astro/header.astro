@@ -1,9 +1,10 @@
 ---
+import { SITE } from "../../config"
+import { LanguageToggle } from "../react/language-toggle"
+import { ThemeToggle } from "../react/theme-toggle"
+import { en, mn } from "../../config"
+import { getLangFromUrl, useTranslations } from "../../i18n/utils"
 import { Rss } from "lucide-react"
-import { LanguageToggle } from "~/components/react/language-toggle"
-import { ThemeToggle } from "~/components/react/theme-toggle"
-import { en, mn } from "~/config"
-import { getLangFromUrl, useTranslations } from "~/i18n/utils"
 
 const lang = getLangFromUrl(Astro.url)
 const config = lang === "mn" ? mn : en
