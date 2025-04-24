@@ -25,11 +25,7 @@ const permalink = new URL(Astro.url.pathname, Astro.site).href
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href={config.meta.favicon} />
     <title>
-      {
-        title
-          ? `${config.meta.title} - ${title}`
-          : `${config.meta.title} - ${config.meta.slogan}`
-      }
+      {title ? `${config.meta.title} - ${title}` : config.meta.title}
     </title>
     <meta name="generator" content={Astro.generator} />
     <meta
