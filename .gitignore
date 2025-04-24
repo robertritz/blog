@@ -23,6 +23,5 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# pagefind
-
-public/pagefind
+# astro tmp pages
+astro_tmp_pages_*

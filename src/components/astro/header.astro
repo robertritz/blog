@@ -1,0 +1,31 @@
+---
+import { Rss } from "lucide-react"
+import { LanguageToggle } from "~/components/react/language-toggle"
+import { ThemeToggle } from "~/components/react/theme-toggle"
+import { en, mn } from "~/config"
+import { getLangFromUrl, useTranslations } from "~/i18n/utils"
+
+const lang = getLangFromUrl(Astro.url)
+const config = lang === "mn" ? mn : en
+const t = useTranslations(lang)
+---
+
+<header class="flex h-24 w-full items-center justify-between">
+  <a href={`/${lang}`} aria-label={`${config.siteName}`}>
+    <div class="text-2xl font-semibold">{config.siteName}</div>
+  </a>
+
+  <div class="flex items-center gap-6">
+    <a
+      href={`/${lang}/archive`}
+      class="text-lg hover:underline hover:underline-offset-4"
+      aria-label={t("nav.archive")}
+      title={t("nav.archive")}
+      data-astro-prefetch="viewport"
+    >
+      {t("nav.archive")}
+    </a>
+    <LanguageToggle client:load />
+    <ThemeToggle client:load />
+  </div>
+</header>

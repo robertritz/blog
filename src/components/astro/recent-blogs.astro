@@ -1,0 +1,24 @@
+---
+import { common } from "~/config"
+import { getLangFromUrl, useTranslations } from "~/i18n/utils"
+import { getPostsByLocale } from "~/utils"
+import PostList from "./post-list.astro"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const allPosts = await getPostsByLocale(lang)
+const posts = allPosts.slice(0, common.latestPosts)
+---
+
+<div class="my-8 text-xl font-medium md:my-8">{t("blog.latest")}</div>
+{
+  posts.map((post: any) => (
+    <PostList
+      post={post}
+      lang={lang}
+      dateFormat="YYYY-MM-DD"
+      dateWidth="w-32"
+    />
+  ))
+}

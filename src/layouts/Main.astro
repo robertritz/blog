@@ -1,54 +1,24 @@
 ---
-import Breadcrumb from "@/components/Breadcrumb.astro";
-import { SITE } from "@/config";
+import Comments from "~/components/astro/comments.astro"
+import Header from "~/components/astro/header.astro"
+import BaseLayout from "~/layouts/base.astro"
 
-interface StringTitleProp {
-  pageTitle: string;
-  pageDesc?: string;
-}
-
-interface ArrayTitleProp {
-  pageTitle: [string, string];
-  titleTransition: string;
-  pageDesc?: string;
-}
-
-export type Props = StringTitleProp | ArrayTitleProp;
-
-const { props } = Astro;
-
-const backUrl = SITE.showBackButton ? Astro.url.pathname : "/";
+const { title, description, ogImage, needComment } = Astro.props
+const filename = Astro.url.pathname.split("/").filter(Boolean).pop() ?? ""
+const openGraphImage = !ogImage ? `/og/${filename}.png` : ogImage
 ---
 
-<Breadcrumb />
-<main
-  data-backUrl={backUrl}
-  id="main-content"
-  class="mx-auto w-full max-w-3xl px-4 pb-4"
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={openGraphImage}
+  needComment={needComment}
 >
-  {
-    "titleTransition" in props ? (
-      <h1 class="text-2xl font-semibold sm:text-3xl">
-        {props.pageTitle[0]}
-        <span transition:name={props.titleTransition}>
-          {props.pageTitle[1]}
-        </span>
-      </h1>
-    ) : (
-      <h1 class="text-2xl font-semibold sm:text-3xl">{props.pageTitle}</h1>
-    )
-  }
-  <p class="mt-2 mb-6 italic">{props.pageDesc}</p>
-  <slot />
-</main>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const mainContent: HTMLElement | null =
-      document.querySelector("#main-content");
-    const backUrl = mainContent?.dataset?.backurl;
-    if (backUrl) {
-      sessionStorage.setItem("backUrl", backUrl);
-    }
-  });
-</script>
+  <main class="max-auto mb-10 w-full max-w-3xl">
+    <Header />
+    <slot />
+    <div class="mt-20">
+      {needComment && <Comments />}
+    </div>
+  </main>
+</BaseLayout>

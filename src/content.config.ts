@@ -1,26 +1,41 @@
-import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
-import { SITE } from "@/config";
+import { defineCollection, z } from "astro:content"
 
-export const BLOG_PATH = "src/data/blog";
+const postSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  pubDate: z.coerce.date(),
+  updatedDate: z.coerce.date().optional(),
+  heroImage: z.string().optional(),
+  ogImage: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+  translationId: z.string().optional(),
+})
 
-const blog = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: `./${BLOG_PATH}` }),
-  schema: ({ image }) =>
-    z.object({
-      author: z.string().default(SITE.author),
-      pubDatetime: z.date(),
-      modDatetime: z.date().optional().nullable(),
-      title: z.string(),
-      featured: z.boolean().optional(),
-      draft: z.boolean().optional(),
-      tags: z.array(z.string()).default(["others"]),
-      ogImage: image().or(z.string()).optional(),
-      description: z.string(),
-      canonicalURL: z.string().optional(),
-      hideEditPost: z.boolean().optional(),
-      timezone: z.string().optional(),
-    }),
-});
+const pageSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  updatedDate: z.coerce.date().optional(),
+  heroImage: z.string().optional(),
+  ogImage: z.string().optional(),
+})
 
-export const collections = { blog };
+const postsCollection = defineCollection({
+  type: 'content',
+  schema: postSchema,
+})
+
+const blogCollection = defineCollection({
+  type: 'content',
+  schema: postSchema,
+})
+
+const aboutCollection = defineCollection({
+  type: 'content',
+  schema: pageSchema,  // Using the simpler page schema for about pages
+})
+
+export const collections = {
+  'posts': postsCollection,
+  'blog': blogCollection,
+  'about': aboutCollection,
+}

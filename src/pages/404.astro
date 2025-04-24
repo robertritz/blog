@@ -1,30 +1,18 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import LinkButton from "@/components/LinkButton.astro";
-import { SITE } from "@/config";
+import MainLayout from "~/layouts/main.astro"
 ---
 
-<Layout title={`404 Not Found | ${SITE.title}`}>
-  <Header />
+<MainLayout title="404" description="Error 404 page not found." noindex={true}>
+  <section class="flex min-h-[60vh] items-center justify-center">
+    <div class="mx-auto max-w-xl px-4 text-center">
+      <h1 class="text-9xl font-bold text-gray-900 dark:text-gray-100">404</h1>
 
-  <main
-    id="main-content"
-    class="mx-auto flex max-w-3xl flex-1 items-center justify-center"
-  >
-    <div class="mb-14 flex flex-col items-center justify-center">
-      <h1 class="text-9xl font-bold text-accent">404</h1>
-      <span aria-hidden="true">¯\_(ツ)_/¯</span>
-      <p class="mt-4 text-2xl sm:text-3xl">Page Not Found</p>
-      <LinkButton
-        href="/"
-        class="my-6 text-lg underline decoration-dashed underline-offset-8"
-      >
-        Go back home
-      </LinkButton>
+      <div class="mt-4 text-gray-600 dark:text-gray-400">
+        <div class="h2 mb-4">Oops! Page not found</div>
+        <p class="text-lg">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+      </div>
     </div>
-  </main>
-
-  <Footer />
-</Layout>
+  </section>
+</MainLayout>
