@@ -1,13 +1,14 @@
 # Docker Build Issue
 
-The build process failed both locally (`npm run dev`) and in Docker (`kamal deploy`) due to issues resolving path aliases (`~/`) after initial attempts to fix them.
+The build process continues to fail in Docker (`kamal deploy`) with `Could not resolve "../layouts/main.astro" from "src/pages/404.astro"`, despite eliminating aliases and verifying relative paths, file casing, and `.dockerignore`.
 
 ## Files checked:
 
-- src/layouts/main.astro - File exists
-- tsconfig.json - Has path alias configured: `"~/*": ["./src/*"]`
-- .dockerignore - Does not exclude `src/layouts` or `src/styles`
-- Dockerfile - Uses `COPY . .` which should include the layouts.
+- src/layouts/main.astro - File exists, correct casing (`main.astro`).
+- src/pages/404.astro - Imports `../layouts/main.astro`.
+- tsconfig.json - Alias `~` exists but isn't used by `.astro` files.
+- .dockerignore - Does not exclude `src/layouts` or `src/styles`.
+- Dockerfile - Uses `COPY . .` before `npm run build`.
 - astro.config.mjs - Alias `~` was removed.
 
 ## Previous failed attempts:
@@ -20,18 +21,17 @@ The build process failed both locally (`npm run dev`) and in Docker (`kamal depl
 6. Added alias config directly to `astro.config.mjs` using `path.resolve(process.cwd(), "src")`.
 7. Modified alias config in `astro.config.mjs` using relative `path.resolve("./src")`.
 8. Set alias `~` in `astro.config.mjs` to absolute path `/app/src`.
-9. Partially replaced `~/layouts/main.astro` imports with relative paths (missed several other alias usages).
-10. Replaced all `~/` aliases in `.astro` files, but missed CSS imports using the alias.
+9. Partially replaced `~/layouts/main.astro` imports with relative paths.
+10. Replaced all `~/` aliases in `.astro` files, including CSS imports.
 
 ## Current Strategy:
 
-Since alias resolution was consistently problematic, the approach is to eliminate alias usage entirely.
+Since the relative path resolution is still failing specifically in the Docker build, add diagnostic steps to the Dockerfile.
 
-1.  **Removed All `~/` Alias Usage:** Performed a global search for `~/` imports in `src/**/*.astro` (including CSS imports within `<style>` or `<script>` tags) and replaced all instances with the corresponding relative paths.
-2.  **Removed Alias Config from `astro.config.mjs`:** Confirmed the `vite.resolve.alias` configuration is removed.
-3.  **Kept Alias Config in `tsconfig.json`:** The alias in `tsconfig.json` (`"~/*": ["./src/*"]`) might still be used by TS/JS files or tooling, so it was left untouched for now.
-4.  **Kept Dockerfile:** No changes to Dockerfile.
+1.  **Added `ls` commands to Dockerfile:** Inserted `RUN ls -la /app/src` and `RUN ls -la /app/src/layouts` immediately before the `RUN npm run build` step to verify the presence and permissions of the necessary files within the build context at that exact moment.
+2.  **Kept Relative Paths:** All imports remain as relative paths.
+3.  **No Alias Config:** `astro.config.mjs` remains without Vite alias config.
 
-Rationale: Completely removing alias usage avoids any ambiguity or environment-specific issues with path resolution during build or dev.
+Rationale: Explicitly listing the directory contents within the Docker build just before the failing step will confirm whether the file `main.astro` is actually present and accessible at `/app/src/layouts/` when `npm run build` is called. If the file *is* listed, the problem lies deeper within Vite/Astro's resolution in the Alpine environment. If it's *not* listed, there's an issue with the `COPY . .` step or the build context provided by Kamal.
 
-**Next Step**: Retry `npm run dev` locally first. If successful, retry `kamal deploy`.
+**Next Step**: Retry `kamal deploy` and examine the build logs for the output of the `ls` commands.
