@@ -1,20 +1,14 @@
 # Docker Build Issue
 
-The build consistently fails with:
-
-```
-[vite:load-fallback] Could not load /app/src/layouts/main.astro (imported by src/pages/404.astro): ENOENT: no such file or directory, open '/app/src/layouts/main.astro'
-```
-
-This indicates an issue resolving the `~/layouts/main.astro` path alias during the remote Docker build.
+The build consistently fails with `ENOENT: no such file or directory, open '/app/src/layouts/main.astro'` when trying to load the layout via the `~` alias.
 
 ## Files checked:
 
-- src/pages/404.astro - Uses import from "~/layouts/main.astro"
 - src/layouts/main.astro - File exists
 - tsconfig.json - Has path alias configured: `"~/*": ["./src/*"]`
 - .dockerignore - Does not exclude `src/layouts`
 - Dockerfile - Uses `COPY . .` which should include the layouts.
+- astro.config.mjs - Verified alias `~` set to `/app/src`.
 
 ## Previous failed attempts:
 
@@ -25,35 +19,22 @@ This indicates an issue resolving the `~/layouts/main.astro` path alias during t
 5. Reverted to alias `~/layouts/main.astro` and relied on project's `vite.config.js` copied into Docker
 6. Added alias config directly to `astro.config.mjs` using `path.resolve(process.cwd(), "src")`.
 7. Modified alias config in `astro.config.mjs` using relative `path.resolve("./src")`.
+8. Set alias `~` in `astro.config.mjs` to absolute path `/app/src`.
 
-## Current Status:
+## Current Strategy:
 
-1. Kept `src/pages/404.astro` using the path alias `~/layouts/main.astro`
-2. **Modified alias config in `astro.config.mjs`**: Changed resolution to use the absolute path `/app/src` within the Docker container.
+Since alias resolution seems problematic in the Docker build environment (even with absolute paths), reverted to using relative paths for importing `main.astro`.
 
-   ```javascript
-   // astro.config.mjs
-   // ... other imports
+1.  **Removed Alias Usage:** Changed `import MainLayout from "~/layouts/main.astro"` to use relative paths (`../`, `../../`, `../../../`) in the following files:
+    *   `src/pages/[lang]/archive/index.astro`
+    *   `src/pages/[lang]/index.astro`
+    *   `src/pages/[lang]/about/index.astro`
+    *   `src/pages/404.astro`
+    *   `src/pages/[lang]/posts/[...slug].astro`
+    *   `src/components/astro/tag.astro`
+2.  **Kept `astro.config.mjs` alias:** The alias definition `"~": "/app/src"` remains in `astro.config.mjs`, although it's no longer used for `main.astro` imports.
+3.  **Kept Dockerfile:** No changes to Dockerfile.
 
-   export default defineConfig({
-     // ... other config
-     vite: {
-       plugins: [tailwindcss()],
-       resolve: {
-         alias: {
-           "~": "/app/src", // Use absolute path within the container
-         },
-       },
-     },
-     integrations: [
-       // ... integrations
-     ],
-   })
-   ```
-
-3. **Removed `vite.config.js`**: The separate Vite config file remains deleted as it's redundant.
-4. Kept the simplified Dockerfile.
-
-Rationale: Using an explicit, absolute path `/app/src` for the alias within the primary `astro.config.mjs` should resolve the path correctly in the Docker build environment, assuming the file is correctly copied to `/app/src/layouts/main.astro`.
+Rationale: Using relative paths bypasses the alias mechanism entirely, which seems to be the source of the inconsistency in the Docker build environment.
 
 **Next Step**: Retry `kamal deploy`.
