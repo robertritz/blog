@@ -13,10 +13,6 @@ COPY . .
 # Modify package.json to bypass TypeScript checks during build
 RUN sed -i 's/"build": "astro check && astro build"/"build": "astro build"/g' package.json
 
-# Verify existence of files before build
-RUN echo "Listing /app/src:" && ls -la /app/src
-RUN echo "Listing /app/src/layouts:" && ls -la /app/src/layouts
-
 # Build the Astro app
 RUN npm run build
 
