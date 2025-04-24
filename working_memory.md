@@ -26,12 +26,12 @@ The build consistently fails with `ENOENT: no such file or directory, open '/app
 Since alias resolution seems problematic in the Docker build environment (even with absolute paths), reverted to using relative paths for importing `main.astro`.
 
 1.  **Removed Alias Usage:** Changed `import MainLayout from "~/layouts/main.astro"` to use relative paths (`../`, `../../`, `../../../`) in the following files:
-    *   `src/pages/[lang]/archive/index.astro`
-    *   `src/pages/[lang]/index.astro`
-    *   `src/pages/[lang]/about/index.astro`
-    *   `src/pages/404.astro`
-    *   `src/pages/[lang]/posts/[...slug].astro`
-    *   `src/components/astro/tag.astro`
+    - `src/pages/[lang]/archive/index.astro`
+    - `src/pages/[lang]/index.astro`
+    - `src/pages/[lang]/about/index.astro`
+    - `src/pages/404.astro`
+    - `src/pages/[lang]/posts/[...slug].astro`
+    - `src/components/astro/tag.astro`
 2.  **Kept `astro.config.mjs` alias:** The alias definition `"~": "/app/src"` remains in `astro.config.mjs`, although it's no longer used for `main.astro` imports.
 3.  **Kept Dockerfile:** No changes to Dockerfile.
 
