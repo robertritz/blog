@@ -33,3 +33,18 @@ The build process continues to fail in Docker (`kamal deploy`) due to case sensi
 Rationale: Aligning the filename casing with the import casing resolves the file resolution error caused by filesystem case sensitivity differences.
 
 **Next Step**: Retry `kamal deploy`.
+
+---
+
+## Update (2024-04-24):
+
+Deployment still failing with the same error:
+`Could not resolve "../layouts/main.astro" from "src/pages/404.astro"`
+
+Hypothesis: Git may not have correctly registered the file rename from `Main.astro` to `main.astro` due to macOS case-insensitivity.
+
+Debugging Steps:
+1. Verified the import path `../layouts/main.astro` in `src/pages/404.astro` is correct.
+2. Added `RUN ls -la /app/src/layouts` to `Dockerfile` before the `npm run build` step to check the actual file casing inside the Docker container during build.
+
+**Next Step:** Retry `kamal deploy` and examine the output of the new `ls` command in the build logs.
