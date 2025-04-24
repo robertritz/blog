@@ -1,0 +1,42 @@
+# Name of your application. Used to uniquely configure containers.
+service: blog
+
+# Name of the container image.
+image: robertritz/blog
+
+# Deploy to these servers.
+servers:
+  web:
+    - 78.46.40.253
+  # job:
+  #   hosts:
+  #     - 192.168.0.1
+  #   cmd: bin/jobs
+
+# Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
+# Remove this section when using multiple web servers and ensure you terminate SSL at your load balancer.
+#
+# Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
+proxy:
+  ssl: true
+  host: robertritz.com
+  forward_headers: true
+  healthcheck:
+    path: /
+    port: 80
+
+# Credentials for your image host.
+registry:
+  # Specify the registry server, if you're not using Docker Hub
+  # server: registry.digitalocean.com / ghcr.io / ...
+  username: robertritz
+
+  # Always use an access token rather than real password (pulled from .kamal/secrets).
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+# Configure builder setup.
+builder:
+  arch: amd64
+  local: false
+  remote: ssh://root@78.46.40.253

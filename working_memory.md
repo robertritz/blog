@@ -67,8 +67,28 @@ Basic setup is complete. You still need to:
    - `/src/config/en/intro.mdx`
    - `/src/config/mn/intro.mdx`
 
+## Deployment Setup
+
+- [x] Created Dockerfile for Astro blog deployment
+  - Using node:20-alpine for build
+  - Using nginx:alpine for serving static files
+  - Added healthcheck configuration
+- [x] Updated deploy.yml for Kamal deployment
+  - Added healthcheck configuration with path, port, interval, timeout, and max_attempts
+  - Kept existing SSL and proxy configuration
+
+The deployment setup uses a two-stage build process:
+1. Build stage: Uses Node.js to build the Astro static site
+2. Production stage: Uses Nginx to serve the static files
+
+Astro is configured with `output: "static"` in astro.config.mjs, which means it generates static HTML files that can be served by any web server like Nginx.
+
 ## Next Steps
 
 1. Review remaining customization tasks in `src/config/`.
-2. Run `bun run dev` (or `npm run dev`) to start the development server.
-3. Visit `http://localhost:4321` to preview your blog and verify the new post appears correctly in both languages.
+2. Run `bun run dev` (or `npm run dev`) to start the development server for local testing.
+3. Deploy the blog using Kamal:
+   ```
+   kamal setup
+   kamal deploy
+   ```
