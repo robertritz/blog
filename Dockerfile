@@ -13,10 +13,10 @@ COPY . .
 # Modify package.json to bypass TypeScript checks during build
 RUN sed -i 's/"build": "astro check && astro build"/"build": "astro build"/g' package.json
 
-# Fix the path alias issue by modifying the import in 404.astro
-RUN sed -i 's|import MainLayout from "~/layouts/main.astro"|import MainLayout from "../layouts/main.astro"|g' src/pages/404.astro
+# Create a new 404.astro file with correct import paths
+RUN echo '---\nimport MainLayout from "/app/src/layouts/main.astro"\n---\n\n<MainLayout title="404" description="Error 404 page not found." noindex={true}>\n  <section class="flex min-h-[60vh] items-center justify-center">\n    <div class="mx-auto max-w-xl px-4 text-center">\n      <h1 class="text-9xl font-bold text-gray-900 dark:text-gray-100">404</h1>\n\n      <div class="mt-4 text-gray-600 dark:text-gray-400">\n        <div class="h2 mb-4">Oops! Page not found</div>\n        <p class="text-lg">\n          The page you are looking for does not exist or has been moved.\n        </p>\n      </div>\n    </div>\n  </section>\n</MainLayout>' > src/pages/404.astro.new && mv src/pages/404.astro.new src/pages/404.astro
 
-# Ensure vite knows about our aliases (as a backup)
+# Ensure vite knows about our aliases
 RUN echo 'import { defineConfig } from "vite"; import path from "path"; export default defineConfig({ resolve: { alias: { "~": path.resolve("./src") } } });' > vite.config.js
 
 # Build the Astro app
