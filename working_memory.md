@@ -16,26 +16,37 @@ Issue seems related to path alias (`~`) resolution during the Docker build, even
 - astro.config.mjs - Doesn't have explicit alias configuration
 
 ## Previous failed attempts:
+
 1. Added a vite.config.js inside Dockerfile to define path aliases
 2. Modified import in 404.astro to use relative path `../layouts/main.astro` with sed in Dockerfile
 3. Attempted to create a custom 404.astro file with absolute path in Dockerfile
 4. Changed import to correct relative path `../../layouts/main.astro` in the codebase
+5. Reverted to alias `~/layouts/main.astro` and relied on project's `vite.config.js` copied into Docker
 
 ## Current Strategy:
-1. Reverted `src/pages/404.astro` to use the path alias `~/layouts/main.astro`
-2. Ensured `vite.config.js` exists in the project root with the correct alias definition:
+
+1. Kept `src/pages/404.astro` using the path alias `~/layouts/main.astro`
+2. **Added alias config directly to `astro.config.mjs`**: 
    ```javascript
-   import { defineConfig } from "vite"
    import path from "path"
+   // ... other imports
    
    export default defineConfig({
-     resolve: {
-       alias: {
-         "~": path.resolve("./src"),
+     // ... other config
+     vite: {
+       plugins: [tailwindcss()],
+       resolve: {
+         alias: {
+           "~": path.resolve(process.cwd(), "src"), // Explicitly resolve from cwd
+         },
        },
      },
+     integrations: [
+       // ... integrations
+     ],
    })
    ```
-3. **Simplified Dockerfile**: Removed the `RUN echo ... > vite.config.js` line. The `COPY . .` command should bring the project's `vite.config.js` into the build context.
+3. Ensured `vite.config.js` still exists in the project root (it might be redundant now, but harmless).
+4. Kept the simplified Dockerfile.
 
-Rationale: This approach relies on Astro/Vite correctly picking up the `vite.config.js` from the project files copied into the Docker image, which is the standard way it should work. Overwriting or creating it within the Dockerfile might have caused conflicts.
+Rationale: Centralizing the Vite configuration within `astro.config.mjs` is the most standard Astro approach. Using `path.resolve(process.cwd(), "src")` ensures the path is resolved correctly relative to the project root, even within the potentially complex build environment created by Kamal's remote builder.
