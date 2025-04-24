@@ -13,8 +13,7 @@ COPY . .
 # Modify package.json to bypass TypeScript checks during build
 RUN sed -i 's/"build": "astro check && astro build"/"build": "astro build"/g' package.json
 
-# Create vite.config.js to handle path aliases
-RUN echo 'import { defineConfig } from "vite"; import path from "path"; export default defineConfig({ resolve: { alias: { "~": path.resolve("./src") } } });' > vite.config.js
+# The vite.config.js from the project root should handle aliases
 
 # Build the Astro app
 RUN npm run build
