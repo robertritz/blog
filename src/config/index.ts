@@ -5,7 +5,8 @@ export const siteConfig = {
     favicon: "/avatar.png",
     url: "https://robertritz.com",
     title: "Robert Ritz",
-    description: "Data scientist, sociologist, and business builder based in Mongolia",
+    description:
+      "Data scientist, sociologist, and business builder based in Mongolia",
   },
   social: {
     github: "https://github.com/robertritz",

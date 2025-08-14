@@ -37,6 +37,7 @@ Your bio appears in two places but is managed in one file:
 **Edit your bio in:** `src/components/Bio.astro`
 
 This component is automatically used on:
+
 - Homepage (under your name)
 - Post pages (in the "About Robert Ritz" section at the bottom)
 
@@ -45,28 +46,35 @@ Update it once, and both places will reflect the changes!
 ## 🎨 Customization
 
 ### Profile Picture
+
 - Replace `/public/avatar.png` with your photo
 - It's used as the favicon and profile image throughout the site
 
 ### Site Configuration
+
 Edit `src/config/index.ts` to update:
+
 - Site name and description
 - Social media links
 - Domain URL
 
 ### Styling
+
 - Main styles are in each `.astro` file's `<style>` section
 - Global styles are in `src/styles/global.css`
 
 ## 📦 Deployment
 
 ### Build for Production
+
 ```bash
 npm run build
 ```
 
 ### Deploy with Kamal
+
 Your existing Kamal setup should work:
+
 ```bash
 kamal setup    # First time only
 kamal deploy   # Deploy updates
@@ -76,7 +84,7 @@ kamal deploy   # Deploy updates
 
 ```bash
 npm run dev        # Start dev server
-npm run build      # Build for production  
+npm run build      # Build for production
 npm run preview    # Preview production build
 npm run format     # Format code with Prettier
 ```

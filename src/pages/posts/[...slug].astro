@@ -9,7 +9,7 @@ import { siteConfig } from "../../config"
 export async function getStaticPaths() {
   const posts = await getCollection("posts")
   const englishPosts = posts.filter((post) => post.data.lang === "en")
-  
+
   return englishPosts.map((post) => ({
     params: { slug: post.slug },
     props: post,
@@ -22,10 +22,13 @@ const post = Astro.props
 const { Content } = await post.render()
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={`${post.data.title} | ${siteConfig.siteName}`} description={post.data.description} />
+    <BaseHead
+      title={`${post.data.title} | ${siteConfig.siteName}`}
+      description={post.data.description}
+    />
   </head>
   <body>
     <SystemTheme />
@@ -44,7 +47,7 @@ const { Content } = await post.render()
           <h1>{post.data.title}</h1>
           <time><FormattedDate date={post.data.pubDate} /></time>
         </header>
-        
+
         <div class="content">
           <Content />
         </div>
@@ -61,13 +64,17 @@ const { Content } = await post.render()
 
 <style>
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+      Arial, sans-serif;
     line-height: 1.6;
     color: #111;
     background: #fff;
     margin: 0;
     padding: 0;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
   }
 
   [data-theme="dark"] body {
@@ -203,7 +210,6 @@ const { Content } = await post.render()
     color: #58a6ff;
   }
 
-
   .content blockquote {
     border-left: 4px solid #ddd;
     padding-left: 24px;
@@ -223,7 +229,8 @@ const { Content } = await post.render()
     padding: 4px 8px;
     border-radius: 6px;
     font-size: 18px;
-    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-family:
+      "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   }
 
   [data-theme="dark"] .content code {
@@ -249,7 +256,8 @@ const { Content } = await post.render()
     color: inherit;
   }
 
-  .content ul, .content ol {
+  .content ul,
+  .content ol {
     margin: 24px 0;
     padding-left: 32px;
   }
@@ -344,14 +352,14 @@ const { Content } = await post.render()
 
 <script>
   // Make all external links in post content open in new tabs
-  document.addEventListener('DOMContentLoaded', function() {
-    const contentLinks = document.querySelectorAll('.content a[href^="http"]');
-    contentLinks.forEach(link => {
-      const href = link.getAttribute('href');
-      if (href && !href.includes('robertritz.com')) {
-        link.setAttribute('target', '_blank');
-        link.setAttribute('rel', 'noopener noreferrer');
+  document.addEventListener("DOMContentLoaded", function () {
+    const contentLinks = document.querySelectorAll('.content a[href^="http"]')
+    contentLinks.forEach((link) => {
+      const href = link.getAttribute("href")
+      if (href && !href.includes("robertritz.com")) {
+        link.setAttribute("target", "_blank")
+        link.setAttribute("rel", "noopener noreferrer")
       }
-    });
-  });
+    })
+  })
 </script>
