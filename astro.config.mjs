@@ -6,7 +6,6 @@ import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers"
 import tailwindcss from "@tailwindcss/vite"
 import expressiveCode from "astro-expressive-code"
 import { defineConfig } from "astro/config"
-import path from "path"
 
 import robotsTxt from "astro-robots-txt"
 
@@ -14,7 +13,7 @@ import robotsTxt from "astro-robots-txt"
 export default defineConfig({
   output: "static",
   prefetch: true,
-  site: "https://astro-air.guoqi.dev",
+  site: "https://robertritz.com",
   vite: {
     plugins: [tailwindcss()],
   },

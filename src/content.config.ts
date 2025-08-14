@@ -8,15 +8,10 @@ const postSchema = z.object({
   heroImage: z.string().optional(),
   ogImage: z.string().optional(),
   tags: z.array(z.string()).optional(),
+  lang: z.enum(["en", "mn"]).default("en"),
+  author: z.string().optional(),
+  excerpt: z.string().optional(),
   translationId: z.string().optional(),
-})
-
-const pageSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  updatedDate: z.coerce.date().optional(),
-  heroImage: z.string().optional(),
-  ogImage: z.string().optional(),
 })
 
 const postsCollection = defineCollection({
@@ -24,18 +19,6 @@ const postsCollection = defineCollection({
   schema: postSchema,
 })
 
-const blogCollection = defineCollection({
-  type: "content",
-  schema: postSchema,
-})
-
-const aboutCollection = defineCollection({
-  type: "content",
-  schema: pageSchema, // Using the simpler page schema for about pages
-})
-
 export const collections = {
   posts: postsCollection,
-  blog: blogCollection,
-  about: aboutCollection,
 }

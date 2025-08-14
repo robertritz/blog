@@ -37,5 +37,4 @@ registry:
 # Configure builder setup.
 builder:
   arch: amd64
-  local: false
-  remote: ssh://root@78.46.40.253
+  driver: cloud robertritz/lexica

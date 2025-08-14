@@ -1,39 +1,118 @@
-# Astro Air
+# Robert Ritz Blog
 
-A minimalism, personal blog theme for Astro.
+A minimalist blog inspired by world.hey.com, built with Astro.
 
-## Configuration
+## 🚀 Quick Start
 
-- Open `src/config/index.ts` and customize your site settings
-- Open `src/config/links.ts` and customize your site links
-- Open `src/config/en(mn)/about.mdx(intro.mdx、links.mdx)` and customize your pages content
+```bash
+npm install
+npm run dev
+```
 
-## Writing Content
+Visit `http://localhost:4321` to see your blog.
 
-1. Create new blog posts in one of these directories based on the language:
+## 📝 Adding New Posts
 
-   - English posts: `src/content/posts/en/`
-   - Mongolian posts: `src/content/posts/mn/`
-
-2. Create your post as a Markdown file (`.md`) with the following frontmatter:
+1. Create a new `.md` file in `src/content/posts/en/`
+2. Use this frontmatter template:
 
 ```markdown
 ---
-# Required fields
 title: "Your Post Title"
-author: "Your Name"
-pubDate: "YYYY-MM-DD"
-description: "A brief description of your post"
-
-# Optional fields
-excerpt: "A brief excerpt of your post (if different from description)"
-translationId: "unique-id-for-translations"
-updatedDate: "YYYY-MM-DD"
-tags: ["tag1", "tag2"]
-ogImage: "cover image URL"
+author: "Robert Ritz"
+pubDate: "2025-01-15"
+description: "Brief description of your post"
+lang: "en"
 ---
 
 Your content here...
 ```
 
-The frontmatter section must be at the top of the file between `---` markers. After the frontmatter, write your post content using Markdown formatting.
+3. The post will automatically appear on your homepage and archive page.
+
+## ✏️ Updating Your Bio
+
+Your bio appears in two places but is managed in one file:
+
+**Edit your bio in:** `src/components/Bio.astro`
+
+This component is automatically used on:
+- Homepage (under your name)
+- Post pages (in the "About Robert Ritz" section at the bottom)
+
+Update it once, and both places will reflect the changes!
+
+## 🎨 Customization
+
+### Profile Picture
+- Replace `/public/avatar.png` with your photo
+- It's used as the favicon and profile image throughout the site
+
+### Site Configuration
+Edit `src/config/index.ts` to update:
+- Site name and description
+- Social media links
+- Domain URL
+
+### Styling
+- Main styles are in each `.astro` file's `<style>` section
+- Global styles are in `src/styles/global.css`
+
+## 📦 Deployment
+
+### Build for Production
+```bash
+npm run build
+```
+
+### Deploy with Kamal
+Your existing Kamal setup should work:
+```bash
+kamal setup    # First time only
+kamal deploy   # Deploy updates
+```
+
+## 🔧 Development Commands
+
+```bash
+npm run dev        # Start dev server
+npm run build      # Build for production  
+npm run preview    # Preview production build
+npm run format     # Format code with Prettier
+```
+
+## 📁 Key Files & Directories
+
+```
+src/
+├── components/         # Reusable components
+├── content/posts/en/   # Your blog posts (add new posts here)
+├── pages/
+│   ├── index.astro     # Homepage (edit bio here)
+│   ├── posts/[...slug].astro  # Post pages (edit about section here)
+│   └── archive.astro   # All posts page
+├── config/index.ts     # Site configuration
+└── styles/             # Global styles
+
+public/
+├── avatar.png          # Your profile picture (replace this)
+└── ...                 # Static assets
+```
+
+## 🌟 Features
+
+- ✅ Minimalist design inspired by world.hey.com
+- ✅ Automatic dark/light mode based on system preference
+- ✅ RSS feed
+- ✅ Mobile responsive
+- ✅ Fast static site generation
+- ✅ SEO optimized
+
+## 📖 Writing Tips
+
+- Keep post filenames descriptive (e.g., `my-thoughts-on-ai.md`)
+- Use the `description` field for post previews on homepage
+- Posts are sorted by `pubDate` (newest first)
+- Markdown syntax is fully supported
+
+Happy blogging! 🎉

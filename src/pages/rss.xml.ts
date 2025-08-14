@@ -1,25 +1,21 @@
 import rss from "@astrojs/rss"
-import { defaultLanguage, en, mn } from "~/config"
-import { getPostsByLocale } from "~/utils"
+import { getCollection } from "astro:content"
+import { siteConfig } from "../config"
 
-export async function GET() {
-  const posts = await getPostsByLocale(defaultLanguage)
-  const config = defaultLanguage === "en" ? en : mn
+export async function GET(context: any) {
+  const posts = (await getCollection("posts"))
+    .filter((post) => post.data.lang === "en")
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 
   return rss({
-    title: config.meta.title,
-    description: config.meta.description,
-    site:
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:4321"
-        : config.meta.url,
-    items: posts.map((post: any) => ({
+    title: siteConfig.siteName,
+    description: siteConfig.meta.description,
+    site: context.site || siteConfig.meta.url,
+    items: posts.map((post) => ({
       title: post.data.title,
-      description: post.data.description,
       pubDate: post.data.pubDate,
-      link: `/posts/${post.id}/`,
-      content: post.rendered ? post.rendered.html : post.data.description,
+      description: post.data.description,
+      link: `/posts/${post.slug}/`,
     })),
-    customData: "",
   })
 }

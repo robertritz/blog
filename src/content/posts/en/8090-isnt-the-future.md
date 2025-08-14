@@ -5,7 +5,10 @@ pubDate: "2025-02-11"
 description: "Slack used to be the scrappy startup and seemed like a low cost choice to keep in touch. Over the years it has become a massive line item on each of their large customers budgets. It is the same story with many SaaS products companies rely on to operate. Chamath Palihapitiya, a VC and co-host on the All-In podcast, started an incubator that aims to solve this issue with AI."
 excerpt: "Slack used to be the scrappy startup and seemed like a low cost choice to keep in touch. Over the years it has become a massive line item on each of their large customers budgets. It is the same story with many SaaS products companies rely on to operate. Chamath Palihapitiya, a VC and co-host on the All-In podcast, started an incubator that aims to solve this issue with AI."
 translationId: "8090-isnt-the-future"
+lang: "en"
 ---
+
+> August 13, 2025 Update to this post. 8090 is now an AI driven "software factory" that is invite only currently. It seems to be an agent based software creation system focused on enterprise. So not really 80% feature complete for a 90% reduction in price...
 
 Slack used to be the scrappy startup and seemed like a low cost choice to keep in touch. Over the years it has become a massive line item on each of their large customers budgets. It is the same story with many SaaS products companies rely on to operate. Chamath Palihapitiya, a VC and co-host on the All-In podcast, started an "incubator" that aims to solve this issue with "AI". They are calling it 8090 Solutions ([8090.inc](https://www.8090.inc/)) in 2024. Chamath claims it will deliver **80% feature complete software for a 90% reduction in price**. Sounds like a great solution to balance the per seat budget creep of Slack et al. right?
 
