@@ -1,0 +1,393 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content"
+import BaseHead from "../../../components/BaseHead.astro"
+import Bio from "../../../components/Bio.astro"
+import FormattedDate from "../../../components/FormattedDate.astro"
+import LanguageSwitcher from "../../../components/LanguageSwitcher.astro"
+import TranslationLink from "../../../components/TranslationLink.astro"
+import SystemTheme from "../../../components/SystemTheme.astro"
+import { siteConfig } from "../../../config"
+import type { Language } from "../../../i18n/config"
+import { isValidLanguage } from "../../../i18n/config"
+import { t } from "../../../i18n/utils"
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts")
+
+  return posts.map((post) => {
+    // Remove the language prefix from the slug for the URL
+    const slug = post.slug.replace(/^(en|mn)\//, "")
+
+    return {
+      params: {
+        lang: post.data.lang,
+        slug: slug
+      },
+      props: post,
+    }
+  })
+}
+
+type Props = CollectionEntry<"posts">
+
+const { lang } = Astro.params
+const currentLang = isValidLanguage(lang) ? lang : "en"
+
+const post = Astro.props
+const { Content } = await post.render()
+---
+
+<!doctype html>
+<html lang={currentLang}>
+  <head>
+    <BaseHead
+      title={`${post.data.title} | ${siteConfig.siteName}`}
+      description={post.data.description}
+    />
+  </head>
+  <body>
+    <SystemTheme />
+    <main>
+      <!-- Author Header -->
+      <header class="author-header">
+        <div class="header-top">
+          <a href={`/${currentLang}/`} class="author-link">
+            <img src="/avatar.png" alt="Robert Ritz" class="avatar" />
+            <span class="name">Robert Ritz</span>
+          </a>
+          <LanguageSwitcher currentLang={currentLang} />
+        </div>
+      </header>
+
+      <!-- Post Content -->
+      <article class="post">
+        <header class="post-meta">
+          <h1>{post.data.title}</h1>
+          <time><FormattedDate date={post.data.pubDate} lang={currentLang} /></time>
+        </header>
+
+        <div class="content">
+          <Content />
+        </div>
+      </article>
+
+      <!-- Translation Link -->
+      <TranslationLink currentLang={currentLang} translationId={post.data.translationId} />
+
+      <!-- About section -->
+      <section class="about-section">
+        <h3>{t("post.about_author", currentLang)}</h3>
+        <Bio />
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  body {
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+      Arial, sans-serif;
+    line-height: 1.6;
+    color: #111;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  [data-theme="dark"] body {
+    color: #f5f5f5;
+    background: #0a0a0a;
+  }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  /* Author header - centered and stacked like world.hey.com */
+  .author-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 60px;
+    text-align: center;
+  }
+
+  .header-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .author-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .author-link:hover .name {
+    text-decoration: underline;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .name {
+    font-weight: 600;
+    font-size: 20px;
+    color: #111;
+    letter-spacing: 0.5px;
+  }
+
+  [data-theme="dark"] .name {
+    color: #f5f5f5;
+  }
+
+  /* Post content - centered title and date like world.hey.com */
+  .post-meta {
+    text-align: center;
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #eee;
+  }
+
+  [data-theme="dark"] .post-meta {
+    border-bottom-color: #333;
+  }
+
+  .post-meta h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+    color: #111;
+  }
+
+  [data-theme="dark"] .post-meta h1 {
+    color: #f5f5f5;
+  }
+
+  .post-meta time {
+    font-size: 16px;
+    color: #666;
+    font-weight: 400;
+  }
+
+  [data-theme="dark"] .post-meta time {
+    color: #999;
+  }
+
+  /* Content styling matching world.hey.com */
+  .content {
+    font-size: 20px;
+    line-height: 1.7;
+    color: #111;
+  }
+
+  [data-theme="dark"] .content {
+    color: #f5f5f5;
+  }
+
+  .content p {
+    margin: 0 0 28px 0;
+  }
+
+  .content h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 48px 0 24px 0;
+    line-height: 1.2;
+    color: #111;
+  }
+
+  [data-theme="dark"] .content h2 {
+    color: #f5f5f5;
+  }
+
+  .content h3 {
+    font-size: 26px;
+    font-weight: 600;
+    margin: 40px 0 20px 0;
+    line-height: 1.3;
+    color: #111;
+  }
+
+  [data-theme="dark"] .content h3 {
+    color: #f5f5f5;
+  }
+
+  .content a {
+    color: #0969da;
+    text-decoration: underline;
+  }
+
+  [data-theme="dark"] .content a {
+    color: #58a6ff;
+  }
+
+  .content blockquote {
+    border-left: 4px solid #ddd;
+    padding-left: 24px;
+    margin: 32px 0;
+    font-style: italic;
+    color: #666;
+    font-size: 20px;
+  }
+
+  [data-theme="dark"] .content blockquote {
+    border-left-color: #555;
+    color: #999;
+  }
+
+  .content code {
+    background: #f6f8fa;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 18px;
+    font-family:
+      "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+
+  [data-theme="dark"] .content code {
+    background: #161b22;
+    color: #f0f6fc;
+  }
+
+  .content pre {
+    background: #f6f8fa;
+    padding: 24px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 32px 0;
+  }
+
+  [data-theme="dark"] .content pre {
+    background: #161b22;
+  }
+
+  .content pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+  }
+
+  .content ul,
+  .content ol {
+    margin: 24px 0;
+    padding-left: 32px;
+  }
+
+  .content li {
+    margin: 8px 0;
+  }
+
+  .content strong {
+    font-weight: 700;
+  }
+
+  .content em {
+    font-style: italic;
+  }
+
+  /* About section styling */
+  .about-section {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid #eee;
+    text-align: center;
+  }
+
+  [data-theme="dark"] .about-section {
+    border-top-color: #333;
+  }
+
+  .about-section h3 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+    margin: 0 0 20px 0;
+  }
+
+  [data-theme="dark"] .about-section h3 {
+    color: #666;
+  }
+
+  .about-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  [data-theme="dark"] .about-section p {
+    color: #999;
+  }
+
+  .about-section a {
+    color: #0969da;
+    text-decoration: underline;
+  }
+
+  [data-theme="dark"] .about-section a {
+    color: #58a6ff;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 40px 16px;
+    }
+
+    .post-meta h1 {
+      font-size: 36px;
+    }
+
+    .content {
+      font-size: 18px;
+    }
+
+    .content h2 {
+      font-size: 28px;
+    }
+
+    .content h3 {
+      font-size: 22px;
+    }
+
+    .content blockquote {
+      font-size: 18px;
+      padding-left: 16px;
+    }
+  }
+</style>
+
+<script>
+  // Make all external links in post content open in new tabs
+  document.addEventListener("DOMContentLoaded", function () {
+    const contentLinks = document.querySelectorAll('.content a[href^="http"]')
+    contentLinks.forEach((link) => {
+      const href = link.getAttribute("href")
+      if (href && !href.includes("robertritz.com")) {
+        link.setAttribute("target", "_blank")
+        link.setAttribute("rel", "noopener noreferrer")
+      }
+    })
+  })
+</script>
