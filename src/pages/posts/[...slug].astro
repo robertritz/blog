@@ -8,9 +8,8 @@ import { siteConfig } from "../../config"
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts")
-  const englishPosts = posts.filter((post) => post.data.lang === "en")
 
-  return englishPosts.map((post) => ({
+  return posts.map((post) => ({
     params: { slug: post.slug },
     props: post,
   }))

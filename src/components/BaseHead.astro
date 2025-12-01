@@ -14,16 +14,6 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
 const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props
-
-// Extract language from URL path if available
-const pathParts = Astro.url.pathname.split("/").filter(Boolean)
-const currentLang = pathParts[0] === "en" || pathParts[0] === "mn" ? pathParts[0] : "en"
-const otherLang = currentLang === "en" ? "mn" : "en"
-
-// Generate alternate URLs for hreflang
-const pathWithoutLang = "/" + pathParts.slice(1).join("/")
-const enURL = new URL(`/en${pathWithoutLang}`, Astro.site)
-const mnURL = new URL(`/mn${pathWithoutLang}`, Astro.site)
 ---
 
 <!-- Global Metadata -->
@@ -57,11 +47,6 @@ const mnURL = new URL(`/mn${pathWithoutLang}`, Astro.site)
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
-
-<!-- Alternate language versions (hreflang) -->
-<link rel="alternate" hreflang="en" href={enURL} />
-<link rel="alternate" hreflang="mn" href={mnURL} />
-<link rel="alternate" hreflang="x-default" href={enURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

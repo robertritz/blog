@@ -5,7 +5,6 @@ import { siteConfig } from "../config"
 import { getCollection } from "astro:content"
 
 const posts = (await getCollection("posts"))
-  .filter((post) => post.data.lang === "en")
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 ---
 

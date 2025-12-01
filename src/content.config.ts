@@ -8,10 +8,8 @@ const postSchema = z.object({
   heroImage: z.string().optional(),
   ogImage: z.string().optional(),
   tags: z.array(z.string()).optional(),
-  lang: z.enum(["en", "mn"]).default("en"),
   author: z.string().optional(),
   excerpt: z.string().optional(),
-  translationId: z.string().optional(),
 })
 
 const postsCollection = defineCollection({

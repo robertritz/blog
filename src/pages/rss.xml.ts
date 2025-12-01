@@ -4,7 +4,6 @@ import { siteConfig } from "../config"
 
 export async function GET(context: any) {
   const posts = (await getCollection("posts"))
-    .filter((post) => post.data.lang === "en")
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 
   return rss({

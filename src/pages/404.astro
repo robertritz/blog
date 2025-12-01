@@ -1,32 +1,25 @@
 ---
 import BaseHead from "../components/BaseHead.astro"
-import LanguageSwitcher from "../components/LanguageSwitcher.astro"
 import SystemTheme from "../components/SystemTheme.astro"
 import { siteConfig } from "../config"
-import { t } from "../i18n/utils"
-
-const currentLang = "en" // Default to English for 404 pages
 ---
 
 <!doctype html>
-<html lang={currentLang}>
+<html lang="en">
   <head>
     <BaseHead
-      title={t("error.404_title", currentLang)}
-      description={t("error.404_heading", currentLang)}
+      title="Page Not Found"
+      description="The page you're looking for doesn't exist."
     />
   </head>
   <body>
     <SystemTheme />
     <main>
-      <div class="language-switcher-wrapper">
-        <LanguageSwitcher currentLang={currentLang} />
-      </div>
       <div class="error-page">
         <h1>404</h1>
-        <h2>{t("error.404_heading", currentLang)}</h2>
-        <p>{t("error.404_message", currentLang)}</p>
-        <a href={`/${currentLang}/`} class="home-link">{t("error.back_home", currentLang)}</a>
+        <h2>Page Not Found</h2>
+        <p>The page you're looking for doesn't exist.</p>
+        <a href="/" class="home-link">← Back to home</a>
       </div>
     </main>
   </body>
@@ -56,12 +49,6 @@ const currentLang = "en" // Default to English for 404 pages
     max-width: 800px;
     margin: 0 auto;
     padding: 60px 20px;
-  }
-
-  .language-switcher-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 40px;
   }
 
   .error-page {
