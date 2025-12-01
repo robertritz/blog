@@ -13,8 +13,8 @@ COPY . .
 # Modify package.json to bypass TypeScript checks during build
 RUN sed -i 's/"build": "astro check && astro build"/"build": "astro build"/g' package.json
 
-# Verify content directory structure before build
-RUN echo "Recursive listing /app/src/content:" && ls -laR /app/src/content
+# Ensure content directory exists (may be empty)
+RUN mkdir -p /app/src/content/posts
 
 # Build the Astro app
 RUN npm run build
