@@ -4,8 +4,9 @@ import SystemTheme from "../components/SystemTheme.astro"
 import { siteConfig } from "../config"
 import { getCollection } from "astro:content"
 
-const posts = (await getCollection("posts"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+const posts = (await getCollection("posts")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+)
 ---
 
 <!doctype html>

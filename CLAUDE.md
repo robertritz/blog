@@ -88,6 +88,7 @@ npm run preview
 ### Code Quality
 
 Pre-commit hooks (via lefthook):
+
 - **eslint** - Lints TypeScript/JavaScript files
 - **prettier** - Formats all files
 
@@ -104,10 +105,12 @@ kamal deploy
 ```
 
 **Important**: Kamal builds from the git repository, so:
+
 1. **Commit your changes first** before deploying
 2. Uncommitted changes will NOT be deployed
 
 **Deployment Configuration** (`config/deploy.yml`):
+
 - Service name: `blog`
 - Docker image: `robertritz/blog`
 - Server: 78.46.40.253
@@ -168,10 +171,12 @@ blog/
 ## Troubleshooting
 
 **Build fails with TypeScript errors:**
+
 - The Dockerfile bypasses type checking during deployment
 - Fix locally with `npm run build` to see errors
 
 **Kamal deployment deploys old code:**
+
 - Kamal builds from git repository
 - Run `git status` to check for uncommitted changes
 - Commit changes before `kamal deploy`
