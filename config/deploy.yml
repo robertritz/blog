@@ -37,4 +37,4 @@ registry:
 # Configure builder setup.
 builder:
   arch: amd64
-  driver: cloud robertritz/lexica
+  local: true
