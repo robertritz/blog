@@ -1,13 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro"
-import Bio from "../components/Bio.astro"
 import SystemTheme from "../components/SystemTheme.astro"
 import { siteConfig } from "../config"
-import { getCollection } from "astro:content"
-
-const posts = (await getCollection("posts"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, siteConfig.latestPosts)
 ---
 
 <!doctype html>
@@ -15,53 +9,61 @@ const posts = (await getCollection("posts"))
   <head>
     <BaseHead
       title={siteConfig.siteName}
-      description={siteConfig.meta.description}
+      description="Data scientist and builder based in Mongolia. President of AUM, co-founder of Precision Kraft, building Data.mn."
     />
   </head>
   <body>
     <SystemTheme />
     <main>
-      <!-- Author Section -->
-      <div class="author">
+      <div class="landing">
         <img src="/avatar.png" alt="Robert Ritz" class="avatar" />
         <h1>Robert Ritz</h1>
+
         <div class="bio">
-          <Bio />
+          <p>
+            Data scientist, builder, and accidental Mongolian. I moved to Ulaanbaatar
+            over a decade ago and found a life I never expected—a country of vast
+            landscapes, resilient people, and endless opportunity to build something
+            meaningful.
+          </p>
+          <p>
+            Today I serve as President of the
+            <a href="https://aum.edu.mn" target="_blank" rel="noopener noreferrer">American University of Mongolia</a>,
+            co-founded <a href="https://kraft.mn" target="_blank" rel="noopener noreferrer">Precision Kraft</a>
+            (custom furniture manufacturing), and I'm building
+            <a href="https://data.mn" target="_blank" rel="noopener noreferrer">Data.mn</a>
+            to bring better statistics and insights to Mongolia.
+          </p>
+          <p>
+            Inspired daily by my wife Bayaraa and son Erin.
+          </p>
         </div>
-      </div>
 
-      <!-- Subscription -->
-      <div class="subscription">
-        <p>
-          Subscribe via <a href="/rss.xml">RSS</a>
-        </p>
-      </div>
+        <div class="projects">
+          <h2>Projects</h2>
+          <ul>
+            <li>
+              <a href="https://data.mn" target="_blank" rel="noopener noreferrer">Data.mn</a>
+              <span>Open statistics and data for Mongolia</span>
+            </li>
+            <li>
+              <a href="https://lexica.mn" target="_blank" rel="noopener noreferrer">Lexica</a>
+              <span>International news translated for Mongolia</span>
+            </li>
+            <li>
+              <a href="https://books.robertritz.com" target="_blank" rel="noopener noreferrer">Books</a>
+              <span>Things I've written</span>
+            </li>
+          </ul>
+        </div>
 
-      <!-- Posts -->
-      <div class="posts">
-        {
-          posts.map((post) => (
-            <article class="post-item">
-              <time>
-                {new Date(post.data.pubDate).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-              <h2>
-                <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
-              </h2>
-              {post.data.description && (
-                <p class="excerpt">{post.data.description}</p>
-              )}
-            </article>
-          ))
-        }
-      </div>
-
-      <div class="archive-link">
-        <a href="/archive/">See all posts</a>
+        <div class="connect">
+          <a href="https://github.com/robertritz" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <span class="separator">·</span>
+          <a href="https://x.com/RobertERitz" target="_blank" rel="noopener noreferrer">X</a>
+          <span class="separator">·</span>
+          <a href="mailto:robert@aum.edu.mn">Email</a>
+        </div>
       </div>
     </main>
   </body>
@@ -72,7 +74,7 @@ const posts = (await getCollection("posts"))
     font-family:
       -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
       Arial, sans-serif;
-    line-height: 1.6;
+    line-height: 1.7;
     color: #111;
     background: #fff;
     margin: 0;
@@ -88,161 +90,183 @@ const posts = (await getCollection("posts"))
   }
 
   main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 60px 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
   }
 
-  .author {
+  .landing {
+    max-width: 560px;
     text-align: center;
-    margin-bottom: 40px;
-  }
-
-  .author .bio {
-    font-size: 18px;
-    margin-top: 20px;
-    line-height: 1.6;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .author .bio p {
-    margin: 0 0 16px 0;
-  }
-
-  .author .bio a {
-    color: #111;
-    text-decoration: underline;
-  }
-
-  [data-theme="dark"] .author .bio a {
-    color: #f5f5f5;
   }
 
   .avatar {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
 
-  .author h1 {
-    font-size: 28px;
+  h1 {
+    font-size: 32px;
     font-weight: 600;
-    margin: 0;
+    margin: 0 0 24px 0;
     color: #111;
+    letter-spacing: -0.02em;
   }
 
-  [data-theme="dark"] .author h1 {
+  [data-theme="dark"] h1 {
     color: #f5f5f5;
   }
 
-  .subscription {
-    text-align: center;
-    margin-bottom: 60px;
-    font-size: 16px;
+  .bio {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    text-align: left;
   }
 
-  .subscription a {
+  .bio p {
+    margin: 0 0 16px 0;
+  }
+
+  .bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  .bio a {
     color: #111;
     text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
-  [data-theme="dark"] .subscription a {
+  [data-theme="dark"] .bio a {
     color: #f5f5f5;
   }
 
-  .posts {
+  .bio a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .projects {
+    text-align: left;
     margin-bottom: 40px;
   }
 
-  .post-item {
-    margin-bottom: 40px;
-    padding-bottom: 40px;
+  .projects h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #666;
+    margin: 0 0 16px 0;
+  }
+
+  [data-theme="dark"] .projects h2 {
+    color: #888;
+  }
+
+  .projects ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .projects li {
+    padding: 12px 0;
     border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  [data-theme="dark"] .post-item {
-    border-bottom-color: #333;
+  [data-theme="dark"] .projects li {
+    border-bottom-color: #222;
   }
 
-  .post-item:last-child {
+  .projects li:last-child {
     border-bottom: none;
   }
 
-  .post-item time {
-    font-size: 14px;
+  .projects a {
+    color: #111;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 17px;
+  }
+
+  [data-theme="dark"] .projects a {
+    color: #f5f5f5;
+  }
+
+  .projects a:hover {
+    text-decoration: underline;
+  }
+
+  .projects span {
     color: #666;
-    display: block;
-    margin-bottom: 8px;
+    font-size: 15px;
   }
 
-  [data-theme="dark"] .post-item time {
-    color: #999;
+  [data-theme="dark"] .projects span {
+    color: #888;
   }
 
-  .post-item h2 {
-    font-size: 24px;
-    font-weight: 600;
-    margin: 0 0 12px 0;
-    line-height: 1.3;
+  .connect {
+    font-size: 15px;
+    color: #666;
   }
 
-  .post-item h2 a {
+  [data-theme="dark"] .connect {
+    color: #888;
+  }
+
+  .connect a {
     color: #111;
     text-decoration: none;
   }
 
-  [data-theme="dark"] .post-item h2 a {
+  [data-theme="dark"] .connect a {
     color: #f5f5f5;
   }
 
-  .post-item h2 a:hover {
+  .connect a:hover {
     text-decoration: underline;
   }
 
-  .excerpt {
-    font-size: 16px;
-    color: #666;
-    margin: 0;
-    line-height: 1.5;
+  .separator {
+    margin: 0 12px;
+    color: #ccc;
   }
 
-  [data-theme="dark"] .excerpt {
-    color: #999;
+  [data-theme="dark"] .separator {
+    color: #444;
   }
 
-  .archive-link {
-    text-align: center;
-    margin-top: 40px;
-  }
-
-  .archive-link a {
-    color: #111;
-    text-decoration: underline;
-    font-size: 16px;
-  }
-
-  [data-theme="dark"] .archive-link a {
-    color: #f5f5f5;
-  }
-
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     main {
-      padding: 40px 20px;
+      padding: 60px 24px;
+      align-items: flex-start;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+    }
+
+    h1 {
+      font-size: 28px;
     }
 
     .bio {
       font-size: 16px;
     }
 
-    .author h1 {
-      font-size: 24px;
-    }
-
-    .post-item h2 {
-      font-size: 20px;
+    .projects a,
+    .projects span {
+      font-size: 16px;
     }
   }
 </style>
