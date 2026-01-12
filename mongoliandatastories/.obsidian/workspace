@@ -1,0 +1,102 @@
+{
+  "main": {
+    "id": "fd8bfd449ca4a190",
+    "type": "split",
+    "children": [
+      {
+        "id": "464ec207386093c1",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "_posts/2022-01-30-Household-income-by-children.md",
+            "mode": "preview"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ca3b3a6f611226f3",
+    "type": "split",
+    "children": [
+      {
+        "id": "5d746d939ffdf525",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8600ffcaa052dbec",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "12673cb010f99fc3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 493
+  },
+  "right": {
+    "id": "d006e5675804829d",
+    "type": "split",
+    "children": [
+      {
+        "id": "4d610b1b0b6aabc2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cb3029c1048398c5",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "_posts/2022-01-30-Household-income-by-children.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "464ec207386093c1",
+  "lastOpenFiles": [
+    "_posts/2022-01-30-Household-income-by-children.md",
+    "_posts/2021-12-17-2021-wrap-up.md",
+    "_posts/2021-12-01-UB-Market-Price-Analysis.md",
+    "images/economic-stratification/inflation_adjusted_wages.png",
+    "images/economic-stratification/ub-night.png",
+    "images/economic-stratification/2011v2020.png",
+    "_posts/2021-10-18-Mongolias-marriage-spike.md",
+    "images/market_prices/rice_dumbell.png",
+    "images/market_prices/potato_dumbell.png",
+    "images/market_prices/prices_hundreds.png"
+  ]
+}
