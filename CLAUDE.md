@@ -2,6 +2,24 @@
 
 This file provides guidance to Claude Code when working with code in this repository.
 
+## Git Workflow (IMPORTANT)
+
+**Before starting work:**
+```bash
+git fetch origin
+git status  # Check if behind remote
+git pull    # Pull any changes from other machine
+```
+
+**When work is complete:**
+```bash
+git add -A
+git commit -m "Description of changes"
+git push
+```
+
+Robert syncs work between two machines via GitHub. Always check for remote changes before starting.
+
 ## Overview
 
 Robert Ritz's personal blog (robertritz.com) - a minimalist static site built with Astro and deployed via Kamal. Inspired by world.hey.com with a clean, text-focused design.
