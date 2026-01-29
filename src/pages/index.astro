@@ -2,6 +2,11 @@
 import BaseHead from "../components/BaseHead.astro"
 import SystemTheme from "../components/SystemTheme.astro"
 import { siteConfig } from "../config"
+import { getCollection } from "astro:content"
+
+const posts = (await getCollection("posts"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, siteConfig.latestPosts)
 ---
 
 <!doctype html>
@@ -13,253 +18,261 @@ import { siteConfig } from "../config"
     />
   </head>
   <body>
-    <SystemTheme />
     <main>
-      <div class="landing">
-        <img src="/avatar.png" alt="Robert Ritz" class="avatar" />
+      <header class="site-header">
         <h1>Robert Ritz</h1>
+        <SystemTheme />
+      </header>
 
-        <div class="bio">
-          <p>
-            Data scientist, builder, and accidental Mongolian. I moved to
-            Ulaanbaatar over a decade ago and found a life I never expected—a
-            country of vast landscapes, resilient people, and endless
-            opportunity to build something meaningful.
-          </p>
-          <p>
-            Today I serve as President of the
-            <a
-              href="https://aum.edu.mn"
-              target="_blank"
-              rel="noopener noreferrer">American University of Mongolia</a
-            >, co-founded <a
-              href="https://kraft.mn"
-              target="_blank"
-              rel="noopener noreferrer">Precision Kraft</a
-            >
-            (custom furniture manufacturing), and I'm building
-            <a href="https://data.mn" target="_blank" rel="noopener noreferrer"
-              >Data.mn</a
-            >
-            to bring better statistics and insights to Mongolia.
-          </p>
-          <p>Inspired daily by my wife Bayaraa and son Erin.</p>
-        </div>
-
-        <div class="projects">
-          <h2>Projects</h2>
-          <ul>
-            <li>
-              <a
-                href="https://data.mn"
-                target="_blank"
-                rel="noopener noreferrer">Data.mn</a
-              >
-              <span>Open statistics and data for Mongolia</span>
-            </li>
-            <li>
-              <a
-                href="https://lexica.mn"
-                target="_blank"
-                rel="noopener noreferrer">Lexica</a
-              >
-              <span>International news translated for Mongolia</span>
-            </li>
-            <li>
-              <a
-                href="https://books.robertritz.com"
-                target="_blank"
-                rel="noopener noreferrer">Books</a
-              >
-              <span>Things I've written</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="connect">
-          <a
-            href="https://github.com/robertritz"
-            target="_blank"
-            rel="noopener noreferrer">GitHub</a
-          >
-          <span class="separator">·</span>
-          <a
-            href="https://x.com/RobertERitz"
-            target="_blank"
-            rel="noopener noreferrer">X</a
-          >
-          <span class="separator">·</span>
-          <a href="mailto:robert@aum.edu.mn">Email</a>
-        </div>
+      <div class="bio">
+        <input type="checkbox" id="bio-toggle" class="bio-checkbox" />
+        <p class="bio-text">
+          Data scientist, builder, and accidental Mongolian. I moved to
+          Ulaanbaatar over a decade ago and found a life I never expected—a
+          country of vast landscapes, resilient people, and endless
+          opportunity to build something meaningful.
+          <span class="bio-more">
+            Today I serve as President of the American University of Mongolia,
+            co-founded Precision Kraft (custom furniture manufacturing), and I'm building
+            Data.mn to bring better statistics and insights to Mongolia.
+            Inspired daily by my wife Bayaraa and son Erin.
+          </span>
+        </p>
+        <label for="bio-toggle" class="bio-toggle-label">
+          <span class="show-more">...More</span>
+          <span class="show-less">Less</span>
+        </label>
       </div>
+
+      <section class="writing">
+        <h2>Writing</h2>
+        <ul class="posts-list">
+          {posts.map((post) => (
+            <li>
+              <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+            </li>
+          ))}
+        </ul>
+        <a href="/archive" class="see-all">See all &rarr;</a>
+      </section>
+
+      <footer class="site-footer">
+        <a href="https://x.com/RobertERitz" target="_blank" rel="noopener noreferrer">X</a>
+        <span class="separator">&middot;</span>
+        <a href="mailto:robert@aum.edu.mn">Email</a>
+      </footer>
     </main>
   </body>
 </html>
 
 <style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   body {
-    font-family:
-      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-      Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.7;
-    color: #111;
-    background: #fff;
+    color: #1f1e1d;
+    background: #f0eee6;
     margin: 0;
     padding: 0;
-    transition:
-      color 0.2s ease,
-      background-color 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
   }
 
   [data-theme="dark"] body {
-    color: #f5f5f5;
-    background: #0a0a0a;
+    color: #e5e5e5;
+    background: #1a1a1a;
   }
 
   main {
-    min-height: 100vh;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .site-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-  }
-
-  .landing {
-    max-width: 560px;
-    text-align: center;
-  }
-
-  .avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin-bottom: 24px;
+    margin-bottom: 40px;
   }
 
   h1 {
-    font-size: 32px;
-    font-weight: 600;
-    margin: 0 0 24px 0;
-    color: #111;
-    letter-spacing: -0.02em;
+    font-family: "Times New Roman", Times, Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    color: #1f1e1d;
   }
 
   [data-theme="dark"] h1 {
-    color: #f5f5f5;
+    color: #e5e5e5;
   }
 
   .bio {
+    margin-bottom: 48px;
+  }
+
+  .bio-checkbox {
+    display: none;
+  }
+
+  .bio-text {
     font-size: 17px;
     line-height: 1.7;
-    margin-bottom: 40px;
-    text-align: left;
+    margin: 0;
+    color: #1f1e1d;
   }
 
-  .bio p {
-    margin: 0 0 16px 0;
-  }
-
-  .bio p:last-child {
-    margin-bottom: 0;
+  [data-theme="dark"] .bio-text {
+    color: #bbb;
   }
 
   .bio a {
-    color: #111;
+    color: #1f1e1d;
     text-decoration: underline;
     text-underline-offset: 2px;
   }
 
   [data-theme="dark"] .bio a {
-    color: #f5f5f5;
+    color: #e5e5e5;
   }
 
   .bio a:hover {
     text-decoration-thickness: 2px;
   }
 
-  .projects {
-    text-align: left;
-    margin-bottom: 40px;
+  /* Bio expand/collapse - mobile only */
+  .bio-more {
+    display: inline;
   }
 
-  .projects h2 {
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #666;
+  .bio-toggle-label {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .bio-more {
+      display: none;
+    }
+
+    .bio-toggle-label {
+      display: inline;
+      color: #888;
+      cursor: pointer;
+      font-size: 17px;
+    }
+
+    [data-theme="dark"] .bio-toggle-label {
+      color: #888;
+    }
+
+    .bio-toggle-label:hover {
+      text-decoration: underline;
+    }
+
+    .show-less {
+      display: none;
+    }
+
+    .bio-checkbox:checked ~ .bio-text .bio-more {
+      display: inline;
+    }
+
+    .bio-checkbox:checked ~ .bio-toggle-label .show-more {
+      display: none;
+    }
+
+    .bio-checkbox:checked ~ .bio-toggle-label .show-less {
+      display: inline;
+    }
+  }
+
+  .writing {
+    margin-bottom: 48px;
+  }
+
+  .writing h2 {
+    font-family: "Times New Roman", Times, Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    color: #1f1e1d;
+  }
+
+  [data-theme="dark"] .writing h2 {
+    color: #e5e5e5;
+  }
+
+  .posts-list {
+    list-style: disc;
+    padding-left: 20px;
     margin: 0 0 16px 0;
   }
 
-  [data-theme="dark"] .projects h2 {
+  .posts-list li {
+    margin: 8px 0;
     color: #888;
   }
 
-  .projects ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  [data-theme="dark"] .posts-list li {
+    color: #888;
   }
 
-  .projects li {
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  [data-theme="dark"] .projects li {
-    border-bottom-color: #222;
-  }
-
-  .projects li:last-child {
-    border-bottom: none;
-  }
-
-  .projects a {
-    color: #111;
+  .posts-list a {
+    color: #1f1e1d;
     text-decoration: none;
-    font-weight: 500;
     font-size: 17px;
   }
 
-  [data-theme="dark"] .projects a {
-    color: #f5f5f5;
+  [data-theme="dark"] .posts-list a {
+    color: #e5e5e5;
   }
 
-  .projects a:hover {
+  .posts-list a:hover {
     text-decoration: underline;
   }
 
-  .projects span {
-    color: #666;
+  .see-all {
+    color: #888;
+    text-decoration: none;
     font-size: 15px;
   }
 
-  [data-theme="dark"] .projects span {
+  [data-theme="dark"] .see-all {
     color: #888;
   }
 
-  .connect {
+  .see-all:hover {
+    text-decoration: underline;
+  }
+
+  .site-footer {
     font-size: 15px;
-    color: #666;
-  }
-
-  [data-theme="dark"] .connect {
     color: #888;
   }
 
-  .connect a {
-    color: #111;
+  [data-theme="dark"] .site-footer {
+    color: #888;
+  }
+
+  .site-footer a {
+    color: #1f1e1d;
     text-decoration: none;
   }
 
-  [data-theme="dark"] .connect a {
-    color: #f5f5f5;
+  [data-theme="dark"] .site-footer a {
+    color: #e5e5e5;
   }
 
-  .connect a:hover {
+  .site-footer a:hover {
     text-decoration: underline;
   }
 
@@ -269,30 +282,23 @@ import { siteConfig } from "../config"
   }
 
   [data-theme="dark"] .separator {
-    color: #444;
+    color: #555;
   }
 
   @media (max-width: 600px) {
     main {
-      padding: 60px 24px;
-      align-items: flex-start;
-    }
-
-    .avatar {
-      width: 100px;
-      height: 100px;
+      padding: 40px 20px;
     }
 
     h1 {
       font-size: 28px;
     }
 
-    .bio {
+    .bio-text {
       font-size: 16px;
     }
 
-    .projects a,
-    .projects span {
+    .posts-list a {
       font-size: 16px;
     }
   }

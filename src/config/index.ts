@@ -13,7 +13,7 @@ export const siteConfig = {
     twitter: "https://x.com/RobertERitz",
   },
   rss: true,
-  latestPosts: 8,
+  latestPosts: 10,
   pageMeta: {
     archive: {
       title: "All Posts",
