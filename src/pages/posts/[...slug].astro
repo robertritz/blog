@@ -17,8 +17,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"posts">
 
 const post = Astro.props
-const { Content, headings } = await post.render()
-const tocHeadings = headings.filter((h) => h.depth <= 3)
+const { Content } = await post.render()
 ---
 
 <!doctype html>
@@ -30,51 +29,12 @@ const tocHeadings = headings.filter((h) => h.depth <= 3)
     />
   </head>
   <body>
-    <!-- Mobile TOC toggle -->
-    <button
-      class="toc-toggle"
-      id="toc-toggle"
-      aria-label="Toggle table of contents"
-    >
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-    </button>
-
     <!-- Header - fixed with SiteHeader component -->
     <div class="fixed-header">
       <div class="header-inner">
-        <SiteHeader />
+        <SiteHeader showNav={false} />
       </div>
     </div>
-
-    <!-- Table of Contents Sidebar -->
-    <aside class="toc-sidebar" id="toc-sidebar">
-      <nav class="toc">
-        <h2>Contents</h2>
-        <ul id="toc-list">
-          {
-            tocHeadings.map((heading, index) => (
-                <li class={`toc-item depth-${heading.depth}`}>
-                  <a href={`#${heading.slug}`}>
-                    {heading.depth === 2 ? `${index + 1}. ` : ""}
-                    {heading.text}
-                  </a>
-                </li>
-              ))
-          }
-        </ul>
-      </nav>
-    </aside>
 
     <!-- Main Content -->
     <main>
@@ -160,88 +120,6 @@ const tocHeadings = headings.filter((h) => h.depth <= 3)
 
   .header-inner :global(.site-header) {
     margin-bottom: 0;
-  }
-
-  /* Mobile TOC Toggle - hidden on desktop */
-  .toc-toggle {
-    display: none;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 200;
-    width: 44px;
-    height: 44px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    color: #1f1e1d;
-    padding: 0;
-  }
-
-  [data-theme="dark"] .toc-toggle {
-    color: #e5e5e5;
-  }
-
-  /* TOC Sidebar - Desktop */
-  .toc-sidebar {
-    position: fixed;
-    top: 100px;
-    left: 32px;
-    width: 220px;
-    max-height: calc(100vh - 140px);
-    overflow-y: auto;
-    z-index: 50;
-  }
-
-  .toc h2 {
-    font-family: "Times New Roman", Times, Georgia, serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0 0 20px 0;
-    color: #1f1e1d;
-  }
-
-  [data-theme="dark"] .toc h2 {
-    color: #e5e5e5;
-  }
-
-  .toc ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .toc-item {
-    margin: 12px 0;
-  }
-
-  .toc-item a {
-    font-family:
-      "Inter",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      sans-serif;
-    font-size: 15px;
-    color: #888;
-    text-decoration: none;
-    line-height: 1.5;
-    display: block;
-  }
-
-  .toc-item a:hover {
-    color: #1f1e1d;
-  }
-
-  [data-theme="dark"] .toc-item a {
-    color: #888;
-  }
-
-  [data-theme="dark"] .toc-item a:hover {
-    color: #e5e5e5;
   }
 
   /* Main content */
@@ -454,36 +332,8 @@ const tocHeadings = headings.filter((h) => h.depth <= 3)
     color: #e5e5e5;
   }
 
-  /* Tablet/smaller desktop - hide TOC, show hamburger */
+  /* Tablet */
   @media (max-width: 1100px) {
-    .toc-sidebar {
-      display: none;
-    }
-
-    .toc-sidebar.open {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 280px;
-      height: 100vh;
-      max-height: 100vh;
-      background: #fafafa;
-      padding: 100px 32px 32px;
-      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
-      z-index: 150;
-      overflow-y: auto;
-    }
-
-    [data-theme="dark"] .toc-sidebar.open {
-      background: #1a1a1a;
-      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .toc-toggle {
-      display: flex;
-    }
-
     .fixed-header {
       padding: 20px 24px;
     }
@@ -493,13 +343,6 @@ const tocHeadings = headings.filter((h) => h.depth <= 3)
   @media (max-width: 600px) {
     .fixed-header {
       padding: 16px 20px;
-    }
-
-    .toc-toggle {
-      top: 14px;
-      left: 16px;
-      width: 40px;
-      height: 40px;
     }
 
     main {
@@ -536,33 +379,6 @@ const tocHeadings = headings.filter((h) => h.depth <= 3)
 </style>
 
 <script>
-  // TOC toggle for mobile
-  const tocToggle = document.getElementById("toc-toggle")
-  const tocSidebar = document.getElementById("toc-sidebar")
-
-  if (tocToggle && tocSidebar) {
-    tocToggle.addEventListener("click", () => {
-      tocSidebar.classList.toggle("open")
-    })
-
-    // Close TOC when clicking a link
-    tocSidebar.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        tocSidebar.classList.remove("open")
-      })
-    })
-
-    // Close TOC when clicking outside
-    document.addEventListener("click", (e) => {
-      if (
-        !tocSidebar.contains(e.target as Node) &&
-        !tocToggle.contains(e.target as Node)
-      ) {
-        tocSidebar.classList.remove("open")
-      }
-    })
-  }
-
   // Make all external links in post content open in new tabs
   document.addEventListener("DOMContentLoaded", function () {
     const contentLinks = document.querySelectorAll('.content a[href^="http"]')
