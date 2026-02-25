@@ -1,0 +1,79 @@
+---
+interface Props {
+  showNav?: boolean
+}
+
+import SystemTheme from "./SystemTheme.astro"
+
+const { showNav = true } = Astro.props
+---
+
+<header class="site-header">
+  <a href="/" class="site-name">Robert Ritz</a>
+  <div class="header-right">
+    {showNav && (
+      <nav class="site-nav">
+        <a href="/#projects" class="nav-link">Projects</a>
+        <a href="/#writing" class="nav-link">Writing</a>
+      </nav>
+    )}
+    <SystemTheme />
+  </div>
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+
+  .site-name {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f1e1d;
+    text-decoration: none;
+  }
+
+  [data-theme="dark"] .site-name {
+    color: #e5e5e5;
+  }
+
+  .site-name:hover {
+    opacity: 0.7;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .site-nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav-link {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    color: #6b7280;
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    color: #1f1e1d;
+  }
+
+  [data-theme="dark"] .nav-link:hover {
+    color: #e5e5e5;
+  }
+
+  @media (max-width: 600px) {
+    .site-nav {
+      display: none;
+    }
+  }
+</style>
