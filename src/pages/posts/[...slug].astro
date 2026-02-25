@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from "astro:content"
 import BaseHead from "../../components/BaseHead.astro"
 import FormattedDate from "../../components/FormattedDate.astro"
-import SystemTheme from "../../components/SystemTheme.astro"
+import SiteHeader from "../../components/SiteHeader.astro"
 import { siteConfig } from "../../config"
 
 export async function getStaticPaths() {
@@ -38,21 +38,12 @@ const { Content, headings } = await post.render()
       </svg>
     </button>
 
-    <!-- Close button (X) - separate from header -->
-    <a href="/" class="close-btn" aria-label="Back to home">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </a>
-
-    <!-- Header - Name and Toggle centered -->
-    <header class="site-header">
-      <div class="header-center">
-        <a href="/" class="site-name">Robert Ritz</a>
-        <SystemTheme />
+    <!-- Header - fixed with SiteHeader component -->
+    <div class="fixed-header">
+      <div class="header-inner">
+        <SiteHeader />
       </div>
-    </header>
+    </div>
 
     <!-- Table of Contents Sidebar -->
     <aside class="toc-sidebar" id="toc-sidebar">
@@ -104,10 +95,10 @@ const { Content, headings } = await post.render()
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.6;
     color: #1f1e1d;
-    background: #f0eee6;
+    background: #fafafa;
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
@@ -121,64 +112,29 @@ const { Content, headings } = await post.render()
     background: #1a1a1a;
   }
 
-  /* Close button - fixed top left */
-  .close-btn {
-    position: fixed;
-    top: 28px;
-    left: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1f1e1d;
-    text-decoration: none;
-    z-index: 100;
-  }
-
-  .close-btn:hover {
-    opacity: 0.6;
-  }
-
-  [data-theme="dark"] .close-btn {
-    color: #e5e5e5;
-  }
-
-  /* Header - name and toggle aligned to content edges */
-  .site-header {
+  /* Fixed header wrapper */
+  .fixed-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 24px 24px;
-    background: #f0eee6;
+    background: #fafafa;
     z-index: 90;
+    padding: 24px;
   }
 
-  [data-theme="dark"] .site-header {
+  [data-theme="dark"] .fixed-header {
     background: #1a1a1a;
   }
 
-  .header-center {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+  .header-inner {
     max-width: 680px;
+    margin: 0 auto;
     padding: 0 24px;
   }
 
-  .site-name {
-    font-family: "Times New Roman", Times, Georgia, serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: #1f1e1d;
-    text-decoration: none;
-  }
-
-  [data-theme="dark"] .site-name {
-    color: #e5e5e5;
+  .header-inner :global(.site-header) {
+    margin-bottom: 0;
   }
 
   /* Mobile TOC Toggle - hidden on desktop */
@@ -237,7 +193,7 @@ const { Content, headings } = await post.render()
   }
 
   .toc-item a {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-size: 15px;
     color: #888;
     text-decoration: none;
@@ -302,7 +258,7 @@ const { Content, headings } = await post.render()
   }
 
   .post-meta time {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-size: 15px;
     color: #666;
   }
@@ -313,7 +269,7 @@ const { Content, headings } = await post.render()
 
   /* Content */
   .content {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-size: 17px;
     line-height: 1.7;
     color: #1f1e1d;
@@ -437,7 +393,7 @@ const { Content, headings } = await post.render()
   }
 
   .back-to-top {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-size: 15px;
     color: #1f1e1d;
     text-decoration: underline;
@@ -462,7 +418,7 @@ const { Content, headings } = await post.render()
       width: 280px;
       height: 100vh;
       max-height: 100vh;
-      background: #f0eee6;
+      background: #fafafa;
       padding: 100px 32px 32px;
       box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
       z-index: 150;
@@ -478,27 +434,15 @@ const { Content, headings } = await post.render()
       display: flex;
     }
 
-    .close-btn {
-      display: none;
-    }
-
-    .site-header {
+    .fixed-header {
       padding: 20px 24px;
     }
   }
 
   /* Mobile */
   @media (max-width: 600px) {
-    .site-header {
+    .fixed-header {
       padding: 16px 20px;
-    }
-
-    .site-name {
-      font-size: 16px;
-    }
-
-    .header-center {
-      gap: 16px;
     }
 
     .toc-toggle {
