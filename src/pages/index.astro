@@ -34,39 +34,61 @@ const posts = (await getCollection("posts"))
 
         <div class="featured-project">
           <h3>Mongolia Newsletter</h3>
-          <p class="project-desc">Weekly digest of Mongolian news, politics, and economics.</p>
-          <a href="https://mongolia.robertritz.com" class="project-link" target="_blank" rel="noopener noreferrer">mongolia.robertritz.com &rarr;</a>
+          <p class="project-desc">
+            Weekly digest of Mongolian news, politics, and economics.
+          </p>
+          <a
+            href="https://mongolia.robertritz.com"
+            class="project-link"
+            target="_blank"
+            rel="noopener noreferrer">mongolia.robertritz.com &rarr;</a
+          >
         </div>
 
         <div class="featured-project">
           <h3>Data.mn</h3>
-          <p class="project-desc">Making Mongolia's data accessible and searchable.</p>
-          <a href="https://data.mn" class="project-link" target="_blank" rel="noopener noreferrer">data.mn &rarr;</a>
+          <p class="project-desc">
+            Making Mongolia's data accessible and searchable.
+          </p>
+          <a
+            href="https://data.mn"
+            class="project-link"
+            target="_blank"
+            rel="noopener noreferrer">data.mn &rarr;</a
+          >
         </div>
 
-        <p class="roles">Also: President of AUM &middot; Co-founder, Precision Kraft</p>
+        <p class="roles">
+          Also: President of AUM &middot; Co-founder, Precision Kraft
+        </p>
       </section>
 
       <section class="writing" id="writing">
         <h2>Writing</h2>
         <ul class="posts-list">
-          {posts.map((post) => (
-            <li>
-              <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
-              <time>
-                {new Date(post.data.pubDate).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                })}
-              </time>
-            </li>
-          ))}
+          {
+            posts.map((post) => (
+              <li>
+                <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+                <time>
+                  {new Date(post.data.pubDate).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                  })}
+                </time>
+              </li>
+            ))
+          }
         </ul>
         <a href="/archive" class="see-all">See all &rarr;</a>
       </section>
 
       <footer class="site-footer">
-        <a href="https://x.com/RobertERitz" target="_blank" rel="noopener noreferrer">X</a>
+        <a
+          href="https://x.com/RobertERitz"
+          target="_blank"
+          rel="noopener noreferrer">X</a
+        >
         <span class="separator">&middot;</span>
         <a href="mailto:robert@aum.edu.mn">Email</a>
         <span class="separator">&middot;</span>
@@ -77,12 +99,20 @@ const posts = (await getCollection("posts"))
 </html>
 
 <style>
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 
   body {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
     line-height: 1.7;
     color: #1f1e1d;
     background: #fafafa;
@@ -92,7 +122,7 @@ const posts = (await getCollection("posts"))
     -moz-osx-font-smoothing: grayscale;
   }
 
-  [data-theme="dark"] body {
+  :global([data-theme="dark"]) body {
     color: #e5e5e5;
     background: #1a1a1a;
   }
@@ -116,7 +146,7 @@ const posts = (await getCollection("posts"))
     color: #1f1e1d;
   }
 
-  [data-theme="dark"] .bio p {
+  :global([data-theme="dark"]) .bio p {
     color: #bbb;
   }
 
@@ -126,7 +156,11 @@ const posts = (await getCollection("posts"))
   }
 
   .projects h2 {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
@@ -135,7 +169,7 @@ const posts = (await getCollection("posts"))
     margin: 0 0 24px 0;
   }
 
-  [data-theme="dark"] .projects h2 {
+  :global([data-theme="dark"]) .projects h2 {
     color: #9ca3af;
   }
 
@@ -144,14 +178,18 @@ const posts = (await getCollection("posts"))
   }
 
   .featured-project h3 {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     font-size: 17px;
     font-weight: 700;
     margin: 0 0 4px 0;
     color: #1f1e1d;
   }
 
-  [data-theme="dark"] .featured-project h3 {
+  :global([data-theme="dark"]) .featured-project h3 {
     color: #e5e5e5;
   }
 
@@ -162,7 +200,7 @@ const posts = (await getCollection("posts"))
     line-height: 1.5;
   }
 
-  [data-theme="dark"] .project-desc {
+  :global([data-theme="dark"]) .project-desc {
     color: #9ca3af;
   }
 
@@ -179,12 +217,12 @@ const posts = (await getCollection("posts"))
     text-decoration-color: #1f1e1d;
   }
 
-  [data-theme="dark"] .project-link {
+  :global([data-theme="dark"]) .project-link {
     color: #9ca3af;
     text-decoration-color: #4b5563;
   }
 
-  [data-theme="dark"] .project-link:hover {
+  :global([data-theme="dark"]) .project-link:hover {
     color: #e5e5e5;
     text-decoration-color: #e5e5e5;
   }
@@ -196,7 +234,7 @@ const posts = (await getCollection("posts"))
     margin: 32px 0 0 0;
   }
 
-  [data-theme="dark"] .roles {
+  :global([data-theme="dark"]) .roles {
     color: #9ca3af;
   }
 
@@ -206,7 +244,11 @@ const posts = (await getCollection("posts"))
   }
 
   .writing h2 {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
@@ -215,7 +257,7 @@ const posts = (await getCollection("posts"))
     margin: 0 0 24px 0;
   }
 
-  [data-theme="dark"] .writing h2 {
+  :global([data-theme="dark"]) .writing h2 {
     color: #9ca3af;
   }
 
@@ -239,7 +281,7 @@ const posts = (await getCollection("posts"))
     font-size: 17px;
   }
 
-  [data-theme="dark"] .posts-list a {
+  :global([data-theme="dark"]) .posts-list a {
     color: #e5e5e5;
   }
 
@@ -255,7 +297,7 @@ const posts = (await getCollection("posts"))
     flex-shrink: 0;
   }
 
-  [data-theme="dark"] .posts-list time {
+  :global([data-theme="dark"]) .posts-list time {
     color: #9ca3af;
   }
 
@@ -265,7 +307,7 @@ const posts = (await getCollection("posts"))
     font-size: 14px;
   }
 
-  [data-theme="dark"] .see-all {
+  :global([data-theme="dark"]) .see-all {
     color: #9ca3af;
   }
 
@@ -285,7 +327,7 @@ const posts = (await getCollection("posts"))
     text-decoration: none;
   }
 
-  [data-theme="dark"] .site-footer a {
+  :global([data-theme="dark"]) .site-footer a {
     color: #e5e5e5;
   }
 
@@ -298,7 +340,7 @@ const posts = (await getCollection("posts"))
     color: #d1d5db;
   }
 
-  [data-theme="dark"] .separator {
+  :global([data-theme="dark"]) .separator {
     color: #4b5563;
   }
 
