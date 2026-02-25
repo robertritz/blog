@@ -1,12 +1,12 @@
 ---
 import BaseHead from "../components/BaseHead.astro"
-import SystemTheme from "../components/SystemTheme.astro"
+import SiteHeader from "../components/SiteHeader.astro"
 import { siteConfig } from "../config"
 import { getCollection } from "astro:content"
 
 const posts = (await getCollection("posts"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, siteConfig.latestPosts)
+  .slice(0, 5)
 ---
 
 <!doctype html>
@@ -14,42 +14,51 @@ const posts = (await getCollection("posts"))
   <head>
     <BaseHead
       title={siteConfig.siteName}
-      description="Data scientist and builder based in Mongolia. President of AUM, co-founder of Precision Kraft, building Data.mn."
+      description={siteConfig.meta.description}
     />
   </head>
   <body>
     <main>
-      <header class="site-header">
-        <h1>Robert Ritz</h1>
-        <SystemTheme />
-      </header>
+      <SiteHeader showNav={false} />
 
-      <div class="bio">
-        <input type="checkbox" id="bio-toggle" class="bio-checkbox" />
-        <p class="bio-text">
+      <section class="bio">
+        <p>
           Data scientist, builder, and accidental Mongolian. I moved to
-          Ulaanbaatar over a decade ago and found a life I never expected—a
-          country of vast landscapes, resilient people, and endless
-          opportunity to build something meaningful.
-          <span class="bio-more">
-            Today I serve as President of the American University of Mongolia,
-            co-founded Precision Kraft (custom furniture manufacturing), and I'm building
-            Data.mn to bring better statistics and insights to Mongolia.
-            Inspired daily by my wife Bayaraa and son Erin.
-          </span>
+          Ulaanbaatar over a decade ago and now run a university, co-founded a
+          furniture company, and build tools to make Mongolia's data accessible.
         </p>
-        <label for="bio-toggle" class="bio-toggle-label">
-          <span class="show-more">...More</span>
-          <span class="show-less">Less</span>
-        </label>
-      </div>
+      </section>
 
-      <section class="writing">
+      <section class="projects" id="projects">
+        <h2>Projects</h2>
+
+        <div class="featured-project">
+          <h3>Mongolia Newsletter</h3>
+          <p class="project-desc">Weekly digest of Mongolian news, politics, and economics.</p>
+          <a href="https://mongolia.robertritz.com" class="project-link" target="_blank" rel="noopener noreferrer">mongolia.robertritz.com &rarr;</a>
+        </div>
+
+        <div class="featured-project">
+          <h3>Data.mn</h3>
+          <p class="project-desc">Making Mongolia's data accessible and searchable.</p>
+          <a href="https://data.mn" class="project-link" target="_blank" rel="noopener noreferrer">data.mn &rarr;</a>
+        </div>
+
+        <p class="roles">Also: President of AUM &middot; Co-founder, Precision Kraft</p>
+      </section>
+
+      <section class="writing" id="writing">
         <h2>Writing</h2>
         <ul class="posts-list">
           {posts.map((post) => (
             <li>
               <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+              <time>
+                {new Date(post.data.pubDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                })}
+              </time>
             </li>
           ))}
         </ul>
@@ -60,6 +69,8 @@ const posts = (await getCollection("posts"))
         <a href="https://x.com/RobertERitz" target="_blank" rel="noopener noreferrer">X</a>
         <span class="separator">&middot;</span>
         <a href="mailto:robert@aum.edu.mn">Email</a>
+        <span class="separator">&middot;</span>
+        <a href="/rss.xml">RSS</a>
       </footer>
     </main>
   </body>
@@ -71,16 +82,14 @@ const posts = (await getCollection("posts"))
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.7;
     color: #1f1e1d;
-    background: #f0eee6;
+    background: #fafafa;
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    width: 100%;
   }
 
   [data-theme="dark"] body {
@@ -90,140 +99,138 @@ const posts = (await getCollection("posts"))
 
   main {
     width: 100%;
-    max-width: 600px;
+    max-width: 640px;
     margin: 0 auto;
     padding: 60px 24px;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
   }
 
-  .site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-
-  h1 {
-    font-family: "Times New Roman", Times, Georgia, serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0;
-    color: #1f1e1d;
-  }
-
-  [data-theme="dark"] h1 {
-    color: #e5e5e5;
-  }
-
+  /* Bio */
   .bio {
     margin-bottom: 48px;
   }
 
-  .bio-checkbox {
-    display: none;
-  }
-
-  .bio-text {
+  .bio p {
     font-size: 17px;
     line-height: 1.7;
     margin: 0;
     color: #1f1e1d;
   }
 
-  [data-theme="dark"] .bio-text {
+  [data-theme="dark"] .bio p {
     color: #bbb;
   }
 
-  .bio a {
-    color: #1f1e1d;
-    text-decoration: underline;
-    text-underline-offset: 2px;
+  /* Projects */
+  .projects {
+    margin-bottom: 48px;
   }
 
-  [data-theme="dark"] .bio a {
+  .projects h2 {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+    margin: 0 0 24px 0;
+  }
+
+  [data-theme="dark"] .projects h2 {
+    color: #9ca3af;
+  }
+
+  .featured-project {
+    margin-bottom: 24px;
+  }
+
+  .featured-project h3 {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: #1f1e1d;
+  }
+
+  [data-theme="dark"] .featured-project h3 {
     color: #e5e5e5;
   }
 
-  .bio a:hover {
-    text-decoration-thickness: 2px;
+  .project-desc {
+    font-size: 15px;
+    color: #6b7280;
+    margin: 0 0 4px 0;
+    line-height: 1.5;
   }
 
-  /* Bio expand/collapse - mobile only */
-  .bio-more {
-    display: inline;
+  [data-theme="dark"] .project-desc {
+    color: #9ca3af;
   }
 
-  .bio-toggle-label {
-    display: none;
+  .project-link {
+    font-size: 15px;
+    color: #6b7280;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: #d1d5db;
   }
 
-  @media (max-width: 600px) {
-    .bio-more {
-      display: none;
-    }
-
-    .bio-toggle-label {
-      display: inline;
-      color: #888;
-      cursor: pointer;
-      font-size: 17px;
-    }
-
-    [data-theme="dark"] .bio-toggle-label {
-      color: #888;
-    }
-
-    .bio-toggle-label:hover {
-      text-decoration: underline;
-    }
-
-    .show-less {
-      display: none;
-    }
-
-    .bio-checkbox:checked ~ .bio-text .bio-more {
-      display: inline;
-    }
-
-    .bio-checkbox:checked ~ .bio-toggle-label .show-more {
-      display: none;
-    }
-
-    .bio-checkbox:checked ~ .bio-toggle-label .show-less {
-      display: inline;
-    }
+  .project-link:hover {
+    color: #1f1e1d;
+    text-decoration-color: #1f1e1d;
   }
 
+  [data-theme="dark"] .project-link {
+    color: #9ca3af;
+    text-decoration-color: #4b5563;
+  }
+
+  [data-theme="dark"] .project-link:hover {
+    color: #e5e5e5;
+    text-decoration-color: #e5e5e5;
+  }
+
+  .roles {
+    font-size: 15px;
+    color: #6b7280;
+    font-style: italic;
+    margin: 32px 0 0 0;
+  }
+
+  [data-theme="dark"] .roles {
+    color: #9ca3af;
+  }
+
+  /* Writing */
   .writing {
     margin-bottom: 48px;
   }
 
   .writing h2 {
-    font-family: "Times New Roman", Times, Georgia, serif;
-    font-size: 20px;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
     font-weight: 700;
-    margin: 0 0 20px 0;
-    color: #1f1e1d;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+    margin: 0 0 24px 0;
   }
 
   [data-theme="dark"] .writing h2 {
-    color: #e5e5e5;
+    color: #9ca3af;
   }
 
   .posts-list {
-    list-style: disc;
-    padding-left: 20px;
+    list-style: none;
+    padding: 0;
     margin: 0 0 16px 0;
   }
 
   .posts-list li {
-    margin: 8px 0;
-    color: #888;
-  }
-
-  [data-theme="dark"] .posts-list li {
-    color: #888;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 8px 0;
   }
 
   .posts-list a {
@@ -238,29 +245,39 @@ const posts = (await getCollection("posts"))
 
   .posts-list a:hover {
     text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .posts-list time {
+    font-size: 14px;
+    color: #6b7280;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  [data-theme="dark"] .posts-list time {
+    color: #9ca3af;
   }
 
   .see-all {
-    color: #888;
+    color: #6b7280;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
   }
 
   [data-theme="dark"] .see-all {
-    color: #888;
+    color: #9ca3af;
   }
 
   .see-all:hover {
     text-decoration: underline;
   }
 
+  /* Footer */
   .site-footer {
-    font-size: 15px;
-    color: #888;
-  }
-
-  [data-theme="dark"] .site-footer {
-    color: #888;
+    font-size: 14px;
+    color: #6b7280;
+    padding-top: 16px;
   }
 
   .site-footer a {
@@ -277,29 +294,31 @@ const posts = (await getCollection("posts"))
   }
 
   .separator {
-    margin: 0 12px;
-    color: #ccc;
+    margin: 0 10px;
+    color: #d1d5db;
   }
 
   [data-theme="dark"] .separator {
-    color: #555;
+    color: #4b5563;
   }
 
+  /* Mobile */
   @media (max-width: 600px) {
     main {
       padding: 40px 20px;
     }
 
-    h1 {
-      font-size: 28px;
-    }
-
-    .bio-text {
+    .bio p {
       font-size: 16px;
     }
 
     .posts-list a {
       font-size: 16px;
+    }
+
+    .posts-list li {
+      flex-direction: column;
+      gap: 2px;
     }
   }
 </style>
