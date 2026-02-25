@@ -18,6 +18,7 @@ type Props = CollectionEntry<"posts">
 
 const post = Astro.props
 const { Content, headings } = await post.render()
+const tocHeadings = headings.filter((h) => h.depth <= 3)
 ---
 
 <!doctype html>
@@ -30,8 +31,19 @@ const { Content, headings } = await post.render()
   </head>
   <body>
     <!-- Mobile TOC toggle -->
-    <button class="toc-toggle" id="toc-toggle" aria-label="Toggle table of contents">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <button
+      class="toc-toggle"
+      id="toc-toggle"
+      aria-label="Toggle table of contents"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
         <line x1="3" y1="6" x2="21" y2="6"></line>
         <line x1="3" y1="12" x2="21" y2="12"></line>
         <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -50,13 +62,16 @@ const { Content, headings } = await post.render()
       <nav class="toc">
         <h2>Contents</h2>
         <ul id="toc-list">
-          {headings.filter(h => h.depth <= 3).map((heading, index) => (
-            <li class={`toc-item depth-${heading.depth}`}>
-              <a href={`#${heading.slug}`}>
-                {heading.depth === 2 ? `${index + 1}. ` : ''}{heading.text}
-              </a>
-            </li>
-          ))}
+          {
+            tocHeadings.map((heading, index) => (
+                <li class={`toc-item depth-${heading.depth}`}>
+                  <a href={`#${heading.slug}`}>
+                    {heading.depth === 2 ? `${index + 1}. ` : ""}
+                    {heading.text}
+                  </a>
+                </li>
+              ))
+          }
         </ul>
       </nav>
     </aside>
@@ -66,9 +81,11 @@ const { Content, headings } = await post.render()
       <article class="post">
         <header class="post-meta">
           <h1>{post.data.title}</h1>
-          {post.data.description && (
-            <p class="subtitle">{post.data.description}</p>
-          )}
+          {
+            post.data.description && (
+              <p class="subtitle">{post.data.description}</p>
+            )
+          }
           <time><FormattedDate date={post.data.pubDate} /></time>
         </header>
 
@@ -86,7 +103,9 @@ const { Content, headings } = await post.render()
 
 <style>
   /* Base styles - matching Dario's exact colors */
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 
@@ -95,7 +114,13 @@ const { Content, headings } = await post.render()
   }
 
   body {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
     line-height: 1.6;
     color: #1f1e1d;
     background: #fafafa;
@@ -193,7 +218,13 @@ const { Content, headings } = await post.render()
   }
 
   .toc-item a {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
     font-size: 15px;
     color: #888;
     text-decoration: none;
@@ -258,7 +289,13 @@ const { Content, headings } = await post.render()
   }
 
   .post-meta time {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
     font-size: 15px;
     color: #666;
   }
@@ -269,7 +306,13 @@ const { Content, headings } = await post.render()
 
   /* Content */
   .content {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
     font-size: 17px;
     line-height: 1.7;
     color: #1f1e1d;
@@ -344,7 +387,8 @@ const { Content, headings } = await post.render()
     padding: 3px 6px;
     border-radius: 4px;
     font-size: 15px;
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-family:
+      "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   }
 
   [data-theme="dark"] .content code {
@@ -393,7 +437,13 @@ const { Content, headings } = await post.render()
   }
 
   .back-to-top {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
     font-size: 15px;
     color: #1f1e1d;
     text-decoration: underline;
@@ -487,27 +537,30 @@ const { Content, headings } = await post.render()
 
 <script>
   // TOC toggle for mobile
-  const tocToggle = document.getElementById('toc-toggle');
-  const tocSidebar = document.getElementById('toc-sidebar');
+  const tocToggle = document.getElementById("toc-toggle")
+  const tocSidebar = document.getElementById("toc-sidebar")
 
   if (tocToggle && tocSidebar) {
-    tocToggle.addEventListener('click', () => {
-      tocSidebar.classList.toggle('open');
-    });
+    tocToggle.addEventListener("click", () => {
+      tocSidebar.classList.toggle("open")
+    })
 
     // Close TOC when clicking a link
-    tocSidebar.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        tocSidebar.classList.remove('open');
-      });
-    });
+    tocSidebar.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        tocSidebar.classList.remove("open")
+      })
+    })
 
     // Close TOC when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!tocSidebar.contains(e.target as Node) && !tocToggle.contains(e.target as Node)) {
-        tocSidebar.classList.remove('open');
+    document.addEventListener("click", (e) => {
+      if (
+        !tocSidebar.contains(e.target as Node) &&
+        !tocToggle.contains(e.target as Node)
+      ) {
+        tocSidebar.classList.remove("open")
       }
-    });
+    })
   }
 
   // Make all external links in post content open in new tabs
