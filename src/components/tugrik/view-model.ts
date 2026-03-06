@@ -28,15 +28,6 @@ export interface TugrikDriverStory {
   sourceLabel: string
 }
 
-export interface TugrikScenarioInput {
-  feature: string
-  label: string
-  direction: "weaker_tugrik" | "stronger_tugrik"
-  interpretation: string
-  scenarioWeight: number
-  stability: number
-}
-
 export interface TugrikSourceUpdateItem {
   key: string
   label: string
@@ -74,7 +65,6 @@ export interface TugrikDashboardViewModel {
   trustLead: string
   trustFacts: TugrikFactItem[]
   driverStories: TugrikDriverStory[]
-  scenarioInputs: TugrikScenarioInput[]
   driverBullets: string[]
   driverLines: string[]
   methodBullets: string[]
@@ -180,7 +170,6 @@ export function buildTugrikViewModel(
     data.drivers.by_horizon[String(selectedHorizon)] ??
     data.drivers.by_horizon[String(data.summary.default_horizon)]
   const stories = buildStories(bucket)
-  const scenarioInputs = buildScenarioInputs(bucket)
   const freshnessLabel = getFreshnessLabel(data.meta.staleness_status)
   const changeLabel = formatPercent(selectedCard.pct_change_from_current, 2)
   const trustLead = buildTrustLead(selectedHorizon, accuracy)
@@ -251,7 +240,6 @@ export function buildTugrikViewModel(
       },
     ],
     driverStories: stories,
-    scenarioInputs,
     driverBullets: stories.map(
       (story) =>
         `${story.title}: ${story.summary} Main signal now: ${story.sourceLabel}.`,
@@ -346,56 +334,6 @@ function buildStories(bucket: TugrikDriverBucket): TugrikDriverStory[] {
     })
 }
 
-function buildScenarioInputs(
-  bucket: TugrikDriverBucket,
-): TugrikScenarioInput[] {
-  const drivers = [...bucket.positive, ...bucket.negative].filter(
-    (driver) => driver.strength > 0,
-  )
-
-  if (!drivers.length) {
-    return []
-  }
-
-  const maxStrength = Math.max(...drivers.map((driver) => driver.strength), 1)
-  const treeByFeature = new Map(
-    bucket.tree.map((feature) => [feature.feature, feature]),
-  )
-  const strongestByRoot = new Map<
-    string,
-    TugrikScenarioInput & { compositeScore: number }
-  >()
-
-  for (const driver of drivers) {
-    const linearWeight = driver.strength / maxStrength
-    const treeWeight =
-      treeByFeature.get(driver.feature)?.normalized_importance ?? 0
-    const compositeScore =
-      linearWeight * 0.75 + treeWeight * 0.45 + driver.stability * 0.1
-    const rootKey = normalizeScenarioKey(driver.label)
-    const existing = strongestByRoot.get(rootKey)
-
-    if (existing && existing.compositeScore >= compositeScore) {
-      continue
-    }
-
-    strongestByRoot.set(rootKey, {
-      feature: driver.feature,
-      label: driver.label,
-      direction: driver.direction,
-      interpretation: driver.interpretation,
-      scenarioWeight: compositeScore,
-      stability: driver.stability,
-      compositeScore,
-    })
-  }
-
-  return Array.from(strongestByRoot.values())
-    .sort((a, b) => b.scenarioWeight - a.scenarioWeight)
-    .slice(0, 4)
-    .map(({ compositeScore: _compositeScore, ...input }) => input)
-}
-
 function matchStory(driver: TugrikDriverLinear): StoryDefinition {
   const haystack = `${driver.feature} ${driver.label}`.toLowerCase()
   return (
@@ -426,13 +364,6 @@ function formatSourceUpdate(
       day: "numeric",
     }),
   }
-}
-
-function normalizeScenarioKey(label: string) {
-  return label
-    .replace(/\s*\([^)]*\)/g, "")
-    .trim()
-    .toLowerCase()
 }
 
 function formatCoverage(value: number | null): string {

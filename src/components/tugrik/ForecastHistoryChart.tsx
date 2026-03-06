@@ -24,6 +24,7 @@ interface ForecastHistoryChartProps {
   framed?: boolean
   height?: TugrikChartHeight
   legendPlacement?: "top" | "bottom" | "none"
+  defaultWindow?: "recent" | "full"
   showWindowControls?: boolean
 }
 
@@ -42,9 +43,12 @@ export function ForecastHistoryChart({
   framed = false,
   height = "standard",
   legendPlacement = "bottom",
+  defaultWindow = "recent",
   showWindowControls = true,
 }: ForecastHistoryChartProps) {
-  const [showFullHistory, setShowFullHistory] = useState(false)
+  const [showFullHistory, setShowFullHistory] = useState(
+    defaultWindow === "full",
+  )
   const tooltip = useTooltip<HistoryTooltipData>()
 
   const filtered = useMemo(() => {
@@ -57,21 +61,46 @@ export function ForecastHistoryChart({
       .filter((row) => row.horizon_months === selectedHorizon)
       .map((row) => ({ ...row, date: periodToDate(row.target_period) }))
       .sort((a, b) => a.target_period.localeCompare(b.target_period))
+    const seededVintages = horizonVintages.filter(
+      (row) => row.source_kind === "seeded_backtest",
+    )
+    const firstSeededPeriod = seededVintages[0]?.target_period
+    const lastSeededPeriod =
+      seededVintages[seededVintages.length - 1]?.target_period
+    const seededSpan =
+      firstSeededPeriod && lastSeededPeriod
+        ? `${formatPeriod(firstSeededPeriod)} to ${formatPeriod(lastSeededPeriod)}`
+        : null
 
-    if (showFullHistory || horizonVintages.length === 0) {
-      return { actual, horizonVintages }
+    if (horizonVintages.length === 0) {
+      return { actual, horizonVintages, seededSpan }
     }
 
-    const cutoff = subtractMonths(
-      horizonVintages[horizonVintages.length - 1].target_period,
-      recentWindowMonths - 1,
-    )
+    const cutoffAnchor =
+      horizonVintages[horizonVintages.length - 1]?.target_period ??
+      actual[actual.length - 1]?.period ??
+      actual[0]?.period
+
+    if (!cutoffAnchor) {
+      return { actual, horizonVintages, seededSpan }
+    }
+
+    const recentCutoff = subtractMonths(cutoffAnchor, recentWindowMonths - 1)
+    const startPeriod = showFullHistory
+      ? (firstSeededPeriod ??
+        horizonVintages[0]?.target_period ??
+        actual[0]?.period ??
+        cutoffAnchor)
+      : firstSeededPeriod && recentCutoff < firstSeededPeriod
+        ? firstSeededPeriod
+        : recentCutoff
 
     return {
-      actual: actual.filter((row) => row.period >= cutoff),
+      actual: actual.filter((row) => row.period >= startPeriod),
       horizonVintages: horizonVintages.filter(
-        (row) => row.target_period >= cutoff,
+        (row) => row.target_period >= startPeriod,
       ),
+      seededSpan,
     }
   }, [
     actualSeries,
@@ -93,7 +122,16 @@ export function ForecastHistoryChart({
       className={`tugrik-chart-surface ${framed ? "is-framed" : "is-plain"}`}
     >
       <div className="tugrik-history-toolbar">
-        <strong className="tugrik-history-label">Forecast vs actual</strong>
+        <div className="tugrik-history-head">
+          <strong className="tugrik-history-label">
+            Seeded backtest vs actual
+          </strong>
+          {filtered.seededSpan ? (
+            <span className="tugrik-history-span">
+              Seeded span {filtered.seededSpan}
+            </span>
+          ) : null}
+        </div>
         {showWindowControls ? (
           <div className="tugrik-chip-row">
             <button
@@ -136,16 +174,30 @@ export function ForecastHistoryChart({
                 (row) => row.actual_value ?? row.forecast_value,
               ),
             ]
+
+            if (!values.length) {
+              return null
+            }
+
             const yMin = Math.min(...values)
             const yMax = Math.max(...values)
             const pad = Math.max((yMax - yMin) * 0.14, 24)
+            const firstActualDate = filtered.actual[0]?.date
+            const firstVintageDate = filtered.horizonVintages[0]?.date
+            const startDate = firstActualDate ?? firstVintageDate ?? new Date()
+            const lastActualDate =
+              filtered.actual[filtered.actual.length - 1]?.date
             const lastVintageDate =
-              filtered.horizonVintages.length > 0
-                ? filtered.horizonVintages[filtered.horizonVintages.length - 1]
-                    .date
-                : filtered.actual[filtered.actual.length - 1].date
+              filtered.horizonVintages[filtered.horizonVintages.length - 1]
+                ?.date
+            const endDate =
+              lastActualDate && lastVintageDate
+                ? lastActualDate > lastVintageDate
+                  ? lastActualDate
+                  : lastVintageDate
+                : (lastVintageDate ?? lastActualDate ?? startDate)
             const xScale = scaleTime({
-              domain: [filtered.actual[0].date, lastVintageDate],
+              domain: [startDate, endDate],
               range: [0, innerWidth],
             })
             const yScale = scaleLinear({
