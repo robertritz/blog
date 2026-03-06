@@ -6,7 +6,11 @@ interface DisclosurePanelProps {
   children: ReactNode
 }
 
-export function DisclosurePanel({ title, summary, children }: DisclosurePanelProps) {
+export function DisclosurePanel({
+  title,
+  summary,
+  children,
+}: DisclosurePanelProps) {
   return (
     <details className="tugrik-disclosure">
       <summary>

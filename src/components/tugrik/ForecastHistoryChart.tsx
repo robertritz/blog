@@ -7,7 +7,11 @@ import { LinePath } from "@visx/shape"
 import { TooltipWithBounds, defaultStyles, useTooltip } from "@visx/tooltip"
 import { AnimatePresence, motion } from "motion/react"
 import { useMemo, useState } from "react"
-import type { TugrikActualPoint, TugrikHistoryVintage, TugrikHorizon } from "~/types/tugrik"
+import type {
+  TugrikActualPoint,
+  TugrikHistoryVintage,
+  TugrikHorizon,
+} from "~/types/tugrik"
 import { formatMnt, formatPeriod, periodToDate } from "./formatters"
 
 interface ForecastHistoryChartProps {
@@ -24,12 +28,21 @@ interface HistoryTooltipData {
   sourceLabel: string
 }
 
-export function ForecastHistoryChart({ actualSeries, vintages, selectedHorizon, recentWindowMonths }: ForecastHistoryChartProps) {
+export function ForecastHistoryChart({
+  actualSeries,
+  vintages,
+  selectedHorizon,
+  recentWindowMonths,
+}: ForecastHistoryChartProps) {
   const [showFullHistory, setShowFullHistory] = useState(false)
   const tooltip = useTooltip<HistoryTooltipData>()
 
   const filtered = useMemo(() => {
-    const actual = actualSeries.map((row) => ({ date: periodToDate(row.period), period: row.period, value: row.usd_mnt }))
+    const actual = actualSeries.map((row) => ({
+      date: periodToDate(row.period),
+      period: row.period,
+      value: row.usd_mnt,
+    }))
     const horizonVintages = vintages
       .filter((row) => row.horizon_months === selectedHorizon)
       .map((row) => ({ ...row, date: periodToDate(row.target_period) }))
@@ -39,15 +52,30 @@ export function ForecastHistoryChart({ actualSeries, vintages, selectedHorizon, 
       return { actual, horizonVintages }
     }
 
-    const cutoff = subtractMonths(horizonVintages[horizonVintages.length - 1].target_period, recentWindowMonths - 1)
+    const cutoff = subtractMonths(
+      horizonVintages[horizonVintages.length - 1].target_period,
+      recentWindowMonths - 1,
+    )
     return {
       actual: actual.filter((row) => row.period >= cutoff),
-      horizonVintages: horizonVintages.filter((row) => row.target_period >= cutoff),
+      horizonVintages: horizonVintages.filter(
+        (row) => row.target_period >= cutoff,
+      ),
     }
-  }, [actualSeries, recentWindowMonths, selectedHorizon, showFullHistory, vintages])
+  }, [
+    actualSeries,
+    recentWindowMonths,
+    selectedHorizon,
+    showFullHistory,
+    vintages,
+  ])
 
-  const seeded = filtered.horizonVintages.filter((row) => row.source_kind === "seeded_backtest")
-  const published = filtered.horizonVintages.filter((row) => row.source_kind === "published_live")
+  const seeded = filtered.horizonVintages.filter(
+    (row) => row.source_kind === "seeded_backtest",
+  )
+  const published = filtered.horizonVintages.filter(
+    (row) => row.source_kind === "published_live",
+  )
 
   return (
     <div className="tugrik-chart-surface tugrik-chart-surface--history">
@@ -55,20 +83,21 @@ export function ForecastHistoryChart({ actualSeries, vintages, selectedHorizon, 
         <div>
           <strong>Forecast vs actual</strong>
           <p>
-            Seeded backtests give immediate history. Published live forecasts are appended going forward and labeled separately.
+            Seeded backtests give immediate history. Published live forecasts
+            are appended going forward and labeled separately.
           </p>
         </div>
         <div className="tugrik-chip-row">
           <button
             type="button"
-            className={`tugrik-chip${showFullHistory ? "" : " is-selected"}`}
+            className={`tugrik-chip${showFullHistory ? "" : "is-selected"}`}
             onClick={() => setShowFullHistory(false)}
           >
             Recent view
           </button>
           <button
             type="button"
-            className={`tugrik-chip${showFullHistory ? " is-selected" : ""}`}
+            className={`tugrik-chip${showFullHistory ? "is-selected" : ""}`}
             onClick={() => setShowFullHistory(true)}
           >
             Full history
@@ -86,14 +115,17 @@ export function ForecastHistoryChart({ actualSeries, vintages, selectedHorizon, 
           const values = [
             ...filtered.actual.map((row) => row.value),
             ...filtered.horizonVintages.map((row) => row.forecast_value),
-            ...filtered.horizonVintages.map((row) => row.actual_value ?? row.forecast_value),
+            ...filtered.horizonVintages.map(
+              (row) => row.actual_value ?? row.forecast_value,
+            ),
           ]
           const yMin = Math.min(...values)
           const yMax = Math.max(...values)
           const pad = (yMax - yMin) * 0.14
           const lastVintageDate =
             filtered.horizonVintages.length > 0
-              ? filtered.horizonVintages[filtered.horizonVintages.length - 1].date
+              ? filtered.horizonVintages[filtered.horizonVintages.length - 1]
+                  .date
               : filtered.actual[filtered.actual.length - 1].date
           const xScale = scaleTime({
             domain: [filtered.actual[0].date, lastVintageDate],
@@ -107,9 +139,18 @@ export function ForecastHistoryChart({ actualSeries, vintages, selectedHorizon, 
 
           return (
             <div className="tugrik-tooltip-frame">
-              <svg width={safeWidth} height={safeHeight} role="img" aria-label="Historical forecast accuracy for the selected horizon">
+              <svg
+                width={safeWidth}
+                height={safeHeight}
+                role="img"
+                aria-label="Historical forecast accuracy for the selected horizon"
+              >
                 <Group left={margin.left} top={margin.top}>
-                  <GridRows scale={yScale} width={innerWidth} stroke="var(--tg-grid)" />
+                  <GridRows
+                    scale={yScale}
+                    width={innerWidth}
+                    stroke="var(--tg-grid)"
+                  />
                   <LinePath
                     data={filtered.actual}
                     x={(row) => xScale(row.date) ?? 0}
@@ -209,7 +250,12 @@ export function ForecastHistoryChart({ actualSeries, vintages, selectedHorizon, 
                     numTicks={5}
                     stroke="var(--tg-grid-strong)"
                     tickStroke="var(--tg-grid-strong)"
-                    tickLabelProps={() => ({ fill: "var(--tg-ink-muted)", fontSize: 11, textAnchor: "end", dy: "0.32em" })}
+                    tickLabelProps={() => ({
+                      fill: "var(--tg-ink-muted)",
+                      fontSize: 11,
+                      textAnchor: "end",
+                      dy: "0.32em",
+                    })}
                     tickFormat={(value) => formatMnt(Number(value))}
                   />
                   <AxisBottom
@@ -218,9 +264,16 @@ export function ForecastHistoryChart({ actualSeries, vintages, selectedHorizon, 
                     numTicks={6}
                     stroke="var(--tg-grid-strong)"
                     tickStroke="var(--tg-grid-strong)"
-                    tickLabelProps={() => ({ fill: "var(--tg-ink-muted)", fontSize: 11, textAnchor: "middle" })}
+                    tickLabelProps={() => ({
+                      fill: "var(--tg-ink-muted)",
+                      fontSize: 11,
+                      textAnchor: "middle",
+                    })}
                     tickFormat={(value) =>
-                      new Date(value.valueOf()).toLocaleDateString("en-US", { month: "short", year: "2-digit" })
+                      new Date(value.valueOf()).toLocaleDateString("en-US", {
+                        month: "short",
+                        year: "2-digit",
+                      })
                     }
                   />
                 </Group>
@@ -242,9 +295,13 @@ export function ForecastHistoryChart({ actualSeries, vintages, selectedHorizon, 
                 >
                   <strong>{tooltip.tooltipData.label}</strong>
                   <div>{tooltip.tooltipData.sourceLabel}</div>
-                  <div>Forecast: {formatMnt(tooltip.tooltipData.forecastValue, 1)}</div>
+                  <div>
+                    Forecast: {formatMnt(tooltip.tooltipData.forecastValue, 1)}
+                  </div>
                   {tooltip.tooltipData.actualValue ? (
-                    <div>Actual: {formatMnt(tooltip.tooltipData.actualValue, 1)}</div>
+                    <div>
+                      Actual: {formatMnt(tooltip.tooltipData.actualValue, 1)}
+                    </div>
                   ) : (
                     <div>Actual: pending</div>
                   )}
@@ -256,9 +313,18 @@ export function ForecastHistoryChart({ actualSeries, vintages, selectedHorizon, 
       </ParentSize>
 
       <div className="tugrik-legend">
-        <span><i className="is-actual" />Actual</span>
-        <span><i className="is-seeded" />Seeded backtest</span>
-        <span><i className="is-published" />Published live</span>
+        <span>
+          <i className="is-actual" />
+          Actual
+        </span>
+        <span>
+          <i className="is-seeded" />
+          Seeded backtest
+        </span>
+        <span>
+          <i className="is-published" />
+          Published live
+        </span>
       </div>
     </div>
   )

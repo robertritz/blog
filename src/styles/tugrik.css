@@ -26,7 +26,7 @@
   --tg-accent-soft: rgba(167, 76, 32, 0.14);
   --tg-green: #205c49;
   --tg-green-soft: rgba(32, 92, 73, 0.14);
-  --tg-band-95: rgba(167, 76, 32, 0.10);
+  --tg-band-95: rgba(167, 76, 32, 0.1);
   --tg-band-80: rgba(167, 76, 32, 0.18);
   --tg-band-ensemble: rgba(32, 92, 73, 0.11);
   --tg-tooltip-bg: rgba(18, 15, 11, 0.92);
@@ -36,7 +36,12 @@
   padding-top: 2.5rem;
   padding-bottom: 4rem;
   color: var(--tg-ink);
-  font-family: "Atkinson", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    "Atkinson",
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 
 [data-theme="dark"] .tugrik-page {
@@ -51,7 +56,7 @@
   --tg-accent-soft: rgba(214, 126, 70, 0.16);
   --tg-green: #63ad90;
   --tg-green-soft: rgba(99, 173, 144, 0.16);
-  --tg-band-95: rgba(214, 126, 70, 0.10);
+  --tg-band-95: rgba(214, 126, 70, 0.1);
   --tg-band-80: rgba(214, 126, 70, 0.18);
   --tg-band-ensemble: rgba(99, 173, 144, 0.14);
   --tg-tooltip-bg: rgba(251, 245, 235, 0.95);
@@ -64,16 +69,32 @@
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(circle at top right, rgba(167, 76, 32, 0.10), transparent 28%),
-    radial-gradient(circle at bottom left, rgba(32, 92, 73, 0.10), transparent 30%),
+    radial-gradient(
+      circle at top right,
+      rgba(167, 76, 32, 0.1),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(32, 92, 73, 0.1),
+      transparent 30%
+    ),
     linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
   pointer-events: none;
 }
 
 [data-theme="dark"] .tugrik-page::before {
   background:
-    radial-gradient(circle at top right, rgba(214, 126, 70, 0.10), transparent 30%),
-    radial-gradient(circle at bottom left, rgba(99, 173, 144, 0.10), transparent 32%);
+    radial-gradient(
+      circle at top right,
+      rgba(214, 126, 70, 0.1),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(99, 173, 144, 0.1),
+      transparent 32%
+    );
 }
 
 .tugrik-dashboard {
@@ -96,7 +117,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.12), transparent 22%);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.12),
+    transparent 22%
+  );
   pointer-events: none;
 }
 
@@ -180,7 +205,15 @@
   backdrop-filter: blur(12px);
 }
 
-[data-theme="dark"] :is(.tugrik-stat-card, .tugrik-callout, .tugrik-metric-card, .tugrik-driver-card, .tugrik-disclosure, .tugrik-forecast-card) {
+[data-theme="dark"]
+  :is(
+    .tugrik-stat-card,
+    .tugrik-callout,
+    .tugrik-metric-card,
+    .tugrik-driver-card,
+    .tugrik-disclosure,
+    .tugrik-forecast-card
+  ) {
   background: rgba(32, 26, 20, 0.72);
 }
 
@@ -255,7 +288,10 @@
   text-align: left;
   padding: 1rem;
   cursor: pointer;
-  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
   color: inherit;
 }
 
@@ -267,7 +303,11 @@
 .tugrik-forecast-card.is-selected {
   border-color: var(--tg-accent);
   box-shadow: inset 0 0 0 1px var(--tg-accent);
-  background: color-mix(in srgb, var(--tg-accent-soft) 76%, var(--tg-paper) 24%);
+  background: color-mix(
+    in srgb,
+    var(--tg-accent-soft) 76%,
+    var(--tg-paper) 24%
+  );
 }
 
 .tugrik-card-horizon,
@@ -302,7 +342,11 @@
   border-radius: 24px;
   border: 1px solid var(--tg-grid-strong);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0.12)),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.44),
+      rgba(255, 255, 255, 0.12)
+    ),
     var(--tg-paper);
   min-height: 23rem;
   overflow: hidden;
@@ -310,7 +354,11 @@
 
 [data-theme="dark"] .tugrik-chart-surface {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0.01)
+    ),
     var(--tg-paper);
 }
 

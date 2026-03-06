@@ -20,12 +20,12 @@ Short version:
 Aligned origin: `2026-01`
 Current aligned `USD/MNT`: `3561.03`
 
-| Horizon | Target month | Forecast | Change vs Jan 2026 |
-|---|---|---:|---:|
-| 1 month | 2026-02 | 3547.57 | -0.38% |
-| 3 months | 2026-04 | 3552.66 | -0.24% |
-| 6 months | 2026-07 | 3474.23 | -2.44% |
-| 12 months | 2027-01 | 3380.60 | -5.07% |
+| Horizon   | Target month | Forecast | Change vs Jan 2026 |
+| --------- | ------------ | -------: | -----------------: |
+| 1 month   | 2026-02      |  3547.57 |             -0.38% |
+| 3 months  | 2026-04      |  3552.66 |             -0.24% |
+| 6 months  | 2026-07      |  3474.23 |             -2.44% |
+| 12 months | 2027-01      |  3380.60 |             -5.07% |
 
 ## Project structure
 

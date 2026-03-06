@@ -25,6 +25,9 @@ export function periodToDate(period: string): Date {
   return new Date(Date.UTC(Number(year), Number(month) - 1, 1))
 }
 
-export function clampNumber(value: number | null | undefined, fallback = 0): number {
+export function clampNumber(
+  value: number | null | undefined,
+  fallback = 0,
+): number {
   return Number.isFinite(value) ? Number(value) : fallback
 }

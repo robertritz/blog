@@ -31,7 +31,9 @@ export function AccuracyStrip({ summary }: AccuracyStripProps) {
       <div className="tugrik-metric-card">
         <span className="tugrik-metric-label">80% interval coverage</span>
         <strong>
-          {summary.coverage80 === null ? "n/a" : `${(summary.coverage80 * 100).toFixed(0)}%`}
+          {summary.coverage80 === null
+            ? "n/a"
+            : `${(summary.coverage80 * 100).toFixed(0)}%`}
         </strong>
         <small>Calibration check</small>
       </div>

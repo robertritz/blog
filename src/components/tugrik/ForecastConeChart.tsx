@@ -6,8 +6,17 @@ import { scaleLinear, scaleTime } from "@visx/scale"
 import { LinePath } from "@visx/shape"
 import { TooltipWithBounds, defaultStyles, useTooltip } from "@visx/tooltip"
 import { motion } from "motion/react"
-import type { TugrikActualPoint, TugrikForecastCard, TugrikHorizon } from "~/types/tugrik"
-import { formatMnt, formatPercent, formatPeriod, periodToDate } from "./formatters"
+import type {
+  TugrikActualPoint,
+  TugrikForecastCard,
+  TugrikHorizon,
+} from "~/types/tugrik"
+import {
+  formatMnt,
+  formatPercent,
+  formatPeriod,
+  periodToDate,
+} from "./formatters"
 
 interface ForecastConeChartProps {
   actual: TugrikActualPoint[]
@@ -33,7 +42,10 @@ function buildBandPath(
     return ""
   }
   const upper = points
-    .map((point, index) => `${index === 0 ? "M" : "L"} ${xScale(point.date)} ${yScale(point.high)}`)
+    .map(
+      (point, index) =>
+        `${index === 0 ? "M" : "L"} ${xScale(point.date)} ${yScale(point.high)}`,
+    )
     .join(" ")
   const lower = points
     .slice()
@@ -43,18 +55,47 @@ function buildBandPath(
   return `${upper} ${lower} Z`
 }
 
-export function ForecastConeChart({ actual, forecastPoints, selectedHorizon }: ForecastConeChartProps) {
+export function ForecastConeChart({
+  actual,
+  forecastPoints,
+  selectedHorizon,
+}: ForecastConeChartProps) {
   const tooltip = useTooltip<TooltipData>()
-  const actualPoints = actual.map((point) => ({ date: periodToDate(point.period), value: point.usd_mnt, label: point.period }))
+  const actualPoints = actual.map((point) => ({
+    date: periodToDate(point.period),
+    value: point.usd_mnt,
+    label: point.period,
+  }))
   const forecast = forecastPoints.map((point) => ({
     ...point,
     date: periodToDate(point.target_period),
   }))
   const origin = periodToDate(forecastPoints[0].as_of_period)
   const originValue = forecastPoints[0].current_level
-  const bandPoints95 = [{ date: origin, low: originValue, high: originValue }, ...forecast.map((point) => ({ date: point.date, low: point.interval95_lo, high: point.interval95_hi }))]
-  const bandPoints80 = [{ date: origin, low: originValue, high: originValue }, ...forecast.map((point) => ({ date: point.date, low: point.interval80_lo, high: point.interval80_hi }))]
-  const ensembleBand = [{ date: origin, low: originValue, high: originValue }, ...forecast.map((point) => ({ date: point.date, low: point.ensemble_min, high: point.ensemble_max }))]
+  const bandPoints95 = [
+    { date: origin, low: originValue, high: originValue },
+    ...forecast.map((point) => ({
+      date: point.date,
+      low: point.interval95_lo,
+      high: point.interval95_hi,
+    })),
+  ]
+  const bandPoints80 = [
+    { date: origin, low: originValue, high: originValue },
+    ...forecast.map((point) => ({
+      date: point.date,
+      low: point.interval80_lo,
+      high: point.interval80_hi,
+    })),
+  ]
+  const ensembleBand = [
+    { date: origin, low: originValue, high: originValue },
+    ...forecast.map((point) => ({
+      date: point.date,
+      low: point.ensemble_min,
+      high: point.ensemble_max,
+    })),
+  ]
 
   return (
     <div className="tugrik-chart-surface tugrik-chart-surface--hero">
@@ -91,7 +132,12 @@ export function ForecastConeChart({ actual, forecastPoints, selectedHorizon }: F
 
           return (
             <div className="tugrik-tooltip-frame">
-              <svg width={safeWidth} height={safeHeight} role="img" aria-label="USD/MNT live forecast with uncertainty bands">
+              <svg
+                width={safeWidth}
+                height={safeHeight}
+                role="img"
+                aria-label="USD/MNT live forecast with uncertainty bands"
+              >
                 <Group left={margin.left} top={margin.top}>
                   <GridRows
                     scale={yScale}
@@ -113,7 +159,12 @@ export function ForecastConeChart({ actual, forecastPoints, selectedHorizon }: F
                     fill="var(--tg-band-80)"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ type: "spring", stiffness: 180, damping: 24, delay: 0.08 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 180,
+                      damping: 24,
+                      delay: 0.08,
+                    }}
                   />
                   <path d={ensemblePath} fill="var(--tg-band-ensemble)" />
 
@@ -126,7 +177,10 @@ export function ForecastConeChart({ actual, forecastPoints, selectedHorizon }: F
                   />
 
                   <LinePath
-                    data={[{ date: origin, forecast_point: originValue }, ...forecast]}
+                    data={[
+                      { date: origin, forecast_point: originValue },
+                      ...forecast,
+                    ]}
                     x={(point) => xScale(point.date) ?? 0}
                     y={(point) => yScale(point.forecast_point) ?? 0}
                     stroke="var(--tg-accent)"
@@ -142,7 +196,11 @@ export function ForecastConeChart({ actual, forecastPoints, selectedHorizon }: F
                     stroke="var(--tg-ink-muted)"
                     strokeDasharray="4 4"
                   />
-                  <text x={xScale(origin) + 8} y={14} className="tugrik-chart-note">
+                  <text
+                    x={xScale(origin) + 8}
+                    y={14}
+                    className="tugrik-chart-note"
+                  >
                     Forecast origin
                   </text>
 
@@ -156,7 +214,9 @@ export function ForecastConeChart({ actual, forecastPoints, selectedHorizon }: F
                           cx={x}
                           cy={y}
                           r={selected ? 6.5 : 4.5}
-                          fill={selected ? "var(--tg-accent)" : "var(--tg-paper)"}
+                          fill={
+                            selected ? "var(--tg-accent)" : "var(--tg-paper)"
+                          }
                           stroke="var(--tg-accent)"
                           strokeWidth={selected ? 2.5 : 1.5}
                           onMouseEnter={() =>
@@ -167,15 +227,25 @@ export function ForecastConeChart({ actual, forecastPoints, selectedHorizon }: F
                                 kind: "forecast",
                                 label: `${point.horizon_months}M · ${formatPeriod(point.target_period)}`,
                                 value: point.forecast_point,
-                                interval80: [point.interval80_lo, point.interval80_hi],
-                                interval95: [point.interval95_lo, point.interval95_hi],
+                                interval80: [
+                                  point.interval80_lo,
+                                  point.interval80_hi,
+                                ],
+                                interval95: [
+                                  point.interval95_lo,
+                                  point.interval95_hi,
+                                ],
                                 pctChange: point.pct_change_from_current,
                               },
                             })
                           }
                           onMouseLeave={tooltip.hideTooltip}
                         />
-                        <text x={x + 8} y={y - 10} className={`tugrik-chart-note${selected ? " is-active" : ""}`}>
+                        <text
+                          x={x + 8}
+                          y={y - 10}
+                          className={`tugrik-chart-note${selected ? "is-active" : ""}`}
+                        >
                           {point.horizon_months}M
                         </text>
                       </g>
@@ -187,7 +257,12 @@ export function ForecastConeChart({ actual, forecastPoints, selectedHorizon }: F
                     numTicks={5}
                     stroke="var(--tg-grid-strong)"
                     tickStroke="var(--tg-grid-strong)"
-                    tickLabelProps={() => ({ fill: "var(--tg-ink-muted)", fontSize: 11, textAnchor: "end", dy: "0.32em" })}
+                    tickLabelProps={() => ({
+                      fill: "var(--tg-ink-muted)",
+                      fontSize: 11,
+                      textAnchor: "end",
+                      dy: "0.32em",
+                    })}
                     tickFormat={(value) => formatMnt(Number(value))}
                   />
                   <AxisBottom
@@ -196,9 +271,16 @@ export function ForecastConeChart({ actual, forecastPoints, selectedHorizon }: F
                     numTicks={6}
                     stroke="var(--tg-grid-strong)"
                     tickStroke="var(--tg-grid-strong)"
-                    tickLabelProps={() => ({ fill: "var(--tg-ink-muted)", fontSize: 11, textAnchor: "middle" })}
+                    tickLabelProps={() => ({
+                      fill: "var(--tg-ink-muted)",
+                      fontSize: 11,
+                      textAnchor: "middle",
+                    })}
                     tickFormat={(value) =>
-                      new Date(value.valueOf()).toLocaleDateString("en-US", { month: "short", year: "2-digit" })
+                      new Date(value.valueOf()).toLocaleDateString("en-US", {
+                        month: "short",
+                        year: "2-digit",
+                      })
                     }
                   />
                 </Group>
@@ -219,18 +301,25 @@ export function ForecastConeChart({ actual, forecastPoints, selectedHorizon }: F
                   }}
                 >
                   <strong>{tooltip.tooltipData.label}</strong>
-                  <div>{formatMnt(tooltip.tooltipData.value, 1)} MNT per USD</div>
+                  <div>
+                    {formatMnt(tooltip.tooltipData.value, 1)} MNT per USD
+                  </div>
                   {tooltip.tooltipData.pctChange !== undefined ? (
-                    <div>{formatPercent(tooltip.tooltipData.pctChange, 2)} vs current</div>
+                    <div>
+                      {formatPercent(tooltip.tooltipData.pctChange, 2)} vs
+                      current
+                    </div>
                   ) : null}
                   {tooltip.tooltipData.interval80 ? (
                     <div>
-                      80%: {formatMnt(tooltip.tooltipData.interval80[0], 1)} to {formatMnt(tooltip.tooltipData.interval80[1], 1)}
+                      80%: {formatMnt(tooltip.tooltipData.interval80[0], 1)} to{" "}
+                      {formatMnt(tooltip.tooltipData.interval80[1], 1)}
                     </div>
                   ) : null}
                   {tooltip.tooltipData.interval95 ? (
                     <div>
-                      95%: {formatMnt(tooltip.tooltipData.interval95[0], 1)} to {formatMnt(tooltip.tooltipData.interval95[1], 1)}
+                      95%: {formatMnt(tooltip.tooltipData.interval95[0], 1)} to{" "}
+                      {formatMnt(tooltip.tooltipData.interval95[1], 1)}
                     </div>
                   ) : null}
                 </TooltipWithBounds>
