@@ -5,7 +5,7 @@ WORKDIR /app
 # Copy package files and install dependencies
 COPY package*.json ./
 COPY bun.lock ./
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 
 # Copy the rest of the application
 COPY . .
