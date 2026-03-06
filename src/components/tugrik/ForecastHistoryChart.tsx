@@ -80,27 +80,21 @@ export function ForecastHistoryChart({
   return (
     <div className="tugrik-chart-surface tugrik-chart-surface--history">
       <div className="tugrik-history-toolbar">
-        <div>
-          <strong>Forecast vs actual</strong>
-          <p>
-            Seeded backtests give immediate history. Published live forecasts
-            are appended going forward and labeled separately.
-          </p>
-        </div>
+        <strong className="tugrik-history-label">Forecast vs actual</strong>
         <div className="tugrik-chip-row">
           <button
             type="button"
             className={`tugrik-chip${showFullHistory ? "" : "is-selected"}`}
             onClick={() => setShowFullHistory(false)}
           >
-            Recent view
+            Recent
           </button>
           <button
             type="button"
             className={`tugrik-chip${showFullHistory ? "is-selected" : ""}`}
             onClick={() => setShowFullHistory(true)}
           >
-            Full history
+            Full
           </button>
         </div>
       </div>
@@ -326,6 +320,12 @@ export function ForecastHistoryChart({
           Published live
         </span>
       </div>
+
+      <p className="tugrik-history-note">
+        Seeded backtests simulate what the page would have shown in earlier
+        periods. Published live points are the real monthly forecasts from this
+        dashboard going forward.
+      </p>
     </div>
   )
 }

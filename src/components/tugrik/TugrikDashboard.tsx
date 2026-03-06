@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "motion/react"
+import { motion } from "motion/react"
 import { useEffect, useMemo, useState } from "react"
 import type { TugrikDashboardData, TugrikHorizon } from "~/types/tugrik"
 import { AccuracyStrip } from "./AccuracyStrip"
@@ -19,19 +19,17 @@ interface TugrikDashboardProps {
  *
  * Read top-to-bottom. Each `at` value is ms after mount.
  *
- *    0ms   hero summary appears
- *  180ms   forecast chart and cards settle in
- *  360ms   accuracy section slides up
- *  520ms   drivers section appears
- *  700ms   comparison and method sections fade in
+ *    0ms   hero forecast appears
+ *  180ms   trust section settles in
+ *  360ms   drivers section appears
+ *  520ms   deeper detail fades in
  * ───────────────────────────────────────────────────────── */
 
 const TIMING = {
   hero: 0,
-  chart: 180,
-  accuracy: 360,
-  drivers: 520,
-  detail: 700,
+  trust: 180,
+  drivers: 360,
+  detail: 520,
 }
 
 const SECTION_SPRING = {
@@ -49,10 +47,9 @@ export function TugrikDashboard({ data }: TugrikDashboardProps) {
   useEffect(() => {
     const timers = [
       window.setTimeout(() => setStage(1), TIMING.hero),
-      window.setTimeout(() => setStage(2), TIMING.chart),
-      window.setTimeout(() => setStage(3), TIMING.accuracy),
-      window.setTimeout(() => setStage(4), TIMING.drivers),
-      window.setTimeout(() => setStage(5), TIMING.detail),
+      window.setTimeout(() => setStage(2), TIMING.trust),
+      window.setTimeout(() => setStage(3), TIMING.drivers),
+      window.setTimeout(() => setStage(4), TIMING.detail),
     ]
     return () => timers.forEach((timer) => window.clearTimeout(timer))
   }, [])
@@ -81,18 +78,31 @@ export function TugrikDashboard({ data }: TugrikDashboardProps) {
         ? "Watch"
         : "Stale"
 
+  const forecastMeaning =
+    selectedCard.pct_change_from_current <= 0
+      ? "This points to a stronger tugrik than the aligned current level."
+      : "This points to a weaker tugrik than the aligned current level."
+
   return (
     <div className="tugrik-dashboard">
       <motion.section
-        className="tugrik-hero"
+        className="tugrik-hero tugrik-hero--focus"
         initial={{ opacity: 0, y: 18 }}
         animate={stage >= 1 ? { opacity: 1, y: 0 } : {}}
         transition={SECTION_SPRING}
       >
         <div className="tugrik-hero-copy">
-          <span className="tugrik-kicker">Live macro briefing</span>
-          <h1>Forecasting the tugrik, without pretending it is easy.</h1>
-          <p className="tugrik-hero-message">{data.summary.hero_message}</p>
+          <span className="tugrik-kicker">Live tugrik forecast</span>
+          <h1>
+            {formatMnt(selectedCard.forecast_point, 1)} by{" "}
+            {formatPeriod(selectedCard.target_period)}
+          </h1>
+          <p className="tugrik-hero-message">
+            Our {selectedHorizon}-month base case for USD/MNT. That is{" "}
+            {formatPercent(selectedCard.pct_change_from_current, 2)} versus the
+            aligned current level of{" "}
+            {formatMnt(data.summary.current_usd_mnt, 2)}.
+          </p>
           <div className="tugrik-meta-row">
             <span
               className={`tugrik-status-pill is-${data.meta.staleness_status}`}
@@ -106,52 +116,43 @@ export function TugrikDashboard({ data }: TugrikDashboardProps) {
               Latest spot month {formatPeriod(data.meta.latest_spot_period)}
             </span>
           </div>
-        </div>
-        <div className="tugrik-stat-blocks">
-          <div className="tugrik-stat-card">
-            <span className="tugrik-stat-label">Aligned USD/MNT</span>
-            <strong>{formatMnt(data.summary.current_usd_mnt, 2)}</strong>
-          </div>
-          <div className="tugrik-stat-card">
-            <span className="tugrik-stat-label">Aligned CNY/MNT</span>
-            <strong>
-              {data.summary.current_cny_mnt
-                ? formatMnt(data.summary.current_cny_mnt, 2)
-                : "n/a"}
-            </strong>
-          </div>
-          <div className="tugrik-stat-card">
-            <span className="tugrik-stat-label">Selected horizon</span>
-            <strong>{selectedHorizon} months</strong>
+          <div className="tugrik-hero-control-block">
+            <span className="tugrik-control-label">Forecast horizon</span>
+            <HorizonToggle
+              cards={data.summary.forecast_cards}
+              selectedHorizon={selectedHorizon}
+              onSelect={setSelectedHorizon}
+            />
           </div>
         </div>
-      </motion.section>
 
-      <motion.section
-        className="tugrik-section"
-        initial={{ opacity: 0, y: 18 }}
-        animate={stage >= 2 ? { opacity: 1, y: 0 } : {}}
-        transition={SECTION_SPRING}
-      >
-        <div className="tugrik-section-head">
-          <div>
-            <span className="tugrik-kicker">Current forecast</span>
-            <h2>Where the model thinks USD/MNT is heading next.</h2>
-          </div>
-          <div className="tugrik-callout">
-            <strong>{formatMnt(selectedCard.forecast_point, 1)}</strong>
-            <span>
-              {formatPercent(selectedCard.pct_change_from_current, 2)} by{" "}
-              {formatPeriod(selectedCard.target_period)}
-            </span>
-            <small>{selectedCard.stability_note}</small>
-          </div>
+        <div className="tugrik-callout tugrik-callout--hero">
+          <span className="tugrik-stat-label">Current read</span>
+          <strong>{formatMnt(selectedCard.forecast_point, 1)}</strong>
+          <span>
+            Base case for {formatPeriod(selectedCard.target_period)} at the{" "}
+            {selectedHorizon}-month horizon
+          </span>
+          <dl className="tugrik-callout-facts">
+            <div>
+              <dt>Aligned now</dt>
+              <dd>{formatMnt(data.summary.current_usd_mnt, 2)}</dd>
+            </div>
+            <div>
+              <dt>80% range</dt>
+              <dd>
+                {formatMnt(selectedCard.interval80_lo, 1)} to{" "}
+                {formatMnt(selectedCard.interval80_hi, 1)}
+              </dd>
+            </div>
+            <div>
+              <dt>Read</dt>
+              <dd>{forecastMeaning}</dd>
+            </div>
+          </dl>
+          <small>{selectedCard.stability_note}</small>
         </div>
-        <HorizonToggle
-          cards={data.summary.forecast_cards}
-          selectedHorizon={selectedHorizon}
-          onSelect={setSelectedHorizon}
-        />
+
         <ForecastConeChart
           actual={data.live.trailing_actual}
           forecastPoints={data.live.forecast_points}
@@ -162,17 +163,16 @@ export function TugrikDashboard({ data }: TugrikDashboardProps) {
       <motion.section
         className="tugrik-section"
         initial={{ opacity: 0, y: 18 }}
-        animate={stage >= 3 ? { opacity: 1, y: 0 } : {}}
+        animate={stage >= 2 ? { opacity: 1, y: 0 } : {}}
         transition={SECTION_SPRING}
       >
         <div className="tugrik-section-head">
           <div>
-            <span className="tugrik-kicker">How we're doing</span>
-            <h2>Actuals versus the forecast history.</h2>
+            <span className="tugrik-kicker">Can we trust it?</span>
+            <h2>How the forecast has actually held up.</h2>
             <p>
-              The seeded backtest history gives immediate context. Published
-              live forecasts now append on top of that, so the public track
-              record grows over time.
+              Start with the simple question: has this done better than a
+              no-change baseline, and how wrong has it been when it misses?
             </p>
           </div>
         </div>
@@ -188,18 +188,17 @@ export function TugrikDashboard({ data }: TugrikDashboardProps) {
       <motion.section
         className="tugrik-section"
         initial={{ opacity: 0, y: 18 }}
-        animate={stage >= 4 ? { opacity: 1, y: 0 } : {}}
+        animate={stage >= 3 ? { opacity: 1, y: 0 } : {}}
         transition={SECTION_SPRING}
       >
         <div className="tugrik-section-head">
           <div>
-            <span className="tugrik-kicker">What’s moving the tugrik?</span>
-            <h2>Plain-language drivers for the selected horizon.</h2>
+            <span className="tugrik-kicker">What is moving it?</span>
+            <h2>Four economic stories behind the current forecast.</h2>
             <p>
               Higher USD/MNT means a weaker tugrik. Lower USD/MNT means a
-              stronger tugrik. The bars below show which macro features the
-              interpretable models lean on most for {selectedHorizon}-month
-              forecasts.
+              stronger tugrik. These are the broad stories the model is leaning
+              on most at the {selectedHorizon}-month horizon.
             </p>
           </div>
         </div>
@@ -212,56 +211,34 @@ export function TugrikDashboard({ data }: TugrikDashboardProps) {
       </motion.section>
 
       <motion.section
-        className="tugrik-section tugrik-section--comparison"
-        initial={{ opacity: 0, y: 18 }}
-        animate={stage >= 5 ? { opacity: 1, y: 0 } : {}}
-        transition={SECTION_SPRING}
-      >
-        <div className="tugrik-section-head">
-          <div>
-            <span className="tugrik-kicker">USD vs CNY</span>
-            <h2>How dollar and yuan forecasting compare.</h2>
-            <p>{data.comparison.takeaway}</p>
-          </div>
-        </div>
-        <UsdCnyComparisonChart rows={data.comparison.horizons} />
-      </motion.section>
-
-      <motion.section
         className="tugrik-section tugrik-section--details"
         initial={{ opacity: 0, y: 18 }}
-        animate={stage >= 5 ? { opacity: 1, y: 0 } : {}}
+        animate={stage >= 4 ? { opacity: 1, y: 0 } : {}}
         transition={SECTION_SPRING}
       >
         <div className="tugrik-section-head">
           <div>
-            <span className="tugrik-kicker">Method & downloads</span>
-            <h2>
-              Enough detail for experts, without dumping everything on everyone.
-            </h2>
+            <span className="tugrik-kicker">Deeper detail</span>
+            <h2>Method, freshness, and supporting comparisons.</h2>
           </div>
         </div>
         <div className="tugrik-details-grid">
           <DisclosurePanel
-            title="How this works"
-            summary="Leakage-safe, validation-first workflow"
+            title="How to read this"
+            summary="The short version of the forecasting workflow"
           >
             <ul className="tugrik-bullets">
               <li>
-                Monthly releases are lagged to approximate what would have been
-                known at forecast time.
+                Monthly releases are lagged so the model only uses information
+                that would have been available at forecast time.
               </li>
               <li>
-                Model selection is done on validation, not the final holdout
-                test window.
+                The 3-month horizon is the clearest signal in this run. Longer
+                horizons are shown with wider caution.
               </li>
               <li>
-                The clearest forecasting gain in this run appears around the
-                3-month horizon.
-              </li>
-              <li>
-                The 12-month forecast is shown, but it is less stable and should
-                be read cautiously.
+                Forecast bands are uncertainty ranges, not promises. They are
+                meant to show how wide outcomes can plausibly get.
               </li>
             </ul>
           </DisclosurePanel>
@@ -288,6 +265,13 @@ export function TugrikDashboard({ data }: TugrikDashboardProps) {
               ))}
             </div>
           </DisclosurePanel>
+          <DisclosurePanel
+            title="USD vs CNY"
+            summary="A supporting benchmark, not the main story"
+          >
+            <p className="tugrik-disclosure-copy">{data.comparison.takeaway}</p>
+            <UsdCnyComparisonChart rows={data.comparison.horizons} />
+          </DisclosurePanel>
           <DisclosurePanel title="Downloads" summary="Curated public artifacts">
             <div className="tugrik-download-list">
               <a href={data.downloads.dashboard_json}>Dashboard JSON</a>
@@ -301,40 +285,6 @@ export function TugrikDashboard({ data }: TugrikDashboardProps) {
                 Backtest summary CSV
               </a>
             </div>
-          </DisclosurePanel>
-          <DisclosurePanel
-            title="Selected horizon"
-            summary={`${selectedHorizon}-month interpretation`}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`selected-${selectedHorizon}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }}
-              >
-                <p>
-                  The {selectedHorizon}-month forecast currently points to{" "}
-                  <strong>
-                    {formatPercent(selectedCard.pct_change_from_current, 2)}
-                  </strong>{" "}
-                  relative to the aligned current level, with the center
-                  forecast at{" "}
-                  <strong>{formatMnt(selectedCard.forecast_point, 1)}</strong>{" "}
-                  by <strong>{formatPeriod(selectedCard.target_period)}</strong>
-                  .
-                </p>
-                <p>
-                  The champion model for this horizon is{" "}
-                  <strong>{selectedCard.champion_family}</strong> on{" "}
-                  <strong>
-                    {selectedCard.champion_panel.replaceAll("_", " ")}
-                  </strong>
-                  .
-                </p>
-              </motion.div>
-            </AnimatePresence>
           </DisclosurePanel>
         </div>
       </motion.section>

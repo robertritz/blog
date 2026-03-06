@@ -1,5 +1,4 @@
 import type { TugrikForecastCard, TugrikHorizon } from "~/types/tugrik"
-import { formatMnt, formatPercent } from "./formatters"
 
 interface HorizonToggleProps {
   cards: TugrikForecastCard[]
@@ -14,7 +13,7 @@ export function HorizonToggle({
 }: HorizonToggleProps) {
   return (
     <div
-      className="tugrik-card-grid"
+      className="tugrik-horizon-picker"
       role="tablist"
       aria-label="Forecast horizon"
     >
@@ -26,19 +25,10 @@ export function HorizonToggle({
             type="button"
             role="tab"
             aria-selected={selected}
-            className={`tugrik-forecast-card${selected ? "is-selected" : ""}`}
+            className={`tugrik-horizon-chip${selected ? "is-selected" : ""}`}
             onClick={() => onSelect(card.horizon_months)}
           >
-            <span className="tugrik-card-horizon">{card.horizon_months}M</span>
-            <strong className="tugrik-card-value">
-              {formatMnt(card.forecast_point)}
-            </strong>
-            <span className="tugrik-card-change">
-              {formatPercent(card.pct_change_from_current, 2)}
-            </span>
-            <span className="tugrik-card-target">
-              Target {card.target_period}
-            </span>
+            {card.horizon_months}M
           </button>
         )
       })}
