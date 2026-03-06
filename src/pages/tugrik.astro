@@ -1,0 +1,30 @@
+---
+import { readFile } from "node:fs/promises"
+
+import BaseHead from "../components/BaseHead.astro"
+import SiteHeader from "../components/SiteHeader.astro"
+import { siteConfig } from "../config"
+import { TugrikDashboard } from "../components/tugrik/TugrikDashboard"
+import type { TugrikDashboardData } from "../types/tugrik"
+import "../styles/tugrik.css"
+
+const dashboardPath = new URL("../../public/data/tugrik/dashboard.json", import.meta.url)
+const dashboardRaw = await readFile(dashboardPath, "utf-8")
+const dashboard = JSON.parse(dashboardRaw) as TugrikDashboardData
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={`Tugrik Forecast | ${siteConfig.siteName}`}
+      description="Live USD/MNT forecast briefing with uncertainty bands, forecast history, drivers, and USD vs CNY comparison."
+    />
+  </head>
+  <body>
+    <main class="tugrik-page">
+      <SiteHeader showNav={false} />
+      <TugrikDashboard client:load data={dashboard} />
+    </main>
+  </body>
+</html>

@@ -7,7 +7,10 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "tugrik:data": "python3 research/usd-mnt-forecast/tools/export_tugrik_dashboard.py",
+    "tugrik:refresh": "bash research/usd-mnt-forecast/tools/refresh_tugrik_dashboard.sh",
+    "tugrik:verify": "python3 research/usd-mnt-forecast/tools/export_tugrik_dashboard.py --verify-only"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -20,6 +23,16 @@
     "@tailwindcss/vite": "^4.0.3",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
+    "@visx/axis": "^3.12.0",
+    "@visx/curve": "^3.12.0",
+    "@visx/event": "^3.12.0",
+    "@visx/grid": "^3.12.0",
+    "@visx/group": "^3.12.0",
+    "@visx/responsive": "^3.12.0",
+    "@visx/scale": "^3.12.0",
+    "@visx/shape": "^3.12.0",
+    "@visx/text": "^3.12.0",
+    "@visx/tooltip": "^3.12.0",
     "astro": "^5.17.2",
     "astro-expressive-code": "^0.40.1",
     "astro-google-analytics": "^1.0.3",
@@ -28,6 +41,7 @@
     "canvaskit-wasm": "^0.39.1",
     "lefthook": "^1.10.10",
     "lucide-react": "^0.479.0",
+    "motion": "^12.35.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^4.0.3",
@@ -46,6 +60,7 @@
     "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "sass": "^1.83.4"
+    "sass": "^1.83.4",
+    "vite": "^6.4.1"
   }
 }

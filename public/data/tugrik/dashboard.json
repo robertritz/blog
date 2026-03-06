@@ -1,0 +1,3628 @@
+{
+  "meta": {
+    "run_timestamp": "2026-03-06T04:33:55.758085+00:00",
+    "aligned_as_of_period": "2026-01",
+    "source_updates": [
+      {
+        "key": "usd_mnt_monthly",
+        "label": "USD/MNT monthly",
+        "last_period": "2026-02",
+        "updated_at": "2026-03-06T04:30:35.418597+00:00",
+        "value_column": "usd_mnt"
+      },
+      {
+        "key": "cny_mnt_monthly",
+        "label": "CNY/MNT monthly",
+        "last_period": "2026-02",
+        "updated_at": "2026-03-06T04:31:15.513246+00:00",
+        "value_column": "cny_mnt"
+      },
+      {
+        "key": "nso_trade_monthly",
+        "label": "NSO foreign trade",
+        "last_period": "2026-01",
+        "updated_at": "2026-03-06T04:31:04.826254+00:00",
+        "value_column": "exports"
+      },
+      {
+        "key": "nso_cpi_headline_monthly",
+        "label": "NSO CPI",
+        "last_period": "2026-01",
+        "updated_at": "2026-03-06T04:31:04.819354+00:00",
+        "value_column": "cpi_yoy_percent"
+      },
+      {
+        "key": "nso_industry_monthly",
+        "label": "NSO industry",
+        "last_period": "2026-01",
+        "updated_at": "2026-03-06T04:31:04.831431+00:00",
+        "value_column": "industrial_output_total"
+      },
+      {
+        "key": "global_factors_monthly",
+        "label": "Global factors",
+        "last_period": "2026-03",
+        "updated_at": "2026-03-06T04:31:15.061026+00:00",
+        "value_column": "dxy_broad"
+      },
+      {
+        "key": "feature_panel_long_history",
+        "label": "Long-history panel",
+        "last_period": "2026-01",
+        "updated_at": "2026-03-06T04:31:15.554202+00:00",
+        "value_column": "usd_mnt"
+      },
+      {
+        "key": "forecast_study_live_forecasts",
+        "label": "Forecast package",
+        "last_period": "2026-01",
+        "updated_at": "2026-03-06T04:33:54.482238+00:00",
+        "value_column": "forecast_point"
+      }
+    ],
+    "source_freshness_key": "2026-03-06T04:33:54.482238+00:00",
+    "staleness_status": "watch",
+    "latest_spot_period": "2026-02"
+  },
+  "summary": {
+    "current_usd_mnt": 3561.029999999999,
+    "current_cny_mnt": 511.0,
+    "default_horizon": 3,
+    "hero_message": "The current run leans toward mild tugrik strengthening beyond the very short run.",
+    "forecast_cards": [
+      {
+        "target": "usd_mnt",
+        "as_of_period": "2026-01",
+        "horizon_months": 1,
+        "current_level": 3561.029999999999,
+        "champion_panel": "feature_panel_rich",
+        "champion_family": "pca_linear",
+        "forecast_point": 3547.5696235504606,
+        "interval80_lo": 3537.8195774326414,
+        "interval80_hi": 3557.346540286529,
+        "interval95_lo": 3535.6972411845704,
+        "interval95_hi": 3559.4818717344424,
+        "ensemble_mean": 3554.7084320197378,
+        "ensemble_min": 3547.5696235504606,
+        "ensemble_max": 3560.7771478520217,
+        "top_models": "pca_linear; elastic_net; extra_trees",
+        "target_period": "2026-02",
+        "pct_change_from_current": -0.3779910994722968,
+        "is_stable": true,
+        "stability_note": "Useful signal, but more modest than 3 months."
+      },
+      {
+        "target": "usd_mnt",
+        "as_of_period": "2026-01",
+        "horizon_months": 3,
+        "current_level": 3561.029999999999,
+        "champion_panel": "feature_panel_rich",
+        "champion_family": "extra_trees",
+        "forecast_point": 3552.6594476204264,
+        "interval80_lo": 3527.0229289837766,
+        "interval80_hi": 3578.482307854804,
+        "interval95_lo": 3524.848880658018,
+        "interval95_hi": 3580.6894360845663,
+        "ensemble_mean": 3537.7276409649203,
+        "ensemble_min": 3515.937591747262,
+        "ensemble_max": 3552.6594476204264,
+        "top_models": "extra_trees; autoreg; pca_linear",
+        "target_period": "2026-04",
+        "pct_change_from_current": -0.2350598669366044,
+        "is_stable": true,
+        "stability_note": "Clearest signal in this run."
+      },
+      {
+        "target": "usd_mnt",
+        "as_of_period": "2026-01",
+        "horizon_months": 6,
+        "current_level": 3561.029999999999,
+        "champion_panel": "feature_panel_long_history",
+        "champion_family": "pca_linear",
+        "forecast_point": 3474.2266538457934,
+        "interval80_lo": 3405.337733705068,
+        "interval80_hi": 3544.5091753527463,
+        "interval95_lo": 3364.580968530924,
+        "interval95_hi": 3587.4454962404334,
+        "ensemble_mean": 3370.9553404628605,
+        "ensemble_min": 3265.903353942325,
+        "ensemble_max": 3474.2266538457934,
+        "top_models": "pca_linear; lasso; elastic_net",
+        "target_period": "2026-07",
+        "pct_change_from_current": -2.4375909822215935,
+        "is_stable": true,
+        "stability_note": "Useful signal, but more modest than 3 months."
+      },
+      {
+        "target": "usd_mnt",
+        "as_of_period": "2026-01",
+        "horizon_months": 12,
+        "current_level": 3561.029999999999,
+        "champion_panel": "feature_panel_long_history",
+        "champion_family": "hist_gbm",
+        "forecast_point": 3380.599967164529,
+        "interval80_lo": 3232.818467484134,
+        "interval80_hi": 3535.136987412333,
+        "interval95_lo": 3189.3343269353513,
+        "interval95_hi": 3583.3358834395017,
+        "ensemble_mean": 3434.240254817852,
+        "ensemble_min": 3318.744471581803,
+        "ensemble_max": 3603.3763257072246,
+        "top_models": "hist_gbm; elastic_net; extra_trees",
+        "target_period": "2027-01",
+        "pct_change_from_current": -5.066793395042158,
+        "is_stable": false,
+        "stability_note": "Shown with caution. This horizon is less stable across runs."
+      }
+    ]
+  },
+  "live": {
+    "forecast_origin": "2026-01",
+    "trailing_actual": [
+      {
+        "period": "2023-08",
+        "usd_mnt": 3469.98
+      },
+      {
+        "period": "2023-09",
+        "usd_mnt": 3466.08
+      },
+      {
+        "period": "2023-10",
+        "usd_mnt": 3452.47
+      },
+      {
+        "period": "2023-11",
+        "usd_mnt": 3440.64
+      },
+      {
+        "period": "2023-12",
+        "usd_mnt": 3421.21
+      },
+      {
+        "period": "2024-01",
+        "usd_mnt": 3407.37
+      },
+      {
+        "period": "2024-02",
+        "usd_mnt": 3391.84
+      },
+      {
+        "period": "2024-03",
+        "usd_mnt": 3376.22
+      },
+      {
+        "period": "2024-04",
+        "usd_mnt": 3376.53
+      },
+      {
+        "period": "2024-05",
+        "usd_mnt": 3381.19
+      },
+      {
+        "period": "2024-06",
+        "usd_mnt": 3381.11
+      },
+      {
+        "period": "2024-07",
+        "usd_mnt": 3380.86
+      },
+      {
+        "period": "2024-08",
+        "usd_mnt": 3380.98
+      },
+      {
+        "period": "2024-09",
+        "usd_mnt": 3380.95
+      },
+      {
+        "period": "2024-10",
+        "usd_mnt": 3392.02
+      },
+      {
+        "period": "2024-11",
+        "usd_mnt": 3412.77
+      },
+      {
+        "period": "2024-12",
+        "usd_mnt": 3417.93
+      },
+      {
+        "period": "2025-01",
+        "usd_mnt": 3431.77
+      },
+      {
+        "period": "2025-02",
+        "usd_mnt": 3459.14
+      },
+      {
+        "period": "2025-03",
+        "usd_mnt": 3475.38
+      },
+      {
+        "period": "2025-04",
+        "usd_mnt": 3541.6
+      },
+      {
+        "period": "2025-05",
+        "usd_mnt": 3572.77
+      },
+      {
+        "period": "2025-06",
+        "usd_mnt": 3577.67
+      },
+      {
+        "period": "2025-07",
+        "usd_mnt": 3584.83
+      },
+      {
+        "period": "2025-08",
+        "usd_mnt": 3592.14
+      },
+      {
+        "period": "2025-09",
+        "usd_mnt": 3593.8
+      },
+      {
+        "period": "2025-10",
+        "usd_mnt": 3591.8
+      },
+      {
+        "period": "2025-11",
+        "usd_mnt": 3571.66
+      },
+      {
+        "period": "2025-12",
+        "usd_mnt": 3549.18
+      },
+      {
+        "period": "2026-01",
+        "usd_mnt": 3561.03
+      }
+    ],
+    "forecast_points": [
+      {
+        "target": "usd_mnt",
+        "as_of_period": "2026-01",
+        "horizon_months": 1,
+        "current_level": 3561.029999999999,
+        "champion_panel": "feature_panel_rich",
+        "champion_family": "pca_linear",
+        "forecast_point": 3547.5696235504606,
+        "interval80_lo": 3537.8195774326414,
+        "interval80_hi": 3557.346540286529,
+        "interval95_lo": 3535.6972411845704,
+        "interval95_hi": 3559.4818717344424,
+        "ensemble_mean": 3554.7084320197378,
+        "ensemble_min": 3547.5696235504606,
+        "ensemble_max": 3560.7771478520217,
+        "top_models": "pca_linear; elastic_net; extra_trees",
+        "target_period": "2026-02",
+        "pct_change_from_current": -0.3779910994722968,
+        "is_stable": true,
+        "stability_note": "Useful signal, but more modest than 3 months."
+      },
+      {
+        "target": "usd_mnt",
+        "as_of_period": "2026-01",
+        "horizon_months": 3,
+        "current_level": 3561.029999999999,
+        "champion_panel": "feature_panel_rich",
+        "champion_family": "extra_trees",
+        "forecast_point": 3552.6594476204264,
+        "interval80_lo": 3527.0229289837766,
+        "interval80_hi": 3578.482307854804,
+        "interval95_lo": 3524.848880658018,
+        "interval95_hi": 3580.6894360845663,
+        "ensemble_mean": 3537.7276409649203,
+        "ensemble_min": 3515.937591747262,
+        "ensemble_max": 3552.6594476204264,
+        "top_models": "extra_trees; autoreg; pca_linear",
+        "target_period": "2026-04",
+        "pct_change_from_current": -0.2350598669366044,
+        "is_stable": true,
+        "stability_note": "Clearest signal in this run."
+      },
+      {
+        "target": "usd_mnt",
+        "as_of_period": "2026-01",
+        "horizon_months": 6,
+        "current_level": 3561.029999999999,
+        "champion_panel": "feature_panel_long_history",
+        "champion_family": "pca_linear",
+        "forecast_point": 3474.2266538457934,
+        "interval80_lo": 3405.337733705068,
+        "interval80_hi": 3544.5091753527463,
+        "interval95_lo": 3364.580968530924,
+        "interval95_hi": 3587.4454962404334,
+        "ensemble_mean": 3370.9553404628605,
+        "ensemble_min": 3265.903353942325,
+        "ensemble_max": 3474.2266538457934,
+        "top_models": "pca_linear; lasso; elastic_net",
+        "target_period": "2026-07",
+        "pct_change_from_current": -2.4375909822215935,
+        "is_stable": true,
+        "stability_note": "Useful signal, but more modest than 3 months."
+      },
+      {
+        "target": "usd_mnt",
+        "as_of_period": "2026-01",
+        "horizon_months": 12,
+        "current_level": 3561.029999999999,
+        "champion_panel": "feature_panel_long_history",
+        "champion_family": "hist_gbm",
+        "forecast_point": 3380.599967164529,
+        "interval80_lo": 3232.818467484134,
+        "interval80_hi": 3535.136987412333,
+        "interval95_lo": 3189.3343269353513,
+        "interval95_hi": 3583.3358834395017,
+        "ensemble_mean": 3434.240254817852,
+        "ensemble_min": 3318.744471581803,
+        "ensemble_max": 3603.3763257072246,
+        "top_models": "hist_gbm; elastic_net; extra_trees",
+        "target_period": "2027-01",
+        "pct_change_from_current": -5.066793395042158,
+        "is_stable": false,
+        "stability_note": "Shown with caution. This horizon is less stable across runs."
+      }
+    ]
+  },
+  "history": {
+    "recent_window_months": 48,
+    "actual_series": [
+      {
+        "period": "2015-01",
+        "usd_mnt": 1932.7
+      },
+      {
+        "period": "2015-02",
+        "usd_mnt": 1961.75
+      },
+      {
+        "period": "2015-03",
+        "usd_mnt": 1986.22
+      },
+      {
+        "period": "2015-04",
+        "usd_mnt": 1975.83
+      },
+      {
+        "period": "2015-05",
+        "usd_mnt": 1939.28
+      },
+      {
+        "period": "2015-06",
+        "usd_mnt": 1903.29
+      },
+      {
+        "period": "2015-07",
+        "usd_mnt": 1978.28
+      },
+      {
+        "period": "2015-08",
+        "usd_mnt": 1990.48
+      },
+      {
+        "period": "2015-09",
+        "usd_mnt": 1993.79
+      },
+      {
+        "period": "2015-10",
+        "usd_mnt": 1993.35
+      },
+      {
+        "period": "2015-11",
+        "usd_mnt": 1992.9
+      },
+      {
+        "period": "2015-12",
+        "usd_mnt": 1995.84
+      },
+      {
+        "period": "2016-01",
+        "usd_mnt": 2003.22
+      },
+      {
+        "period": "2016-02",
+        "usd_mnt": 2024.25
+      },
+      {
+        "period": "2016-03",
+        "usd_mnt": 2046.35
+      },
+      {
+        "period": "2016-04",
+        "usd_mnt": 2011.99
+      },
+      {
+        "period": "2016-05",
+        "usd_mnt": 2005.96
+      },
+      {
+        "period": "2016-06",
+        "usd_mnt": 1964.93
+      },
+      {
+        "period": "2016-07",
+        "usd_mnt": 2031.9
+      },
+      {
+        "period": "2016-08",
+        "usd_mnt": 2189.05
+      },
+      {
+        "period": "2016-09",
+        "usd_mnt": 2243.98
+      },
+      {
+        "period": "2016-10",
+        "usd_mnt": 2307.8
+      },
+      {
+        "period": "2016-11",
+        "usd_mnt": 2434.32
+      },
+      {
+        "period": "2016-12",
+        "usd_mnt": 2482.57
+      },
+      {
+        "period": "2017-01",
+        "usd_mnt": 2488.38
+      },
+      {
+        "period": "2017-02",
+        "usd_mnt": 2478.29
+      },
+      {
+        "period": "2017-03",
+        "usd_mnt": 2459.55
+      },
+      {
+        "period": "2017-04",
+        "usd_mnt": 2421.85
+      },
+      {
+        "period": "2017-05",
+        "usd_mnt": 2413.06
+      },
+      {
+        "period": "2017-06",
+        "usd_mnt": 2367.93
+      },
+      {
+        "period": "2017-07",
+        "usd_mnt": 2409.41
+      },
+      {
+        "period": "2017-08",
+        "usd_mnt": 2443.53
+      },
+      {
+        "period": "2017-09",
+        "usd_mnt": 2454.29
+      },
+      {
+        "period": "2017-10",
+        "usd_mnt": 2458.69
+      },
+      {
+        "period": "2017-11",
+        "usd_mnt": 2448.86
+      },
+      {
+        "period": "2017-12",
+        "usd_mnt": 2433.49
+      },
+      {
+        "period": "2018-01",
+        "usd_mnt": 2425.77
+      },
+      {
+        "period": "2018-02",
+        "usd_mnt": 2402.9
+      },
+      {
+        "period": "2018-03",
+        "usd_mnt": 2395.37
+      },
+      {
+        "period": "2018-04",
+        "usd_mnt": 2394.65
+      },
+      {
+        "period": "2018-05",
+        "usd_mnt": 2405.19
+      },
+      {
+        "period": "2018-06",
+        "usd_mnt": 2432.3
+      },
+      {
+        "period": "2018-07",
+        "usd_mnt": 2462.83
+      },
+      {
+        "period": "2018-08",
+        "usd_mnt": 2464.12
+      },
+      {
+        "period": "2018-09",
+        "usd_mnt": 2503.31
+      },
+      {
+        "period": "2018-10",
+        "usd_mnt": 2564.14
+      },
+      {
+        "period": "2018-11",
+        "usd_mnt": 2581.88
+      },
+      {
+        "period": "2018-12",
+        "usd_mnt": 2637.35
+      },
+      {
+        "period": "2019-01",
+        "usd_mnt": 2649.68
+      },
+      {
+        "period": "2019-02",
+        "usd_mnt": 2633.37
+      },
+      {
+        "period": "2019-03",
+        "usd_mnt": 2632.51
+      },
+      {
+        "period": "2019-04",
+        "usd_mnt": 2634.93
+      },
+      {
+        "period": "2019-05",
+        "usd_mnt": 2645.16
+      },
+      {
+        "period": "2019-06",
+        "usd_mnt": 2654.47
+      },
+      {
+        "period": "2019-07",
+        "usd_mnt": 2661.55
+      },
+      {
+        "period": "2019-08",
+        "usd_mnt": 2670.54
+      },
+      {
+        "period": "2019-09",
+        "usd_mnt": 2669.68
+      },
+      {
+        "period": "2019-10",
+        "usd_mnt": 2678.01
+      },
+      {
+        "period": "2019-11",
+        "usd_mnt": 2705.26
+      },
+      {
+        "period": "2019-12",
+        "usd_mnt": 2727.34
+      },
+      {
+        "period": "2020-01",
+        "usd_mnt": 2744.38
+      },
+      {
+        "period": "2020-02",
+        "usd_mnt": 2756.52
+      },
+      {
+        "period": "2020-03",
+        "usd_mnt": 2769.03
+      },
+      {
+        "period": "2020-04",
+        "usd_mnt": 2783.16
+      },
+      {
+        "period": "2020-05",
+        "usd_mnt": 2797.25
+      },
+      {
+        "period": "2020-06",
+        "usd_mnt": 2816.26
+      },
+      {
+        "period": "2020-07",
+        "usd_mnt": 2836.41
+      },
+      {
+        "period": "2020-08",
+        "usd_mnt": 2849.11
+      },
+      {
+        "period": "2020-09",
+        "usd_mnt": 2854.17
+      },
+      {
+        "period": "2020-10",
+        "usd_mnt": 2853.6
+      },
+      {
+        "period": "2020-11",
+        "usd_mnt": 2850.04
+      },
+      {
+        "period": "2020-12",
+        "usd_mnt": 2849.55
+      },
+      {
+        "period": "2021-01",
+        "usd_mnt": 2849.82
+      },
+      {
+        "period": "2021-02",
+        "usd_mnt": 2849.73
+      },
+      {
+        "period": "2021-03",
+        "usd_mnt": 2849.64
+      },
+      {
+        "period": "2021-04",
+        "usd_mnt": 2849.89
+      },
+      {
+        "period": "2021-05",
+        "usd_mnt": 2849.57
+      },
+      {
+        "period": "2021-06",
+        "usd_mnt": 2849.12
+      },
+      {
+        "period": "2021-07",
+        "usd_mnt": 2848.97
+      },
+      {
+        "period": "2021-08",
+        "usd_mnt": 2848.91
+      },
+      {
+        "period": "2021-09",
+        "usd_mnt": 2848.94
+      },
+      {
+        "period": "2021-10",
+        "usd_mnt": 2848.97
+      },
+      {
+        "period": "2021-11",
+        "usd_mnt": 2848.95
+      },
+      {
+        "period": "2021-12",
+        "usd_mnt": 2848.96
+      },
+      {
+        "period": "2022-01",
+        "usd_mnt": 2849.36
+      },
+      {
+        "period": "2022-02",
+        "usd_mnt": 2857.17
+      },
+      {
+        "period": "2022-03",
+        "usd_mnt": 2901.83
+      },
+      {
+        "period": "2022-04",
+        "usd_mnt": 3041.84
+      },
+      {
+        "period": "2022-05",
+        "usd_mnt": 3110.22
+      },
+      {
+        "period": "2022-06",
+        "usd_mnt": 3124.25
+      },
+      {
+        "period": "2022-07",
+        "usd_mnt": 3153.03
+      },
+      {
+        "period": "2022-08",
+        "usd_mnt": 3185.72
+      },
+      {
+        "period": "2022-09",
+        "usd_mnt": 3257.1
+      },
+      {
+        "period": "2022-10",
+        "usd_mnt": 3369.9
+      },
+      {
+        "period": "2022-11",
+        "usd_mnt": 3406.43
+      },
+      {
+        "period": "2022-12",
+        "usd_mnt": 3431.29
+      },
+      {
+        "period": "2023-01",
+        "usd_mnt": 3467.21
+      },
+      {
+        "period": "2023-02",
+        "usd_mnt": 3508.06
+      },
+      {
+        "period": "2023-03",
+        "usd_mnt": 3524.98
+      },
+      {
+        "period": "2023-04",
+        "usd_mnt": 3496.41
+      },
+      {
+        "period": "2023-05",
+        "usd_mnt": 3461.18
+      },
+      {
+        "period": "2023-06",
+        "usd_mnt": 3438.26
+      },
+      {
+        "period": "2023-07",
+        "usd_mnt": 3442.35
+      },
+      {
+        "period": "2023-08",
+        "usd_mnt": 3469.98
+      },
+      {
+        "period": "2023-09",
+        "usd_mnt": 3466.08
+      },
+      {
+        "period": "2023-10",
+        "usd_mnt": 3452.47
+      },
+      {
+        "period": "2023-11",
+        "usd_mnt": 3440.64
+      },
+      {
+        "period": "2023-12",
+        "usd_mnt": 3421.21
+      },
+      {
+        "period": "2024-01",
+        "usd_mnt": 3407.37
+      },
+      {
+        "period": "2024-02",
+        "usd_mnt": 3391.84
+      },
+      {
+        "period": "2024-03",
+        "usd_mnt": 3376.22
+      },
+      {
+        "period": "2024-04",
+        "usd_mnt": 3376.53
+      },
+      {
+        "period": "2024-05",
+        "usd_mnt": 3381.19
+      },
+      {
+        "period": "2024-06",
+        "usd_mnt": 3381.11
+      },
+      {
+        "period": "2024-07",
+        "usd_mnt": 3380.86
+      },
+      {
+        "period": "2024-08",
+        "usd_mnt": 3380.98
+      },
+      {
+        "period": "2024-09",
+        "usd_mnt": 3380.95
+      },
+      {
+        "period": "2024-10",
+        "usd_mnt": 3392.02
+      },
+      {
+        "period": "2024-11",
+        "usd_mnt": 3412.77
+      },
+      {
+        "period": "2024-12",
+        "usd_mnt": 3417.93
+      },
+      {
+        "period": "2025-01",
+        "usd_mnt": 3431.77
+      },
+      {
+        "period": "2025-02",
+        "usd_mnt": 3459.14
+      },
+      {
+        "period": "2025-03",
+        "usd_mnt": 3475.38
+      },
+      {
+        "period": "2025-04",
+        "usd_mnt": 3541.6
+      },
+      {
+        "period": "2025-05",
+        "usd_mnt": 3572.77
+      },
+      {
+        "period": "2025-06",
+        "usd_mnt": 3577.67
+      },
+      {
+        "period": "2025-07",
+        "usd_mnt": 3584.83
+      },
+      {
+        "period": "2025-08",
+        "usd_mnt": 3592.14
+      },
+      {
+        "period": "2025-09",
+        "usd_mnt": 3593.8
+      },
+      {
+        "period": "2025-10",
+        "usd_mnt": 3591.8
+      },
+      {
+        "period": "2025-11",
+        "usd_mnt": 3571.66
+      },
+      {
+        "period": "2025-12",
+        "usd_mnt": 3549.18
+      },
+      {
+        "period": "2026-01",
+        "usd_mnt": 3561.03
+      },
+      {
+        "period": "2026-02",
+        "usd_mnt": 3565.87
+      }
+    ],
+    "vintages": [
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2024-05",
+        "target_period": "2024-06",
+        "forecast_value": 3390.352041867046,
+        "actual_value": 3381.1099999999983,
+        "abs_error": 9.242041867047648,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2024-06",
+        "target_period": "2024-07",
+        "forecast_value": 3380.802082945084,
+        "actual_value": 3380.859999999999,
+        "abs_error": 0.0579170549153786,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2024-07",
+        "target_period": "2024-08",
+        "forecast_value": 3382.6533505053,
+        "actual_value": 3380.9799999999987,
+        "abs_error": 1.6733505053011868,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2024-08",
+        "target_period": "2024-09",
+        "forecast_value": 3393.7193279376265,
+        "actual_value": 3380.9500000000025,
+        "abs_error": 12.769327937623984,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2024-09",
+        "target_period": "2024-10",
+        "forecast_value": 3392.5025754493645,
+        "actual_value": 3392.0200000000027,
+        "abs_error": 0.4825754493617751,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2024-10",
+        "target_period": "2024-11",
+        "forecast_value": 3403.08479644473,
+        "actual_value": 3412.7700000000013,
+        "abs_error": 9.685203555271528,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2024-11",
+        "target_period": "2024-12",
+        "forecast_value": 3421.9882380625654,
+        "actual_value": 3417.9300000000007,
+        "abs_error": 4.058238062564669,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2024-12",
+        "target_period": "2025-01",
+        "forecast_value": 3433.0145537634257,
+        "actual_value": 3431.7699999999977,
+        "abs_error": 1.24455376342803,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-01",
+        "target_period": "2025-02",
+        "forecast_value": 3450.278483328942,
+        "actual_value": 3459.1400000000017,
+        "abs_error": 8.86151667105969,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-02",
+        "target_period": "2025-03",
+        "forecast_value": 3482.883500844189,
+        "actual_value": 3475.3800000000024,
+        "abs_error": 7.503500844186419,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-03",
+        "target_period": "2025-04",
+        "forecast_value": 3508.85172054354,
+        "actual_value": 3541.599999999998,
+        "abs_error": 32.74827945645802,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3499.2080856818657,
+        "hi_80": 3518.5219327595955,
+        "lo_95": 3497.1089124489627,
+        "hi_95": 3520.633959363726
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-04",
+        "target_period": "2025-05",
+        "forecast_value": 3578.486063642713,
+        "actual_value": 3572.770000000001,
+        "abs_error": 5.716063642712015,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3568.65104760219,
+        "hi_80": 3588.348184474157,
+        "lo_95": 3566.5102155701225,
+        "hi_95": 3590.502124956928
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-05",
+        "target_period": "2025-06",
+        "forecast_value": 3609.137136373868,
+        "actual_value": 3577.6699999999987,
+        "abs_error": 31.46713637386938,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3599.217879739248,
+        "hi_80": 3619.0837299620903,
+        "lo_95": 3597.058710679411,
+        "hi_95": 3621.256119751418
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-06",
+        "target_period": "2025-07",
+        "forecast_value": 3601.4794312140634,
+        "actual_value": 3584.8299999999967,
+        "abs_error": 16.64943121406668,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3591.58122081289,
+        "hi_80": 3611.4049205665183,
+        "lo_95": 3589.4266329810384,
+        "hi_95": 3613.572701076711
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-07",
+        "target_period": "2025-08",
+        "forecast_value": 3601.8053346211573,
+        "actual_value": 3592.14,
+        "abs_error": 9.6653346211574,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3591.9062285157165,
+        "hi_80": 3611.731722146393,
+        "lo_95": 3589.751445711902,
+        "hi_95": 3613.899698822375
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-08",
+        "target_period": "2025-09",
+        "forecast_value": 3604.987614488036,
+        "actual_value": 3593.799999999997,
+        "abs_error": 11.18761448803889,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3595.079762289142,
+        "hi_80": 3614.9227722105034,
+        "lo_95": 3592.9230756839556,
+        "hi_95": 3617.092664344953
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-09",
+        "target_period": "2025-10",
+        "forecast_value": 3606.8558633233465,
+        "actual_value": 3591.8000000000006,
+        "abs_error": 15.055863323345877,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3596.9428764789805,
+        "hi_80": 3616.796169842101,
+        "lo_95": 3594.7850721924956,
+        "hi_95": 3618.967186501482
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-10",
+        "target_period": "2025-11",
+        "forecast_value": 3596.319585869093,
+        "actual_value": 3571.659999999999,
+        "abs_error": 24.659585869093917,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3586.435556649802,
+        "hi_80": 3606.230854957067,
+        "lo_95": 3584.284055699385,
+        "hi_95": 3608.3955296846534
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-11",
+        "target_period": "2025-12",
+        "forecast_value": 3564.9157404797165,
+        "actual_value": 3549.180000000001,
+        "abs_error": 15.735740479715332,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3555.118020754901,
+        "hi_80": 3574.740462208754,
+        "lo_95": 3552.985307179073,
+        "hi_95": 3576.8862345254615
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 1,
+        "forecast_origin": "2025-12",
+        "target_period": "2026-01",
+        "forecast_value": 3533.072368795604,
+        "actual_value": 3561.029999999999,
+        "abs_error": 27.9576312043946,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3523.362166547657,
+        "hi_80": 3542.809331854175,
+        "lo_95": 3521.2485032933614,
+        "hi_95": 3544.93593720302
+      },
+      {
+        "source_kind": "published_live",
+        "source_label": "Published live",
+        "horizon_months": 1,
+        "forecast_origin": "2026-01",
+        "target_period": "2026-02",
+        "forecast_value": 3547.5696235504606,
+        "actual_value": 3565.87,
+        "abs_error": 18.30037644953927,
+        "direction_hit": null,
+        "split": "published",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3537.8195774326414,
+        "hi_80": 3557.346540286529,
+        "lo_95": 3535.6972411845704,
+        "hi_95": 3559.4818717344424
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2024-03",
+        "target_period": "2024-06",
+        "forecast_value": 3385.2013449659344,
+        "actual_value": 3381.1099999999983,
+        "abs_error": 4.0913449659360595,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2024-04",
+        "target_period": "2024-07",
+        "forecast_value": 3397.4554405167178,
+        "actual_value": 3380.859999999999,
+        "abs_error": 16.595440516718554,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2024-05",
+        "target_period": "2024-08",
+        "forecast_value": 3382.181875182779,
+        "actual_value": 3380.9799999999987,
+        "abs_error": 1.2018751827804408,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2024-06",
+        "target_period": "2024-09",
+        "forecast_value": 3373.6072504546055,
+        "actual_value": 3380.9500000000025,
+        "abs_error": 7.342749545397055,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2024-07",
+        "target_period": "2024-10",
+        "forecast_value": 3372.958998348876,
+        "actual_value": 3392.0200000000027,
+        "abs_error": 19.061001651126844,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2024-08",
+        "target_period": "2024-11",
+        "forecast_value": 3385.609332608531,
+        "actual_value": 3412.7700000000013,
+        "abs_error": 27.16066739147027,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2024-09",
+        "target_period": "2024-12",
+        "forecast_value": 3391.7191057991863,
+        "actual_value": 3417.9300000000007,
+        "abs_error": 26.210894200814437,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2024-10",
+        "target_period": "2025-01",
+        "forecast_value": 3417.9131280592997,
+        "actual_value": 3431.7699999999977,
+        "abs_error": 13.856871940698056,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2024-11",
+        "target_period": "2025-02",
+        "forecast_value": 3434.569755779939,
+        "actual_value": 3459.1400000000017,
+        "abs_error": 24.57024422006225,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2024-12",
+        "target_period": "2025-03",
+        "forecast_value": 3457.621757439057,
+        "actual_value": 3475.3800000000024,
+        "abs_error": 17.75824256094529,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2025-01",
+        "target_period": "2025-04",
+        "forecast_value": 3472.934222612164,
+        "actual_value": 3541.599999999998,
+        "abs_error": 68.66577738783417,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3447.873013049426,
+        "hi_80": 3498.177592081131,
+        "lo_95": 3445.747752538685,
+        "hi_95": 3500.335190149803
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2025-02",
+        "target_period": "2025-05",
+        "forecast_value": 3532.916427033472,
+        "actual_value": 3572.770000000001,
+        "abs_error": 39.8535729665291,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3507.422376967954,
+        "hi_80": 3558.59578314967,
+        "lo_95": 3505.260410374623,
+        "hi_95": 3560.790645813672
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2025-03",
+        "target_period": "2025-06",
+        "forecast_value": 3548.942142947676,
+        "actual_value": 3577.6699999999987,
+        "abs_error": 28.727857052322634,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3523.33244893408,
+        "hi_80": 3574.737983581546,
+        "lo_95": 3521.1606754112177,
+        "hi_95": 3576.942802395446
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2025-04",
+        "target_period": "2025-07",
+        "forecast_value": 3599.004156459978,
+        "actual_value": 3584.8299999999967,
+        "abs_error": 14.174156459981075,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3573.033207515725,
+        "hi_80": 3625.16387784207,
+        "lo_95": 3570.8307985665674,
+        "hi_95": 3627.39979822506
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2025-05",
+        "target_period": "2025-08",
+        "forecast_value": 3607.22975155399,
+        "actual_value": 3592.14,
+        "abs_error": 15.089751553990029,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3581.199445492897,
+        "hi_80": 3633.449261496058,
+        "lo_95": 3578.99200289458,
+        "hi_95": 3635.6902921192514
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2025-06",
+        "target_period": "2025-09",
+        "forecast_value": 3605.37348794197,
+        "actual_value": 3593.799999999997,
+        "abs_error": 11.573487941972871,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3579.3565769550137,
+        "hi_80": 3631.579505446466,
+        "lo_95": 3577.150270296366,
+        "hi_95": 3633.819382845749
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2025-07",
+        "target_period": "2025-10",
+        "forecast_value": 3605.089447472428,
+        "actual_value": 3591.8000000000006,
+        "abs_error": 13.289447472427128,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3579.0745861637197,
+        "hi_80": 3631.293400400385,
+        "lo_95": 3576.8684533235073,
+        "hi_95": 3633.533101336445
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2025-08",
+        "target_period": "2025-11",
+        "forecast_value": 3610.201739925552,
+        "actual_value": 3571.659999999999,
+        "abs_error": 38.541739925552974,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3584.149987554618,
+        "hi_80": 3636.442852062108,
+        "lo_95": 3581.9407262493746,
+        "hi_95": 3638.6857290653247
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2025-09",
+        "target_period": "2025-12",
+        "forecast_value": 3609.060988048496,
+        "actual_value": 3549.180000000001,
+        "abs_error": 59.880988048495055,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3583.017467512667,
+        "hi_80": 3635.293808516032,
+        "lo_95": 3580.8089042900133,
+        "hi_95": 3637.535976814767
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 3,
+        "forecast_origin": "2025-10",
+        "target_period": "2026-01",
+        "forecast_value": 3583.6433571008392,
+        "actual_value": 3561.029999999999,
+        "abs_error": 22.613357100840403,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3557.7832539679707,
+        "hi_80": 3609.6914269776894,
+        "lo_95": 3555.5902450529625,
+        "hi_95": 3611.917804297406
+      },
+      {
+        "source_kind": "published_live",
+        "source_label": "Published live",
+        "horizon_months": 3,
+        "forecast_origin": "2026-01",
+        "target_period": "2026-04",
+        "forecast_value": 3552.6594476204264,
+        "actual_value": null,
+        "abs_error": null,
+        "direction_hit": null,
+        "split": "published",
+        "model_family": "extra_trees",
+        "model_panel": "feature_panel_rich",
+        "lo_80": 3527.0229289837766,
+        "hi_80": 3578.482307854804,
+        "lo_95": 3524.848880658018,
+        "hi_95": 3580.6894360845663
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2022-08",
+        "target_period": "2023-02",
+        "forecast_value": 3300.245461536708,
+        "actual_value": 3508.059999999998,
+        "abs_error": 207.81453846329032,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2022-09",
+        "target_period": "2023-03",
+        "forecast_value": 3431.246308829436,
+        "actual_value": 3524.980000000002,
+        "abs_error": 93.73369117056563,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2022-10",
+        "target_period": "2023-04",
+        "forecast_value": 3545.629258545574,
+        "actual_value": 3496.410000000002,
+        "abs_error": 49.21925854557185,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2022-11",
+        "target_period": "2023-05",
+        "forecast_value": 3497.6777984461373,
+        "actual_value": 3461.1800000000007,
+        "abs_error": 36.497798446136585,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2022-12",
+        "target_period": "2023-06",
+        "forecast_value": 3483.0988469140807,
+        "actual_value": 3438.2599999999993,
+        "abs_error": 44.83884691408139,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-01",
+        "target_period": "2023-07",
+        "forecast_value": 3447.4115781956907,
+        "actual_value": 3442.3500000000013,
+        "abs_error": 5.061578195689435,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-02",
+        "target_period": "2023-08",
+        "forecast_value": 3540.885691422598,
+        "actual_value": 3469.980000000002,
+        "abs_error": 70.90569142259619,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-03",
+        "target_period": "2023-09",
+        "forecast_value": 3460.4833931231383,
+        "actual_value": 3466.079999999999,
+        "abs_error": 5.596606876860733,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-04",
+        "target_period": "2023-10",
+        "forecast_value": 3385.0292332770073,
+        "actual_value": 3452.4699999999984,
+        "abs_error": 67.44076672299116,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-05",
+        "target_period": "2023-11",
+        "forecast_value": 3403.21777475683,
+        "actual_value": 3440.6400000000012,
+        "abs_error": 37.4222252431714,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-06",
+        "target_period": "2023-12",
+        "forecast_value": 3395.774049645027,
+        "actual_value": 3421.209999999998,
+        "abs_error": 25.435950354971283,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-07",
+        "target_period": "2024-01",
+        "forecast_value": 3372.6506587225467,
+        "actual_value": 3407.370000000002,
+        "abs_error": 34.71934127745544,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-08",
+        "target_period": "2024-02",
+        "forecast_value": 3448.7551867390293,
+        "actual_value": 3391.8399999999974,
+        "abs_error": 56.91518673903192,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-09",
+        "target_period": "2024-03",
+        "forecast_value": 3443.310670523616,
+        "actual_value": 3376.219999999998,
+        "abs_error": 67.09067052361797,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-10",
+        "target_period": "2024-04",
+        "forecast_value": 3456.7306224730746,
+        "actual_value": 3376.530000000001,
+        "abs_error": 80.20062247307351,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-11",
+        "target_period": "2024-05",
+        "forecast_value": 3424.5387710333507,
+        "actual_value": 3381.190000000003,
+        "abs_error": 43.34877103334793,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2023-12",
+        "target_period": "2024-06",
+        "forecast_value": 3412.078422830485,
+        "actual_value": 3381.1099999999983,
+        "abs_error": 30.968422830486816,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-01",
+        "target_period": "2024-07",
+        "forecast_value": 3427.111179099461,
+        "actual_value": 3380.859999999999,
+        "abs_error": 46.25117909946175,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-02",
+        "target_period": "2024-08",
+        "forecast_value": 3470.4199760643637,
+        "actual_value": 3380.9799999999987,
+        "abs_error": 89.43997606436506,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3401.6065368717204,
+        "hi_80": 3540.625489667198,
+        "lo_95": 3360.89442850552,
+        "hi_95": 3583.51476562805
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-03",
+        "target_period": "2024-09",
+        "forecast_value": 3469.889140819038,
+        "actual_value": 3380.9500000000025,
+        "abs_error": 88.9391408190354,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3401.086227326203,
+        "hi_80": 3540.0839157904406,
+        "lo_95": 3360.3803462818196,
+        "hi_95": 3582.966631410042
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-04",
+        "target_period": "2024-10",
+        "forecast_value": 3461.2484878810274,
+        "actual_value": 3392.0200000000027,
+        "abs_error": 69.22848788102465,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3392.6169061145065,
+        "hi_80": 3531.2684651387353,
+        "lo_95": 3352.012390092568,
+        "hi_95": 3574.0443950232107
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-05",
+        "target_period": "2024-11",
+        "forecast_value": 3434.157916153618,
+        "actual_value": 3412.7700000000013,
+        "abs_error": 21.387916153616516,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3366.0635014801624,
+        "hi_80": 3503.629859595524,
+        "lo_95": 3325.776789729602,
+        "hi_95": 3546.0709899413937
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-06",
+        "target_period": "2024-12",
+        "forecast_value": 3434.320367743009,
+        "actual_value": 3417.9300000000007,
+        "abs_error": 16.390367743008028,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3366.222731888069,
+        "hi_80": 3503.7955975298955,
+        "lo_95": 3325.934114389283,
+        "hi_95": 3546.2387355379774
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-07",
+        "target_period": "2025-01",
+        "forecast_value": 3427.7094960534205,
+        "actual_value": 3431.7699999999977,
+        "abs_error": 4.060503946577228,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3359.7429442805687,
+        "hi_80": 3497.0509899681274,
+        "lo_95": 3319.531880082674,
+        "hi_95": 3539.4124273456828
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-08",
+        "target_period": "2025-02",
+        "forecast_value": 3474.534819497512,
+        "actual_value": 3459.1400000000017,
+        "abs_error": 15.39481949751007,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3405.639788874919,
+        "hi_80": 3544.8235750994736,
+        "lo_95": 3364.8794085552036,
+        "hi_95": 3587.7637044604207
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-09",
+        "target_period": "2025-03",
+        "forecast_value": 3447.50644914393,
+        "actual_value": 3475.3800000000024,
+        "abs_error": 27.8735508560726,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3379.147352250577,
+        "hi_80": 3517.24842924448,
+        "lo_95": 3338.7040465069613,
+        "hi_95": 3559.854527784126
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-10",
+        "target_period": "2025-04",
+        "forecast_value": 3460.037453039075,
+        "actual_value": 3541.599999999998,
+        "abs_error": 81.56254696092265,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3391.4298843525366,
+        "hi_80": 3530.032931439683,
+        "lo_95": 3350.839575193762,
+        "hi_95": 3572.7938947184184
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-11",
+        "target_period": "2025-05",
+        "forecast_value": 3505.6525443732876,
+        "actual_value": 3572.770000000001,
+        "abs_error": 67.11745562671331,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3436.140493999967,
+        "hi_80": 3576.570801843071,
+        "lo_95": 3395.0150661655443,
+        "hi_95": 3619.895500420042
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2024-12",
+        "target_period": "2025-06",
+        "forecast_value": 3543.307678453565,
+        "actual_value": 3577.6699999999987,
+        "abs_error": 34.36232154643358,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3473.048980902901,
+        "hi_80": 3614.9876875401906,
+        "lo_95": 3431.48181405424,
+        "hi_95": 3658.777748075672
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2025-01",
+        "target_period": "2025-07",
+        "forecast_value": 3576.004455103127,
+        "actual_value": 3584.8299999999967,
+        "abs_error": 8.825544896869815,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3505.09742747504,
+        "hi_80": 3648.34590978241,
+        "lo_95": 3463.146688977022,
+        "hi_95": 3692.540054286525
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2025-02",
+        "target_period": "2025-08",
+        "forecast_value": 3621.609386838216,
+        "actual_value": 3592.14,
+        "abs_error": 29.469386838215996,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3549.7980789735925,
+        "hi_80": 3694.8734150611526,
+        "lo_95": 3507.3123409839745,
+        "hi_95": 3739.631169305832
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2025-03",
+        "target_period": "2025-09",
+        "forecast_value": 3656.71063854438,
+        "actual_value": 3593.799999999997,
+        "abs_error": 62.91063854438289,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3584.203323318536,
+        "hi_80": 3730.6847541403527,
+        "lo_95": 3541.3058063589065,
+        "hi_95": 3775.876308121485
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2025-04",
+        "target_period": "2025-10",
+        "forecast_value": 3749.9647848989584,
+        "actual_value": 3591.8000000000006,
+        "abs_error": 158.1647848989578,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3675.608374009221,
+        "hi_80": 3825.825402787326,
+        "lo_95": 3631.61687622359,
+        "hi_95": 3872.169440573035
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2025-05",
+        "target_period": "2025-11",
+        "forecast_value": 3711.7735104586263,
+        "actual_value": 3571.659999999999,
+        "abs_error": 140.1135104586274,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3638.174377638838,
+        "hi_80": 3786.8615307779023,
+        "lo_95": 3594.6309084244995,
+        "hi_95": 3832.733580700454
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2025-06",
+        "target_period": "2025-12",
+        "forecast_value": 3636.1082428544632,
+        "actual_value": 3549.180000000001,
+        "abs_error": 86.92824285446204,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3564.009443517996,
+        "hi_80": 3709.665578412045,
+        "lo_95": 3521.353616893172,
+        "hi_95": 3754.602517147675
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 6,
+        "forecast_origin": "2025-07",
+        "target_period": "2026-01",
+        "forecast_value": 3636.411074250695,
+        "actual_value": 3561.029999999999,
+        "abs_error": 75.38107425069666,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3564.3062702029783,
+        "hi_80": 3709.974535992961,
+        "lo_95": 3521.6468910096746,
+        "hi_95": 3754.915217278316
+      },
+      {
+        "source_kind": "published_live",
+        "source_label": "Published live",
+        "horizon_months": 6,
+        "forecast_origin": "2026-01",
+        "target_period": "2026-07",
+        "forecast_value": 3474.2266538457934,
+        "actual_value": null,
+        "abs_error": null,
+        "direction_hit": null,
+        "split": "published",
+        "model_family": "pca_linear",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3405.337733705068,
+        "hi_80": 3544.5091753527463,
+        "lo_95": 3364.580968530924,
+        "hi_95": 3587.4454962404334
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2022-02",
+        "target_period": "2023-02",
+        "forecast_value": 3387.057460607942,
+        "actual_value": 3508.059999999998,
+        "abs_error": 121.00253939205597,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2022-03",
+        "target_period": "2023-03",
+        "forecast_value": 3534.5554781604915,
+        "actual_value": 3524.980000000002,
+        "abs_error": 9.575478160489638,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2022-04",
+        "target_period": "2023-04",
+        "forecast_value": 3640.327385783339,
+        "actual_value": 3496.410000000002,
+        "abs_error": 143.91738578333707,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2022-05",
+        "target_period": "2023-05",
+        "forecast_value": 3591.268205799908,
+        "actual_value": 3461.1800000000007,
+        "abs_error": 130.08820579990743,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2022-06",
+        "target_period": "2023-06",
+        "forecast_value": 3525.837113088002,
+        "actual_value": 3438.2599999999993,
+        "abs_error": 87.57711308800253,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2022-07",
+        "target_period": "2023-07",
+        "forecast_value": 3513.9353428478025,
+        "actual_value": 3442.3500000000013,
+        "abs_error": 71.58534284780126,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2022-08",
+        "target_period": "2023-08",
+        "forecast_value": 3514.965207429122,
+        "actual_value": 3469.980000000002,
+        "abs_error": 44.98520742912024,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2022-09",
+        "target_period": "2023-09",
+        "forecast_value": 3672.0097276127567,
+        "actual_value": 3466.079999999999,
+        "abs_error": 205.9297276127577,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2022-10",
+        "target_period": "2023-10",
+        "forecast_value": 3659.86303398414,
+        "actual_value": 3452.4699999999984,
+        "abs_error": 207.3930339841413,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2022-11",
+        "target_period": "2023-11",
+        "forecast_value": 3646.915511072868,
+        "actual_value": 3440.6400000000012,
+        "abs_error": 206.27551107286672,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2022-12",
+        "target_period": "2023-12",
+        "forecast_value": 3574.954872827744,
+        "actual_value": 3421.209999999998,
+        "abs_error": 153.7448728277459,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-01",
+        "target_period": "2024-01",
+        "forecast_value": 3324.9127419785095,
+        "actual_value": 3407.370000000002,
+        "abs_error": 82.45725802149263,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-02",
+        "target_period": "2024-02",
+        "forecast_value": 3548.6424572129,
+        "actual_value": 3391.8399999999974,
+        "abs_error": 156.80245721290248,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-03",
+        "target_period": "2024-03",
+        "forecast_value": 3429.915315654269,
+        "actual_value": 3376.219999999998,
+        "abs_error": 53.69531565427087,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-04",
+        "target_period": "2024-04",
+        "forecast_value": 3404.650124325645,
+        "actual_value": 3376.530000000001,
+        "abs_error": 28.1201243256437,
+        "direction_hit": 1,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-05",
+        "target_period": "2024-05",
+        "forecast_value": 3516.0263999238427,
+        "actual_value": 3381.190000000003,
+        "abs_error": 134.83639992383996,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-06",
+        "target_period": "2024-06",
+        "forecast_value": 3456.2744753051907,
+        "actual_value": 3381.1099999999983,
+        "abs_error": 75.16447530519235,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-07",
+        "target_period": "2024-07",
+        "forecast_value": 3500.887354917298,
+        "actual_value": 3380.859999999999,
+        "abs_error": 120.02735491729892,
+        "direction_hit": 0,
+        "split": "validation",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": null,
+        "hi_80": null,
+        "lo_95": null,
+        "hi_95": null
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-08",
+        "target_period": "2024-08",
+        "forecast_value": 3664.095243736414,
+        "actual_value": 3380.9799999999987,
+        "abs_error": 283.1152437364153,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3503.920867782272,
+        "hi_80": 3831.5916545424834,
+        "lo_95": 3456.7901708319323,
+        "hi_95": 3883.832483804107
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-09",
+        "target_period": "2024-09",
+        "forecast_value": 3630.17814956976,
+        "actual_value": 3380.9500000000025,
+        "abs_error": 249.22814956975753,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3471.486445061348,
+        "hi_80": 3796.1241117220734,
+        "lo_95": 3424.792018508001,
+        "hi_95": 3847.8813680939265
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-10",
+        "target_period": "2024-10",
+        "forecast_value": 3692.474866103691,
+        "actual_value": 3392.0200000000027,
+        "abs_error": 300.4548661036888,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3531.059886944635,
+        "hi_80": 3861.268591681989,
+        "lo_95": 3483.5641472504844,
+        "hi_95": 3913.9140433423167
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-11",
+        "target_period": "2024-11",
+        "forecast_value": 3449.2797529754853,
+        "actual_value": 3412.7700000000013,
+        "abs_error": 36.509752975483934,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3298.495945467055,
+        "hi_80": 3606.9563252417383,
+        "lo_95": 3254.1283873332077,
+        "hi_95": 3656.134423152485
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2023-12",
+        "target_period": "2024-12",
+        "forecast_value": 3473.695320066273,
+        "actual_value": 3417.9300000000007,
+        "abs_error": 55.765320066272125,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3321.844196355018,
+        "hi_80": 3632.487998651676,
+        "lo_95": 3277.162584514353,
+        "hi_95": 3682.014201452408
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-01",
+        "target_period": "2025-01",
+        "forecast_value": 3494.728969816698,
+        "actual_value": 3431.7699999999977,
+        "abs_error": 62.958969816699664,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3341.9583689907113,
+        "hi_80": 3654.483157480057,
+        "lo_95": 3297.0062045289483,
+        "hi_95": 3704.309247492301
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-02",
+        "target_period": "2025-02",
+        "forecast_value": 3682.434438324315,
+        "actual_value": 3459.1400000000017,
+        "abs_error": 223.29443832431343,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3521.4583722247985,
+        "hi_80": 3850.76918685531,
+        "lo_95": 3474.0917810181854,
+        "hi_95": 3903.271487140348
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-03",
+        "target_period": "2025-03",
+        "forecast_value": 3673.010872112393,
+        "actual_value": 3475.3800000000024,
+        "abs_error": 197.63087211239008,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3512.446753229542,
+        "hi_80": 3840.914842125775,
+        "lo_95": 3465.20137591443,
+        "hi_95": 3893.282785937859
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-04",
+        "target_period": "2025-04",
+        "forecast_value": 3593.929438574721,
+        "actual_value": 3541.599999999998,
+        "abs_error": 52.3294385747231,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3436.8223311568727,
+        "hi_80": 3758.218367111875,
+        "lo_95": 3390.5941662313226,
+        "hi_95": 3809.4588075725474
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-05",
+        "target_period": "2025-05",
+        "forecast_value": 3518.893385757962,
+        "actual_value": 3572.770000000001,
+        "abs_error": 53.87661424203952,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3365.0664476955717,
+        "hi_80": 3679.752198893681,
+        "lo_95": 3319.8034600458313,
+        "hi_95": 3729.922813008991
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-06",
+        "target_period": "2025-06",
+        "forecast_value": 3380.304677429127,
+        "actual_value": 3577.6699999999987,
+        "abs_error": 197.36532257087177,
+        "direction_hit": 0,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3232.536086214792,
+        "hi_80": 3534.8281991274835,
+        "lo_95": 3189.0557439327317,
+        "hi_95": 3583.0228850619487
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-07",
+        "target_period": "2025-07",
+        "forecast_value": 3589.206244865854,
+        "actual_value": 3584.8299999999967,
+        "abs_error": 4.376244865857188,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3432.305609866025,
+        "hi_80": 3753.2792625324782,
+        "lo_95": 3386.1381986590663,
+        "hi_95": 3804.45236207003
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-08",
+        "target_period": "2025-08",
+        "forecast_value": 3580.6318261060483,
+        "actual_value": 3592.14,
+        "abs_error": 11.508173893951607,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3424.106018200676,
+        "hi_80": 3744.312882245617,
+        "lo_95": 3378.0488984313606,
+        "hi_95": 3795.363732028003
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-09",
+        "target_period": "2025-09",
+        "forecast_value": 3520.5493054201347,
+        "actual_value": 3593.799999999997,
+        "abs_error": 73.25069457986228,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3366.649979529134,
+        "hi_80": 3681.483815441865,
+        "lo_95": 3321.365692037937,
+        "hi_95": 3731.678038827837
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-10",
+        "target_period": "2025-10",
+        "forecast_value": 3622.3267917736025,
+        "actual_value": 3591.8000000000006,
+        "abs_error": 30.52679177360187,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3463.9783060550244,
+        "hi_80": 3787.913845610675,
+        "lo_95": 3417.3848703166877,
+        "hi_95": 3839.55916126734
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-11",
+        "target_period": "2025-11",
+        "forecast_value": 3633.262278702083,
+        "actual_value": 3571.659999999999,
+        "abs_error": 61.60227870208382,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3474.435752791313,
+        "hi_80": 3799.3492253337186,
+        "lo_95": 3427.7016555564414,
+        "hi_95": 3851.1504536693737
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2024-12",
+        "target_period": "2025-12",
+        "forecast_value": 3538.6037723474333,
+        "actual_value": 3549.180000000001,
+        "abs_error": 10.576227652567924,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3383.9152030604787,
+        "hi_80": 3700.363604367687,
+        "lo_95": 3338.398683721378,
+        "hi_95": 3750.815239273126
+      },
+      {
+        "source_kind": "seeded_backtest",
+        "source_label": "Seeded backtest",
+        "horizon_months": 12,
+        "forecast_origin": "2025-01",
+        "target_period": "2026-01",
+        "forecast_value": 3582.166133140465,
+        "actual_value": 3561.029999999999,
+        "abs_error": 21.136133140465972,
+        "direction_hit": 1,
+        "split": "test",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3425.5732536511373,
+        "hi_80": 3745.91732690044,
+        "lo_95": 3379.4963983250045,
+        "hi_95": 3796.9900520617366
+      },
+      {
+        "source_kind": "published_live",
+        "source_label": "Published live",
+        "horizon_months": 12,
+        "forecast_origin": "2026-01",
+        "target_period": "2027-01",
+        "forecast_value": 3380.599967164529,
+        "actual_value": null,
+        "abs_error": null,
+        "direction_hit": null,
+        "split": "published",
+        "model_family": "hist_gbm",
+        "model_panel": "feature_panel_long_history",
+        "lo_80": 3232.818467484134,
+        "hi_80": 3535.136987412333,
+        "lo_95": 3189.3343269353513,
+        "hi_95": 3583.3358834395017
+      }
+    ],
+    "accuracy_by_horizon": [
+      {
+        "horizon_months": 1,
+        "forecast_count": 20,
+        "champion_family": "pca_linear",
+        "champion_panel": "feature_panel_rich",
+        "rmse_ratio_vs_random_walk": 0.8251319149836113,
+        "directional_accuracy": 0.75,
+        "mae": 12.321045319180621,
+        "mape": 0.34872072845513535,
+        "coverage80": 0.2,
+        "coverage95": 0.3,
+        "recent_mae": 17.26730818234152,
+        "latest_abs_error": 27.9576312043946,
+        "latest_target_period": "2026-01"
+      },
+      {
+        "horizon_months": 3,
+        "forecast_count": 20,
+        "champion_family": "extra_trees",
+        "champion_panel": "feature_panel_rich",
+        "rmse_ratio_vs_random_walk": 0.570349386419456,
+        "directional_accuracy": 0.8,
+        "mae": 23.512973404294733,
+        "mape": 0.6690202229708159,
+        "coverage80": 0.5,
+        "coverage95": 0.5,
+        "recent_mae": 29.56155189091275,
+        "latest_abs_error": 22.613357100840403,
+        "latest_target_period": "2026-01"
+      },
+      {
+        "horizon_months": 6,
+        "forecast_count": 36,
+        "champion_family": "pca_linear",
+        "champion_panel": "feature_panel_long_history",
+        "rmse_ratio_vs_random_walk": 0.7989510449986544,
+        "directional_accuracy": 0.8055555555555556,
+        "mae": 57.80587267138591,
+        "mape": 1.6597597362398921,
+        "coverage80": 0.5555555555555556,
+        "coverage95": 0.8888888888888888,
+        "recent_mae": 65.67532310248873,
+        "latest_abs_error": 75.38107425069666,
+        "latest_target_period": "2026-01"
+      },
+      {
+        "horizon_months": 12,
+        "forecast_count": 36,
+        "champion_family": "hist_gbm",
+        "champion_panel": "feature_panel_long_history",
+        "rmse_ratio_vs_random_walk": 1.023543018021137,
+        "directional_accuracy": 0.6944444444444444,
+        "mae": 109.96342600166423,
+        "mape": 3.1920319540186712,
+        "coverage80": 0.6666666666666666,
+        "coverage95": 0.7777777777777778,
+        "recent_mae": 78.12276920272738,
+        "latest_abs_error": 21.136133140465972,
+        "latest_target_period": "2026-01"
+      }
+    ]
+  },
+  "drivers": {
+    "by_horizon": {
+      "1": {
+        "positive": [
+          {
+            "feature": "coal_price",
+            "label": "Coal price",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.003035999925601,
+            "stability": 1.0,
+            "strength": 0.003035999925601,
+            "family": "elastic_net",
+            "panel": "feature_panel_rich",
+            "interpretation": "Commodity-price moves tend to line up with higher future USD/MNT (a weaker tugrik)."
+          },
+          {
+            "feature": "oil_brent_price",
+            "label": "Brent oil price",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.0009793597609251,
+            "stability": 1.0,
+            "strength": 0.0009793597609251,
+            "family": "elastic_net",
+            "panel": "feature_panel_rich",
+            "interpretation": "Higher values of this feature tend to line up with higher future USD/MNT (a weaker tugrik)."
+          },
+          {
+            "feature": "cny_mnt_mom",
+            "label": "CNY/MNT monthly change",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.0007101797573771,
+            "stability": 1.0,
+            "strength": 0.0007101797573771,
+            "family": "elastic_net",
+            "panel": "feature_panel_rich",
+            "interpretation": "Moves in the yuan-related exchange rate tend to line up with higher future USD/MNT (a weaker tugrik)."
+          }
+        ],
+        "negative": [
+          {
+            "feature": "financial_account_3mma",
+            "label": "Financial account (3m avg)",
+            "direction": "stronger_tugrik",
+            "coefficient": -0.0013732198170632,
+            "stability": 0.7727272727272727,
+            "strength": 0.001061124404094291,
+            "family": "elastic_net",
+            "panel": "feature_panel_rich",
+            "interpretation": "Changes in the external balance tend to line up with lower future USD/MNT (a stronger tugrik)."
+          },
+          {
+            "feature": "net_errors_3mma",
+            "label": "Net errors and omissions (3m avg)",
+            "direction": "stronger_tugrik",
+            "coefficient": -0.0010705835570304,
+            "stability": 0.9090909090909092,
+            "strength": 0.0009732577791185456,
+            "family": "elastic_net",
+            "panel": "feature_panel_rich",
+            "interpretation": "Higher values of this feature tend to line up with lower future USD/MNT (a stronger tugrik)."
+          },
+          {
+            "feature": "trade_balance_share",
+            "label": "Trade balance share",
+            "direction": "stronger_tugrik",
+            "coefficient": -0.0001780354167361,
+            "stability": 0.9545454545454546,
+            "strength": 0.00016994289779355,
+            "family": "elastic_net",
+            "panel": "feature_panel_rich",
+            "interpretation": "Trade conditions tend to line up with lower future USD/MNT (a stronger tugrik)."
+          }
+        ],
+        "tree": [
+          {
+            "feature": "coal_price",
+            "label": "Coal price",
+            "importance": 0.2686842605786478,
+            "normalized_importance": 1.0,
+            "family": "extra_trees",
+            "panel": "feature_panel_rich"
+          },
+          {
+            "feature": "cpi_yoy_percent",
+            "label": "CPI inflation (y/y)",
+            "importance": 0.0815209548346482,
+            "normalized_importance": 0.3034080026090171,
+            "family": "extra_trees",
+            "panel": "feature_panel_rich"
+          },
+          {
+            "feature": "oil_brent_price",
+            "label": "Brent oil price",
+            "importance": 0.0641632623045082,
+            "normalized_importance": 0.238805437156326,
+            "family": "extra_trees",
+            "panel": "feature_panel_rich"
+          },
+          {
+            "feature": "coal_price_yoy",
+            "label": "Coal price (y/y)",
+            "importance": 0.0187662182332964,
+            "normalized_importance": 0.06984487365534854,
+            "family": "extra_trees",
+            "panel": "feature_panel_rich"
+          },
+          {
+            "feature": "dxy_broad",
+            "label": "Broad USD index",
+            "importance": 0.0166151749128529,
+            "normalized_importance": 0.061839033209723115,
+            "family": "extra_trees",
+            "panel": "feature_panel_rich"
+          }
+        ]
+      },
+      "3": {
+        "positive": [
+          {
+            "feature": "cpi_yoy_percent",
+            "label": "CPI inflation (y/y)",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.0058926739007653,
+            "stability": 1.0,
+            "strength": 0.0058926739007653,
+            "family": "lasso",
+            "panel": "feature_panel_rich",
+            "interpretation": "Inflation pressure tends to line up with higher future USD/MNT (a weaker tugrik)."
+          },
+          {
+            "feature": "dxy_broad_yoy",
+            "label": "Broad USD index (y/y)",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.0056586479737709,
+            "stability": 0.75,
+            "strength": 0.004243985980328175,
+            "family": "lasso",
+            "panel": "feature_panel_rich",
+            "interpretation": "A stronger broad U.S. dollar tends to line up with higher future USD/MNT (a weaker tugrik)."
+          },
+          {
+            "feature": "coal_price",
+            "label": "Coal price",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.0025702922230194,
+            "stability": 1.0,
+            "strength": 0.0025702922230194,
+            "family": "lasso",
+            "panel": "feature_panel_rich",
+            "interpretation": "Commodity-price moves tend to line up with higher future USD/MNT (a weaker tugrik)."
+          }
+        ],
+        "negative": [
+          {
+            "feature": "trade_balance_share",
+            "label": "Trade balance share",
+            "direction": "stronger_tugrik",
+            "coefficient": -0.0047130886603354,
+            "stability": 1.0,
+            "strength": 0.0047130886603354,
+            "family": "lasso",
+            "panel": "feature_panel_rich",
+            "interpretation": "Trade conditions tend to line up with lower future USD/MNT (a stronger tugrik)."
+          },
+          {
+            "feature": "net_errors_3mma",
+            "label": "Net errors and omissions (3m avg)",
+            "direction": "stronger_tugrik",
+            "coefficient": -0.002880743099533,
+            "stability": 1.0,
+            "strength": 0.002880743099533,
+            "family": "lasso",
+            "panel": "feature_panel_rich",
+            "interpretation": "Higher values of this feature tend to line up with lower future USD/MNT (a stronger tugrik)."
+          },
+          {
+            "feature": "dxy_broad",
+            "label": "Broad USD index",
+            "direction": "stronger_tugrik",
+            "coefficient": 0.0,
+            "stability": 0.0,
+            "strength": 0.0,
+            "family": "lasso",
+            "panel": "feature_panel_rich",
+            "interpretation": "A stronger broad U.S. dollar tends to line up with lower future USD/MNT (a stronger tugrik)."
+          }
+        ],
+        "tree": [
+          {
+            "feature": "coal_price",
+            "label": "Coal price",
+            "importance": 0.1339644792749539,
+            "normalized_importance": 1.0,
+            "family": "extra_trees",
+            "panel": "feature_panel_rich"
+          },
+          {
+            "feature": "cpi_yoy_percent",
+            "label": "CPI inflation (y/y)",
+            "importance": 0.1163494386034788,
+            "normalized_importance": 0.8685096171252881,
+            "family": "extra_trees",
+            "panel": "feature_panel_rich"
+          },
+          {
+            "feature": "coal_price_yoy",
+            "label": "Coal price (y/y)",
+            "importance": 0.0387003124622559,
+            "normalized_importance": 0.2888848795718892,
+            "family": "extra_trees",
+            "panel": "feature_panel_rich"
+          },
+          {
+            "feature": "oil_brent_price",
+            "label": "Brent oil price",
+            "importance": 0.0238938618566105,
+            "normalized_importance": 0.17835968150609396,
+            "family": "extra_trees",
+            "panel": "feature_panel_rich"
+          },
+          {
+            "feature": "dxy_broad_yoy",
+            "label": "Broad USD index (y/y)",
+            "importance": 0.0229666854563365,
+            "normalized_importance": 0.1714386200031337,
+            "family": "extra_trees",
+            "panel": "feature_panel_rich"
+          }
+        ]
+      },
+      "6": {
+        "positive": [
+          {
+            "feature": "coal_price_yoy",
+            "label": "Coal price (y/y)",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.0106712523031353,
+            "stability": 0.9761904761904762,
+            "strength": 0.010417174867346364,
+            "family": "lasso",
+            "panel": "feature_panel_long_history",
+            "interpretation": "Commodity-price moves tend to line up with higher future USD/MNT (a weaker tugrik)."
+          },
+          {
+            "feature": "dxy_broad_mom",
+            "label": "Broad USD index (m/m)",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.0008496441546815,
+            "stability": 0.9285714285714286,
+            "strength": 0.0007889552864899643,
+            "family": "lasso",
+            "panel": "feature_panel_long_history",
+            "interpretation": "A stronger broad U.S. dollar tends to line up with higher future USD/MNT (a weaker tugrik)."
+          },
+          {
+            "feature": "oil_brent_price",
+            "label": "Brent oil price",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.0010095933117359,
+            "stability": 0.2261904761904762,
+            "strength": 0.00022836039194026308,
+            "family": "lasso",
+            "panel": "feature_panel_long_history",
+            "interpretation": "Higher values of this feature tend to line up with higher future USD/MNT (a weaker tugrik)."
+          }
+        ],
+        "negative": [
+          {
+            "feature": "copper_price_yoy",
+            "label": "Copper price (y/y)",
+            "direction": "stronger_tugrik",
+            "coefficient": -0.0183022100532434,
+            "stability": 1.0,
+            "strength": 0.0183022100532434,
+            "family": "lasso",
+            "panel": "feature_panel_long_history",
+            "interpretation": "Commodity-price moves tend to line up with lower future USD/MNT (a stronger tugrik)."
+          },
+          {
+            "feature": "copper_price_mom",
+            "label": "Copper price (m/m)",
+            "direction": "stronger_tugrik",
+            "coefficient": -0.0106795677728337,
+            "stability": 1.0,
+            "strength": 0.0106795677728337,
+            "family": "lasso",
+            "panel": "feature_panel_long_history",
+            "interpretation": "Commodity-price moves tend to line up with lower future USD/MNT (a stronger tugrik)."
+          },
+          {
+            "feature": "financial_account_3mma",
+            "label": "Financial account (3m avg)",
+            "direction": "stronger_tugrik",
+            "coefficient": -0.0097170251521534,
+            "stability": 1.0,
+            "strength": 0.0097170251521534,
+            "family": "lasso",
+            "panel": "feature_panel_long_history",
+            "interpretation": "Changes in the external balance tend to line up with lower future USD/MNT (a stronger tugrik)."
+          }
+        ],
+        "tree": [
+          {
+            "feature": "financial_account_3mma",
+            "label": "Financial account (3m avg)",
+            "importance": 0.2557770220073806,
+            "normalized_importance": 1.0,
+            "family": "random_forest",
+            "panel": "feature_panel_long_history"
+          },
+          {
+            "feature": "copper_price",
+            "label": "Copper price",
+            "importance": 0.0694682477111212,
+            "normalized_importance": 0.2715969056404005,
+            "family": "random_forest",
+            "panel": "feature_panel_long_history"
+          },
+          {
+            "feature": "gold_price",
+            "label": "Gold price",
+            "importance": 0.0445177587282783,
+            "normalized_importance": 0.17404909314720896,
+            "family": "random_forest",
+            "panel": "feature_panel_long_history"
+          },
+          {
+            "feature": "oil_brent_price",
+            "label": "Brent oil price",
+            "importance": 0.0372567073665147,
+            "normalized_importance": 0.1456608849149852,
+            "family": "random_forest",
+            "panel": "feature_panel_long_history"
+          },
+          {
+            "feature": "coal_price_yoy",
+            "label": "Coal price (y/y)",
+            "importance": 0.028400232239698,
+            "normalized_importance": 0.11103511963978724,
+            "family": "random_forest",
+            "panel": "feature_panel_long_history"
+          }
+        ]
+      },
+      "12": {
+        "positive": [
+          {
+            "feature": "coal_price_yoy",
+            "label": "Coal price (y/y)",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.0431316729079342,
+            "stability": 1.0,
+            "strength": 0.0431316729079342,
+            "family": "elastic_net",
+            "panel": "feature_panel_long_history",
+            "interpretation": "Commodity-price moves tend to line up with higher future USD/MNT (a weaker tugrik)."
+          },
+          {
+            "feature": "copper_price",
+            "label": "Copper price",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.0096553496117617,
+            "stability": 0.8170731707317073,
+            "strength": 0.00788912712180529,
+            "family": "elastic_net",
+            "panel": "feature_panel_long_history",
+            "interpretation": "Commodity-price moves tend to line up with higher future USD/MNT (a weaker tugrik)."
+          },
+          {
+            "feature": "oil_brent_price_yoy",
+            "label": "Brent oil price (y/y)",
+            "direction": "weaker_tugrik",
+            "coefficient": 0.0101237298291902,
+            "stability": 0.6097560975609756,
+            "strength": 0.006173005993408659,
+            "family": "elastic_net",
+            "panel": "feature_panel_long_history",
+            "interpretation": "Higher values of this feature tend to line up with higher future USD/MNT (a weaker tugrik)."
+          }
+        ],
+        "negative": [
+          {
+            "feature": "copper_price_yoy",
+            "label": "Copper price (y/y)",
+            "direction": "stronger_tugrik",
+            "coefficient": -0.0712205255330571,
+            "stability": 1.0,
+            "strength": 0.0712205255330571,
+            "family": "elastic_net",
+            "panel": "feature_panel_long_history",
+            "interpretation": "Commodity-price moves tend to line up with lower future USD/MNT (a stronger tugrik)."
+          },
+          {
+            "feature": "gold_price_yoy",
+            "label": "Gold price (y/y)",
+            "direction": "stronger_tugrik",
+            "coefficient": -0.0313393047557384,
+            "stability": 1.0,
+            "strength": 0.0313393047557384,
+            "family": "elastic_net",
+            "panel": "feature_panel_long_history",
+            "interpretation": "Commodity-price moves tend to line up with lower future USD/MNT (a stronger tugrik)."
+          },
+          {
+            "feature": "dxy_broad_yoy",
+            "label": "Broad USD index (y/y)",
+            "direction": "stronger_tugrik",
+            "coefficient": -0.0264358827528516,
+            "stability": 1.0,
+            "strength": 0.0264358827528516,
+            "family": "elastic_net",
+            "panel": "feature_panel_long_history",
+            "interpretation": "A stronger broad U.S. dollar tends to line up with lower future USD/MNT (a stronger tugrik)."
+          }
+        ],
+        "tree": [
+          {
+            "feature": "financial_account_3mma",
+            "label": "Financial account (3m avg)",
+            "importance": 0.2358857941187958,
+            "normalized_importance": 1.0,
+            "family": "hist_gbm",
+            "panel": "feature_panel_long_history"
+          },
+          {
+            "feature": "oil_brent_price",
+            "label": "Brent oil price",
+            "importance": 0.0862876133552507,
+            "normalized_importance": 0.36580250064484554,
+            "family": "hist_gbm",
+            "panel": "feature_panel_long_history"
+          },
+          {
+            "feature": "copper_price",
+            "label": "Copper price",
+            "importance": 0.0660906055900898,
+            "normalized_importance": 0.28018052480432765,
+            "family": "hist_gbm",
+            "panel": "feature_panel_long_history"
+          },
+          {
+            "feature": "gold_price_yoy",
+            "label": "Gold price (y/y)",
+            "importance": 0.0659666536661795,
+            "normalized_importance": 0.27965505049853767,
+            "family": "hist_gbm",
+            "panel": "feature_panel_long_history"
+          },
+          {
+            "feature": "neer_yoy",
+            "label": "NEER (y/y)",
+            "importance": 0.061433999030179,
+            "normalized_importance": 0.26043958797806993,
+            "family": "hist_gbm",
+            "panel": "feature_panel_long_history"
+          }
+        ]
+      }
+    },
+    "explainers": {
+      "weaker_tugrik": "Higher values of these features tend to line up with a higher USD/MNT, which means a weaker tugrik.",
+      "stronger_tugrik": "Higher values of these features tend to line up with a lower USD/MNT, which means a stronger tugrik."
+    }
+  },
+  "comparison": {
+    "horizons": [
+      {
+        "horizon_months": 1,
+        "usd_champion_ratio": 0.8251319149836113,
+        "cny_champion_ratio": 0.796344440692431,
+        "usd_best_realized_ratio": 0.6409445538429855,
+        "cny_best_realized_ratio": 0.6694145134122406
+      },
+      {
+        "horizon_months": 3,
+        "usd_champion_ratio": 0.570349386419456,
+        "cny_champion_ratio": 0.8862114768082145,
+        "usd_best_realized_ratio": 0.4719923422149311,
+        "cny_best_realized_ratio": 0.4585083919157259
+      },
+      {
+        "horizon_months": 6,
+        "usd_champion_ratio": 0.7989510449986544,
+        "cny_champion_ratio": 0.5153349362238107,
+        "usd_best_realized_ratio": 0.4682979477891217,
+        "cny_best_realized_ratio": 0.5153349362238107
+      },
+      {
+        "horizon_months": 12,
+        "usd_champion_ratio": 1.023543018021137,
+        "cny_champion_ratio": 0.3163932256514901,
+        "usd_best_realized_ratio": 0.2072104606817642,
+        "cny_best_realized_ratio": 0.3163932256514901
+      }
+    ],
+    "takeaway": "CNY/MNT also shows signal in this study, especially beyond the shortest horizon, which suggests the story is broader than the U.S. dollar alone.",
+    "usd_family_summary": [
+      {
+        "family": "extra_trees",
+        "val_rmse_vs_random_walk": 0.823172061243644,
+        "test_rmse_vs_random_walk": 0.6703286869273646
+      },
+      {
+        "family": "pca_linear",
+        "val_rmse_vs_random_walk": 0.8355221558233318,
+        "test_rmse_vs_random_walk": 0.6927861690174986
+      },
+      {
+        "family": "hist_gbm",
+        "val_rmse_vs_random_walk": 0.8938969351735906,
+        "test_rmse_vs_random_walk": 0.7811549935536976
+      },
+      {
+        "family": "elastic_net",
+        "val_rmse_vs_random_walk": 0.8948159805303623,
+        "test_rmse_vs_random_walk": 0.933015744184158
+      },
+      {
+        "family": "random_walk",
+        "val_rmse_vs_random_walk": 1.0,
+        "test_rmse_vs_random_walk": 1.0
+      },
+      {
+        "family": "lasso",
+        "val_rmse_vs_random_walk": 1.0480709594234394,
+        "test_rmse_vs_random_walk": 0.7984918049283123
+      },
+      {
+        "family": "autoreg",
+        "val_rmse_vs_random_walk": 1.056393597383355,
+        "test_rmse_vs_random_walk": 0.8756148795760167
+      },
+      {
+        "family": "ridge",
+        "val_rmse_vs_random_walk": 1.0802910708771798,
+        "test_rmse_vs_random_walk": 1.1543643551692642
+      },
+      {
+        "family": "random_forest",
+        "val_rmse_vs_random_walk": 1.154642984558284,
+        "test_rmse_vs_random_walk": 0.7388980404155532
+      },
+      {
+        "family": "random_walk_drift",
+        "val_rmse_vs_random_walk": 1.4934791617124126,
+        "test_rmse_vs_random_walk": 0.8334901824776592
+      },
+      {
+        "family": "ols",
+        "val_rmse_vs_random_walk": 2.7500335926766373,
+        "test_rmse_vs_random_walk": 1.33010652883804
+      },
+      {
+        "family": "mlp",
+        "val_rmse_vs_random_walk": 17.801187386355654,
+        "test_rmse_vs_random_walk": 12.20330619499792
+      }
+    ]
+  },
+  "downloads": {
+    "dashboard_json": "/data/tugrik/dashboard.json",
+    "current_forecast_csv": "/data/tugrik/current_forecast.csv",
+    "forecast_vintages_csv": "/data/tugrik/forecast_vintages.csv",
+    "backtest_summary_csv": "/data/tugrik/backtest_summary.csv"
+  }
+}
