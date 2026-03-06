@@ -364,6 +364,102 @@ html[data-theme="dark"] .tugrik-route .nav-link:hover {
   color: var(--tg-text-muted);
 }
 
+.tugrik-scenario-workbench {
+  display: grid;
+  gap: 1rem;
+}
+
+.tugrik-scenario-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--tg-grid-strong);
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--tg-surface) 72%, white 28%) 0%,
+    var(--tg-surface) 100%
+  );
+}
+
+.tugrik-scenario-message {
+  margin: 0;
+  max-width: 44rem;
+  color: var(--tg-text-strong);
+}
+
+.tugrik-scenario-control-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.tugrik-scenario-card,
+.tugrik-scenario-output {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--tg-grid-strong);
+  border-radius: 18px;
+  background: var(--tg-surface);
+}
+
+.tugrik-scenario-card-head {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.tugrik-scenario-card-head > div {
+  display: grid;
+  gap: 0.18rem;
+}
+
+.tugrik-scenario-card-head strong,
+.tugrik-scenario-card-tone {
+  color: var(--tg-text-strong);
+}
+
+.tugrik-scenario-card-head small,
+.tugrik-scenario-card-copy,
+.tugrik-scenario-note {
+  color: var(--tg-text-muted);
+}
+
+.tugrik-scenario-card-tone {
+  font-size: 0.92rem;
+}
+
+.tugrik-scenario-card-copy,
+.tugrik-scenario-note {
+  margin: 0;
+}
+
+.tugrik-scenario-toolbar .tugrik-chip:disabled {
+  cursor: default;
+  opacity: 0.58;
+}
+
+.tugrik-scenario-assumptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.tugrik-scenario-assumption {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.42rem 0.75rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tg-series-forecast) 10%, white 90%);
+  border: 1px solid
+    color-mix(in srgb, var(--tg-series-forecast) 26%, var(--tg-grid-strong) 74%);
+  color: var(--tg-text-strong);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
 .tugrik-chart-surface {
   position: relative;
   display: grid;
@@ -732,6 +828,10 @@ html[data-theme="dark"] .tugrik-route .nav-link:hover {
     align-items: start;
     flex-direction: column;
   }
+
+  .tugrik-scenario-control-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
@@ -739,6 +839,11 @@ html[data-theme="dark"] .tugrik-route .nav-link:hover {
     width: min(100%, calc(100% - 1rem));
     max-width: min(100%, calc(100% - 1rem));
     padding: 1.25rem 0.5rem 4rem;
+  }
+
+  .tugrik-scenario-toolbar {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .tugrik-facts-row,
