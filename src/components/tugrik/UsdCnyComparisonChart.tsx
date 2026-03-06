@@ -6,17 +6,31 @@ import { scaleLinear } from "@visx/scale"
 import { LinePath } from "@visx/shape"
 import type { TugrikComparisonRow } from "~/types/tugrik"
 
+type TugrikChartHeight = "compact" | "standard" | "tall"
+
 interface UsdCnyComparisonChartProps {
   rows: TugrikComparisonRow[]
+  framed?: boolean
+  height?: TugrikChartHeight
+  legendPlacement?: "top" | "bottom" | "none"
 }
 
-export function UsdCnyComparisonChart({ rows }: UsdCnyComparisonChartProps) {
+export function UsdCnyComparisonChart({
+  rows,
+  framed = false,
+  height = "standard",
+  legendPlacement = "bottom",
+}: UsdCnyComparisonChartProps) {
   return (
-    <div className="tugrik-chart-surface tugrik-chart-surface--comparison">
+    <div
+      className={`tugrik-chart-surface${framed ? "is-framed" : "is-plain"} is-${height}`}
+    >
+      {legendPlacement === "top" ? <ComparisonLegend /> : null}
       <ParentSize>
-        {({ width, height }) => {
+        {({ width, height: surfaceHeight }) => {
           const safeWidth = Math.max(width, 320)
-          const safeHeight = Math.max(height, 320)
+          const minHeight = height === "compact" ? 280 : 320
+          const safeHeight = Math.max(surfaceHeight, minHeight)
           const margin = { top: 20, right: 16, bottom: 36, left: 52 }
           const innerWidth = safeWidth - margin.left - margin.right
           const innerHeight = safeHeight - margin.top - margin.bottom
@@ -60,48 +74,52 @@ export function UsdCnyComparisonChart({ rows }: UsdCnyComparisonChartProps) {
                   stroke="var(--tg-grid-strong)"
                   strokeDasharray="5 4"
                 />
+
                 <LinePath
                   data={rows}
                   x={(row) => xScale(row.horizon_months) ?? 0}
                   y={(row) => yScale(row.usd_champion_ratio) ?? 0}
-                  stroke="var(--tg-accent)"
-                  strokeWidth={2.5}
+                  stroke="var(--tg-series-forecast)"
+                  strokeWidth={2.4}
                 />
                 <LinePath
                   data={rows}
                   x={(row) => xScale(row.horizon_months) ?? 0}
                   y={(row) => yScale(row.cny_champion_ratio) ?? 0}
-                  stroke="var(--tg-green)"
-                  strokeWidth={2.5}
+                  stroke="var(--tg-series-benchmark)"
+                  strokeWidth={2.4}
                 />
+
                 {rows.map((row) => (
                   <g key={row.horizon_months}>
                     <circle
                       cx={xScale(row.horizon_months)}
                       cy={yScale(row.usd_champion_ratio)}
-                      r={4.2}
-                      fill="var(--tg-accent)"
+                      r={4}
+                      fill="var(--tg-series-forecast)"
                     />
                     <circle
                       cx={xScale(row.horizon_months)}
                       cy={yScale(row.cny_champion_ratio)}
-                      r={4.2}
-                      fill="var(--tg-green)"
+                      r={4}
+                      fill="var(--tg-series-benchmark)"
                     />
                   </g>
                 ))}
+
                 <AxisLeft
                   scale={yScale}
                   numTicks={5}
                   stroke="var(--tg-grid-strong)"
                   tickStroke="var(--tg-grid-strong)"
                   tickLabelProps={() => ({
-                    fill: "var(--tg-ink-muted)",
+                    fill: "var(--tg-text-muted)",
                     fontSize: 11,
                     textAnchor: "end",
                     dy: "0.32em",
                   })}
                 />
+
                 <AxisBottom
                   top={innerHeight}
                   scale={xScale}
@@ -109,7 +127,7 @@ export function UsdCnyComparisonChart({ rows }: UsdCnyComparisonChartProps) {
                   stroke="var(--tg-grid-strong)"
                   tickStroke="var(--tg-grid-strong)"
                   tickLabelProps={() => ({
-                    fill: "var(--tg-ink-muted)",
+                    fill: "var(--tg-text-muted)",
                     fontSize: 11,
                     textAnchor: "middle",
                   })}
@@ -119,16 +137,22 @@ export function UsdCnyComparisonChart({ rows }: UsdCnyComparisonChartProps) {
           )
         }}
       </ParentSize>
-      <div className="tugrik-legend">
-        <span>
-          <i className="is-seeded" />
-          USD/MNT champion
-        </span>
-        <span>
-          <i className="is-published" />
-          CNY/MNT champion
-        </span>
-      </div>
+      {legendPlacement === "bottom" ? <ComparisonLegend /> : null}
+    </div>
+  )
+}
+
+function ComparisonLegend() {
+  return (
+    <div className="tugrik-legend">
+      <span>
+        <i className="is-forecast" />
+        USD/MNT champion
+      </span>
+      <span>
+        <i className="is-benchmark" />
+        CNY/MNT champion
+      </span>
     </div>
   )
 }

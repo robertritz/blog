@@ -14,11 +14,17 @@ import type {
 } from "~/types/tugrik"
 import { formatMnt, formatPeriod, periodToDate } from "./formatters"
 
+type TugrikChartHeight = "compact" | "standard" | "tall"
+
 interface ForecastHistoryChartProps {
   actualSeries: TugrikActualPoint[]
   vintages: TugrikHistoryVintage[]
   selectedHorizon: TugrikHorizon
   recentWindowMonths: number
+  framed?: boolean
+  height?: TugrikChartHeight
+  legendPlacement?: "top" | "bottom" | "none"
+  showWindowControls?: boolean
 }
 
 interface HistoryTooltipData {
@@ -33,6 +39,10 @@ export function ForecastHistoryChart({
   vintages,
   selectedHorizon,
   recentWindowMonths,
+  framed = false,
+  height = "standard",
+  legendPlacement = "bottom",
+  showWindowControls = true,
 }: ForecastHistoryChartProps) {
   const [showFullHistory, setShowFullHistory] = useState(false)
   const tooltip = useTooltip<HistoryTooltipData>()
@@ -56,6 +66,7 @@ export function ForecastHistoryChart({
       horizonVintages[horizonVintages.length - 1].target_period,
       recentWindowMonths - 1,
     )
+
     return {
       actual: actual.filter((row) => row.period >= cutoff),
       horizonVintages: horizonVintages.filter(
@@ -78,31 +89,38 @@ export function ForecastHistoryChart({
   )
 
   return (
-    <div className="tugrik-chart-surface tugrik-chart-surface--history">
+    <div
+      className={`tugrik-chart-surface${framed ? "is-framed" : "is-plain"} is-${height}`}
+    >
       <div className="tugrik-history-toolbar">
         <strong className="tugrik-history-label">Forecast vs actual</strong>
-        <div className="tugrik-chip-row">
-          <button
-            type="button"
-            className={`tugrik-chip${showFullHistory ? "" : "is-selected"}`}
-            onClick={() => setShowFullHistory(false)}
-          >
-            Recent
-          </button>
-          <button
-            type="button"
-            className={`tugrik-chip${showFullHistory ? "is-selected" : ""}`}
-            onClick={() => setShowFullHistory(true)}
-          >
-            Full
-          </button>
-        </div>
+        {showWindowControls ? (
+          <div className="tugrik-chip-row">
+            <button
+              type="button"
+              className={`tugrik-chip${showFullHistory ? "" : "is-selected"}`}
+              onClick={() => setShowFullHistory(false)}
+            >
+              Recent
+            </button>
+            <button
+              type="button"
+              className={`tugrik-chip${showFullHistory ? "is-selected" : ""}`}
+              onClick={() => setShowFullHistory(true)}
+            >
+              Full
+            </button>
+          </div>
+        ) : null}
       </div>
 
+      {legendPlacement === "top" ? <HistoryLegend /> : null}
+
       <ParentSize>
-        {({ width, height }) => {
+        {({ width, height: surfaceHeight }) => {
           const safeWidth = Math.max(width, 320)
-          const safeHeight = Math.max(height, 380)
+          const minHeight = height === "compact" ? 310 : 390
+          const safeHeight = Math.max(surfaceHeight, minHeight)
           const margin = { top: 18, right: 18, bottom: 40, left: 52 }
           const innerWidth = safeWidth - margin.left - margin.right
           const innerHeight = safeHeight - margin.top - margin.bottom
@@ -115,7 +133,7 @@ export function ForecastHistoryChart({
           ]
           const yMin = Math.min(...values)
           const yMax = Math.max(...values)
-          const pad = (yMax - yMin) * 0.14
+          const pad = Math.max((yMax - yMin) * 0.14, 24)
           const lastVintageDate =
             filtered.horizonVintages.length > 0
               ? filtered.horizonVintages[filtered.horizonVintages.length - 1]
@@ -145,28 +163,29 @@ export function ForecastHistoryChart({
                     width={innerWidth}
                     stroke="var(--tg-grid)"
                   />
+
                   <LinePath
                     data={filtered.actual}
                     x={(row) => xScale(row.date) ?? 0}
                     y={(row) => yScale(row.value) ?? 0}
-                    stroke="var(--tg-ink-strong)"
+                    stroke="var(--tg-series-actual)"
                     strokeWidth={2.3}
                   />
 
                   <AnimatePresence mode="wait">
                     <motion.g
-                      key={`history-${selectedHorizon}-${showFullHistory ? "all" : "recent"}`}
+                      key={`history-${selectedHorizon}-${showFullHistory ? "full" : "recent"}`}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: 0.22 }}
+                      transition={{ duration: 0.14 }}
                     >
                       {seeded.length > 1 ? (
                         <LinePath
                           data={seeded}
                           x={(row) => xScale(row.date) ?? 0}
                           y={(row) => yScale(row.forecast_value) ?? 0}
-                          stroke="var(--tg-accent)"
+                          stroke="var(--tg-series-forecast)"
                           strokeWidth={2.1}
                           strokeDasharray="7 5"
                         />
@@ -176,7 +195,7 @@ export function ForecastHistoryChart({
                           data={published}
                           x={(row) => xScale(row.date) ?? 0}
                           y={(row) => yScale(row.forecast_value) ?? 0}
-                          stroke="var(--tg-green)"
+                          stroke="var(--tg-series-benchmark)"
                           strokeWidth={2.1}
                         />
                       ) : null}
@@ -191,8 +210,8 @@ export function ForecastHistoryChart({
                         key={`seeded-${row.target_period}-${row.forecast_origin}`}
                         cx={x}
                         cy={y}
-                        r={3.6}
-                        fill="var(--tg-accent)"
+                        r={3.4}
+                        fill="var(--tg-series-forecast)"
                         onMouseEnter={() =>
                           tooltip.showTooltip({
                             tooltipLeft: x + margin.left,
@@ -221,7 +240,7 @@ export function ForecastHistoryChart({
                         width={8}
                         height={8}
                         rx={2}
-                        fill="var(--tg-green)"
+                        fill="var(--tg-series-benchmark)"
                         onMouseEnter={() =>
                           tooltip.showTooltip({
                             tooltipLeft: x + margin.left,
@@ -245,13 +264,14 @@ export function ForecastHistoryChart({
                     stroke="var(--tg-grid-strong)"
                     tickStroke="var(--tg-grid-strong)"
                     tickLabelProps={() => ({
-                      fill: "var(--tg-ink-muted)",
+                      fill: "var(--tg-text-muted)",
                       fontSize: 11,
                       textAnchor: "end",
                       dy: "0.32em",
                     })}
                     tickFormat={(value) => formatMnt(Number(value))}
                   />
+
                   <AxisBottom
                     top={innerHeight}
                     scale={xScale}
@@ -259,7 +279,7 @@ export function ForecastHistoryChart({
                     stroke="var(--tg-grid-strong)"
                     tickStroke="var(--tg-grid-strong)"
                     tickLabelProps={() => ({
-                      fill: "var(--tg-ink-muted)",
+                      fill: "var(--tg-text-muted)",
                       fontSize: 11,
                       textAnchor: "middle",
                     })}
@@ -284,7 +304,7 @@ export function ForecastHistoryChart({
                     border: "1px solid var(--tg-grid-strong)",
                     borderRadius: 12,
                     padding: "0.75rem 0.85rem",
-                    boxShadow: "0 14px 30px rgba(24, 22, 18, 0.16)",
+                    boxShadow: "0 12px 24px rgba(0, 0, 0, 0.08)",
                   }}
                 >
                   <strong>{tooltip.tooltipData.label}</strong>
@@ -306,26 +326,26 @@ export function ForecastHistoryChart({
         }}
       </ParentSize>
 
-      <div className="tugrik-legend">
-        <span>
-          <i className="is-actual" />
-          Actual
-        </span>
-        <span>
-          <i className="is-seeded" />
-          Seeded backtest
-        </span>
-        <span>
-          <i className="is-published" />
-          Published live
-        </span>
-      </div>
+      {legendPlacement === "bottom" ? <HistoryLegend /> : null}
+    </div>
+  )
+}
 
-      <p className="tugrik-history-note">
-        Seeded backtests simulate what the page would have shown in earlier
-        periods. Published live points are the real monthly forecasts from this
-        dashboard going forward.
-      </p>
+function HistoryLegend() {
+  return (
+    <div className="tugrik-legend">
+      <span>
+        <i className="is-actual" />
+        Actual
+      </span>
+      <span>
+        <i className="is-forecast" />
+        Seeded backtest
+      </span>
+      <span>
+        <i className="is-benchmark" />
+        Published live
+      </span>
     </div>
   )
 }

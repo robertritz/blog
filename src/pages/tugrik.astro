@@ -21,12 +21,12 @@ const dashboard = JSON.parse(dashboardRaw) as TugrikDashboardData
   <head>
     <BaseHead
       title={`Tugrik Forecast | ${siteConfig.siteName}`}
-      description="Live USD/MNT forecast briefing with uncertainty bands, forecast history, drivers, and USD vs CNY comparison."
+      description="Five live USD/MNT forecast layouts over the same dashboard data, with shared horizon controls, chart views, and raw detail panels."
     />
   </head>
-  <body>
+  <body class="tugrik-route">
     <main class="tugrik-page">
-      <SiteHeader showNav={false} />
+      <SiteHeader showNav={false} showThemeToggle={false} />
       <TugrikDashboard client:load data={dashboard} />
     </main>
   </body>

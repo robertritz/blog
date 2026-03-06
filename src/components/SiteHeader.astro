@@ -1,11 +1,12 @@
 ---
 interface Props {
   showNav?: boolean
+  showThemeToggle?: boolean
 }
 
 import SystemTheme from "./SystemTheme.astro"
 
-const { showNav = true } = Astro.props
+const { showNav = true, showThemeToggle = true } = Astro.props
 ---
 
 <header class="site-header">
@@ -23,7 +24,7 @@ const { showNav = true } = Astro.props
         </nav>
       )
     }
-    <SystemTheme />
+    {showThemeToggle ? <SystemTheme /> : null}
   </div>
 </header>
 
