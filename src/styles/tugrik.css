@@ -126,18 +126,29 @@ html[data-theme="dark"] .tugrik-route .nav-link:hover {
   font-weight: 700;
   line-height: 1;
   cursor: pointer;
+  white-space: nowrap;
   transition:
     background-color 0.15s ease,
     border-color 0.15s ease,
+    box-shadow 0.15s ease,
     color 0.15s ease;
 }
 
 .tugrik-variant-chip.is-selected,
 .tugrik-horizon-chip.is-selected,
 .tugrik-chip.is-selected {
-  background: var(--tg-text-strong);
-  border-color: var(--tg-text-strong);
-  color: #ffffff;
+  background: color-mix(
+    in srgb,
+    var(--tg-series-forecast) 11%,
+    var(--tg-bg) 89%
+  );
+  border-color: color-mix(
+    in srgb,
+    var(--tg-series-forecast) 42%,
+    var(--tg-grid-strong) 58%
+  );
+  box-shadow: inset 0 0 0 1px rgba(15, 106, 139, 0.18);
+  color: var(--tg-text-strong);
 }
 
 .tugrik-variant-caption {
@@ -173,7 +184,7 @@ html[data-theme="dark"] .tugrik-route .nav-link:hover {
 .tugrik-wire-head p,
 .tugrik-ledger-head p {
   margin: 0;
-  max-width: 42rem;
+  max-width: 56rem;
   color: var(--tg-text-muted);
 }
 
@@ -374,19 +385,19 @@ html[data-theme="dark"] .tugrik-route .nav-link:hover {
 
 .tugrik-chart-canvas {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .tugrik-chart-canvas.is-compact {
-  height: 18rem;
+  height: 19.375rem;
 }
 
 .tugrik-chart-canvas.is-standard {
-  height: 22rem;
+  height: 24.375rem;
 }
 
 .tugrik-chart-canvas.is-tall {
-  height: 25rem;
+  height: 27.5rem;
 }
 
 .tugrik-tooltip-frame {
@@ -396,8 +407,8 @@ html[data-theme="dark"] .tugrik-route .nav-link:hover {
 }
 
 .tugrik-chart-note {
-  fill: var(--tg-text-muted);
-  font-size: 11px;
+  fill: var(--tg-text);
+  font-size: 12.5px;
 }
 
 .tugrik-chart-note.is-active {
@@ -739,14 +750,6 @@ html[data-theme="dark"] .tugrik-route .nav-link:hover {
 
   .tugrik-markets-strip-stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .tugrik-chart-canvas.is-standard {
-    height: 19rem;
-  }
-
-  .tugrik-chart-canvas.is-tall {
-    height: 20rem;
   }
 
   .tugrik-raw-row,

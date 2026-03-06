@@ -34,7 +34,11 @@ export function VariantPicker({
               type="button"
               role="tab"
               aria-selected={selected}
-              className={`tugrik-variant-chip${selected ? "is-selected" : ""}`}
+              className={
+                selected
+                  ? "tugrik-variant-chip is-selected"
+                  : "tugrik-variant-chip"
+              }
               title={definition.description}
               onClick={() => onSelect(definition.id)}
             >

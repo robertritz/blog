@@ -98,14 +98,18 @@ export function ForecastHistoryChart({
           <div className="tugrik-chip-row">
             <button
               type="button"
-              className={`tugrik-chip${showFullHistory ? "" : "is-selected"}`}
+              className={
+                showFullHistory ? "tugrik-chip" : "tugrik-chip is-selected"
+              }
               onClick={() => setShowFullHistory(false)}
             >
               Recent
             </button>
             <button
               type="button"
-              className={`tugrik-chip${showFullHistory ? "is-selected" : ""}`}
+              className={
+                showFullHistory ? "tugrik-chip is-selected" : "tugrik-chip"
+              }
               onClick={() => setShowFullHistory(true)}
             >
               Full
@@ -120,11 +124,9 @@ export function ForecastHistoryChart({
         <ParentSize>
           {({ width, height: canvasHeight }) => {
             const safeWidth = Math.max(width, 320)
-            const safeHeight = Math.max(
-              canvasHeight,
-              getMinimumChartHeight(height),
-            )
-            const margin = { top: 18, right: 18, bottom: 40, left: 52 }
+            const safeHeight =
+              canvasHeight > 0 ? canvasHeight : getMinimumChartHeight(height)
+            const margin = { top: 18, right: 18, bottom: 52, left: 58 }
             const innerWidth = safeWidth - margin.left - margin.right
             const innerHeight = safeHeight - margin.top - margin.bottom
             const values = [
@@ -267,8 +269,9 @@ export function ForecastHistoryChart({
                       stroke="var(--tg-grid-strong)"
                       tickStroke="var(--tg-grid-strong)"
                       tickLabelProps={() => ({
-                        fill: "var(--tg-text-muted)",
-                        fontSize: 11,
+                        fill: "var(--tg-text-strong)",
+                        fontSize: 13.5,
+                        fontWeight: 650,
                         textAnchor: "end",
                         dy: "0.32em",
                       })}
@@ -278,13 +281,15 @@ export function ForecastHistoryChart({
                     <AxisBottom
                       top={innerHeight}
                       scale={xScale}
-                      numTicks={6}
+                      numTicks={safeWidth < 520 ? 4 : 6}
                       stroke="var(--tg-grid-strong)"
                       tickStroke="var(--tg-grid-strong)"
                       tickLabelProps={() => ({
-                        fill: "var(--tg-text-muted)",
-                        fontSize: 11,
+                        fill: "var(--tg-text-strong)",
+                        fontSize: 13.5,
+                        fontWeight: 650,
                         textAnchor: "middle",
+                        dy: "0.9em",
                       })}
                       tickFormat={(value) =>
                         new Date(value.valueOf()).toLocaleDateString("en-US", {

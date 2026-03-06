@@ -31,11 +31,9 @@ export function UsdCnyComparisonChart({
         <ParentSize>
           {({ width, height: canvasHeight }) => {
             const safeWidth = Math.max(width, 320)
-            const safeHeight = Math.max(
-              canvasHeight,
-              getMinimumChartHeight(height),
-            )
-            const margin = { top: 20, right: 16, bottom: 36, left: 52 }
+            const safeHeight =
+              canvasHeight > 0 ? canvasHeight : getMinimumChartHeight(height)
+            const margin = { top: 20, right: 16, bottom: 46, left: 58 }
             const innerWidth = safeWidth - margin.left - margin.right
             const innerHeight = safeHeight - margin.top - margin.bottom
             const xScale = scaleLinear({
@@ -117,8 +115,9 @@ export function UsdCnyComparisonChart({
                     stroke="var(--tg-grid-strong)"
                     tickStroke="var(--tg-grid-strong)"
                     tickLabelProps={() => ({
-                      fill: "var(--tg-text-muted)",
-                      fontSize: 11,
+                      fill: "var(--tg-text-strong)",
+                      fontSize: 13.5,
+                      fontWeight: 650,
                       textAnchor: "end",
                       dy: "0.32em",
                     })}
@@ -131,9 +130,11 @@ export function UsdCnyComparisonChart({
                     stroke="var(--tg-grid-strong)"
                     tickStroke="var(--tg-grid-strong)"
                     tickLabelProps={() => ({
-                      fill: "var(--tg-text-muted)",
-                      fontSize: 11,
+                      fill: "var(--tg-text-strong)",
+                      fontSize: 13.5,
+                      fontWeight: 650,
                       textAnchor: "middle",
+                      dy: "0.9em",
                     })}
                   />
                 </Group>

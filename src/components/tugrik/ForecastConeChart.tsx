@@ -99,11 +99,9 @@ export function ForecastConeChart({
         <ParentSize>
           {({ width, height: canvasHeight }) => {
             const safeWidth = Math.max(width, 320)
-            const safeHeight = Math.max(
-              canvasHeight,
-              getMinimumChartHeight(height),
-            )
-            const margin = { top: 16, right: 20, bottom: 36, left: 52 }
+            const safeHeight =
+              canvasHeight > 0 ? canvasHeight : getMinimumChartHeight(height)
+            const margin = { top: 18, right: 20, bottom: 64, left: 62 }
             const innerWidth = safeWidth - margin.left - margin.right
             const innerHeight = safeHeight - margin.top - margin.bottom
             const values = [
@@ -240,7 +238,11 @@ export function ForecastConeChart({
                             <text
                               x={x + 8}
                               y={y - 10}
-                              className={`tugrik-chart-note${selected ? "is-active" : ""}`}
+                              className={
+                                selected
+                                  ? "tugrik-chart-note is-active"
+                                  : "tugrik-chart-note"
+                              }
                             >
                               {point.horizon_months}M
                             </text>
@@ -255,8 +257,9 @@ export function ForecastConeChart({
                       stroke="var(--tg-grid-strong)"
                       tickStroke="var(--tg-grid-strong)"
                       tickLabelProps={() => ({
-                        fill: "var(--tg-text-muted)",
-                        fontSize: 11,
+                        fill: "var(--tg-text-strong)",
+                        fontSize: 14,
+                        fontWeight: 700,
                         textAnchor: "end",
                         dy: "0.32em",
                       })}
@@ -266,13 +269,15 @@ export function ForecastConeChart({
                     <AxisBottom
                       top={innerHeight}
                       scale={xScale}
-                      numTicks={6}
+                      numTicks={safeWidth < 520 ? 4 : 6}
                       stroke="var(--tg-grid-strong)"
                       tickStroke="var(--tg-grid-strong)"
                       tickLabelProps={() => ({
-                        fill: "var(--tg-text-muted)",
-                        fontSize: 11,
+                        fill: "var(--tg-text-strong)",
+                        fontSize: safeWidth < 520 ? 13 : 14,
+                        fontWeight: 700,
                         textAnchor: "middle",
+                        dy: "1.05em",
                       })}
                       tickFormat={(value) =>
                         new Date(value.valueOf()).toLocaleDateString("en-US", {
@@ -331,7 +336,7 @@ function getMinimumChartHeight(height: TugrikChartHeight) {
   }
 
   if (height === "tall") {
-    return 420
+    return 440
   }
 
   return 360

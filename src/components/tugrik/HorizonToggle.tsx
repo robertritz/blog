@@ -25,7 +25,11 @@ export function HorizonToggle({
             type="button"
             role="tab"
             aria-selected={selected}
-            className={`tugrik-horizon-chip${selected ? "is-selected" : ""}`}
+            className={
+              selected
+                ? "tugrik-horizon-chip is-selected"
+                : "tugrik-horizon-chip"
+            }
             onClick={() => onSelect(card.horizon_months)}
           >
             {card.horizon_months}M

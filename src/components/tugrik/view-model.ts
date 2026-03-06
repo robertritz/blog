@@ -185,7 +185,7 @@ export function buildTugrikViewModel(
     wireDek: `${selectedHorizon}M base case is ${formatMnt(selectedCard.forecast_point, 1)} by ${formatPeriod(selectedCard.target_period)}.`,
     alignedPeriod: formatPeriod(data.meta.aligned_as_of_period),
     latestSpotPeriod: formatPeriod(data.meta.latest_spot_period),
-    asOfLine: `As of ${formatPeriod(data.meta.aligned_as_of_period)}. Latest spot month ${formatPeriod(data.meta.latest_spot_period)}.`,
+    asOfLine: `As of ${formatPeriod(data.meta.aligned_as_of_period)}.`,
     freshnessLabel,
     freshnessTone: data.meta.staleness_status,
     headlineValue: formatMnt(selectedCard.forecast_point, 1),

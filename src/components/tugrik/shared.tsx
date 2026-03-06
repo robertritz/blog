@@ -34,14 +34,12 @@ export function TugrikPageHeading({
   compact = false,
 }: TugrikVariantProps & { compact?: boolean }) {
   return (
-    <header className={`tugrik-page-heading${compact ? "is-compact" : ""}`}>
+    <header
+      className={
+        compact ? "tugrik-page-heading is-compact" : "tugrik-page-heading"
+      }
+    >
       <div className="tugrik-page-heading-copy">
-        <div className="tugrik-page-kicker-row">
-          <span className="tugrik-page-kicker">Tugrik Lab</span>
-          <span className={`tugrik-status-pill is-${model.freshnessTone}`}>
-            {model.freshnessLabel}
-          </span>
-        </div>
         <h1>{model.pageTitle}</h1>
         <p>{model.pageDeck}</p>
       </div>
@@ -60,7 +58,9 @@ export function TugrikPageHeading({
 
 export function MetaLine({ model, compact = false }: MetaLineProps) {
   return (
-    <div className={`tugrik-meta-line${compact ? "is-compact" : ""}`}>
+    <div
+      className={compact ? "tugrik-meta-line is-compact" : "tugrik-meta-line"}
+    >
       <span>{model.asOfLine}</span>
       <span>Aligned now {model.currentLevel}</span>
     </div>
@@ -69,7 +69,9 @@ export function MetaLine({ model, compact = false }: MetaLineProps) {
 
 export function FactsRow({ facts, compact = false }: FactsRowProps) {
   return (
-    <dl className={`tugrik-facts-row${compact ? "is-compact" : ""}`}>
+    <dl
+      className={compact ? "tugrik-facts-row is-compact" : "tugrik-facts-row"}
+    >
       {facts.map((fact) => (
         <div key={fact.label}>
           <dt>{fact.label}</dt>
