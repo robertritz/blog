@@ -3,6 +3,7 @@ title: "A world where AI has all the answers, and you are along for the ride"
 description: ""
 pubDate: 2025-12-01
 author: "Robert Ritz"
+draft: true
 ---
 
 > This is a possible (and honestly not extremely likely) future thought experiment about the future.

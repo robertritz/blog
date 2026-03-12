@@ -10,6 +10,7 @@ const postSchema = z.object({
   tags: z.array(z.string()).optional(),
   author: z.string().optional(),
   excerpt: z.string().optional(),
+  draft: z.boolean().optional(),
 })
 
 const postsCollection = defineCollection({

@@ -6,7 +6,7 @@ import SiteHeader from "../../components/SiteHeader.astro"
 import { siteConfig } from "../../config"
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts")
+  const posts = await getCollection("posts", ({ data }) => !data.draft)
 
   return posts.map((post) => ({
     params: { slug: post.slug },

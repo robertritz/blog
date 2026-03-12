@@ -4,7 +4,7 @@ import SiteHeader from "../components/SiteHeader.astro"
 import { siteConfig } from "../config"
 import { getCollection } from "astro:content"
 
-const posts = (await getCollection("posts"))
+const posts = (await getCollection("posts", ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 5)
 ---
