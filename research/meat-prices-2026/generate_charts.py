@@ -99,19 +99,19 @@ def chart1_price_roller_coaster():
     cutoff = datetime(2019, 5, 1)
     ax.axvline(x=cutoff, color=TEXT_MID, linestyle='--', linewidth=1, alpha=0.7)
     ax.text(cutoff, ax.get_ylim()[1] * 0.97, '  May 2019\n  (original post)',
-            fontsize=9, color=TEXT_MID, va='top', ha='left')
+            fontsize=11, color=TEXT_MID, va='top', ha='left')
 
     # Annotations for key events
     # COVID lockdown ~2020-02
     covid_date = datetime(2020, 3, 1)
     ax.annotate('COVID\nlockdown', xy=(covid_date, 11000), xytext=(datetime(2020, 10, 1), 7000),
-                fontsize=9, color=TEXT_MID, ha='center',
+                fontsize=11, color=TEXT_MID, ha='center',
                 arrowprops=dict(arrowstyle='->', color=TEXT_MID, lw=1))
 
     # 2023/24 dzud - prices spike
     dzud_date = datetime(2024, 5, 1)
     ax.annotate('2023/24\ndzud', xy=(dzud_date, 22000), xytext=(datetime(2023, 1, 1), 26000),
-                fontsize=9, color=TEXT_MID, ha='center',
+                fontsize=11, color=TEXT_MID, ha='center',
                 arrowprops=dict(arrowstyle='->', color=TEXT_MID, lw=1))
 
     # Direct end-labels
@@ -120,9 +120,9 @@ def chart1_price_roller_coaster():
     beef_last = beef.iloc[-1]['value']
     mutton_last = mutton.iloc[-1]['value']
 
-    ax.text(label_x, beef_last, 'Beef', fontsize=10, fontweight='bold',
+    ax.text(label_x, beef_last, 'Beef', fontsize=12, fontweight='bold',
             color=ACCENT, va='center')
-    ax.text(label_x, mutton_last, 'Mutton', fontsize=10, fontweight='bold',
+    ax.text(label_x, mutton_last, 'Mutton', fontsize=12, fontweight='bold',
             color=SECONDARY, va='center')
 
     # Format
@@ -134,12 +134,12 @@ def chart1_price_roller_coaster():
 
     # Title & subtitle
     fig.text(0.08, 0.95, "The roller coaster didn't stop",
-             fontsize=16, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
+             fontsize=18, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
     fig.text(0.08, 0.91, "Monthly average meat prices in Ulaanbaatar, MNT per kg | 2011\u20132026",
-             fontsize=11, color=TEXT_MID, ha='left', va='top')
+             fontsize=13, color=TEXT_MID, ha='left', va='top')
 
     fig.text(0.08, 0.02, "Source: National Statistics Office of Mongolia (1212.mn)",
-             fontsize=8, color=TEXT_LIGHT, ha='left', va='bottom')
+             fontsize=9, color=TEXT_LIGHT, ha='left', va='bottom')
 
     plt.savefig(OUT_DIR / 'roller_coaster.png')
     plt.close()
@@ -166,7 +166,7 @@ def chart2_exports():
         if year in (2017, 2018, 2023, 2024):
             ax.text(bar.get_x() + bar.get_width() / 2, val + 200,
                     f'{val:,.0f}t', ha='center', va='bottom',
-                    fontsize=9, fontweight='bold',
+                    fontsize=11, fontweight='bold',
                     color=ACCENT if year >= 2020 else TEXT_MID)
 
     ax.yaxis.grid(True, color=GRID, linewidth=0.6)
@@ -176,11 +176,11 @@ def chart2_exports():
     ax.tick_params(axis='x', rotation=45)
 
     fig.text(0.08, 0.95, "Meat exports kept climbing",
-             fontsize=16, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
+             fontsize=18, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
     fig.text(0.08, 0.91, "Annual meat export volume (frozen beef, horse, offal), metric tons | 2011\u20132024",
-             fontsize=11, color=TEXT_MID, ha='left', va='top')
+             fontsize=13, color=TEXT_MID, ha='left', va='top')
     fig.text(0.08, 0.02, "Source: National Statistics Office of Mongolia (1212.mn)",
-             fontsize=8, color=TEXT_LIGHT, ha='left', va='bottom')
+             fontsize=9, color=TEXT_LIGHT, ha='left', va='bottom')
 
     plt.savefig(OUT_DIR / 'exports.png')
     plt.close()
@@ -216,7 +216,7 @@ def chart3_animal_losses():
             color = SECONDARY if year == 2010 else ACCENT
             ax.text(bar.get_x() + bar.get_width() / 2, val + 0.15,
                     f'{val:.1f}M', ha='center', va='bottom',
-                    fontsize=10, fontweight='bold', color=color)
+                    fontsize=12, fontweight='bold', color=color)
 
     ax.yaxis.grid(True, color=GRID, linewidth=0.6)
     ax.set_axisbelow(True)
@@ -225,11 +225,11 @@ def chart3_animal_losses():
     ax.set_ylim(0, None)
 
     fig.text(0.08, 0.95, "2024 saw the worst animal losses since 2010",
-             fontsize=16, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
+             fontsize=18, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
     fig.text(0.08, 0.91, "Adult animals lost, millions | 2008\u20132024",
-             fontsize=11, color=TEXT_MID, ha='left', va='top')
+             fontsize=13, color=TEXT_MID, ha='left', va='top')
     fig.text(0.08, 0.02, "Source: National Statistics Office of Mongolia (1212.mn)",
-             fontsize=8, color=TEXT_LIGHT, ha='left', va='bottom')
+             fontsize=9, color=TEXT_LIGHT, ha='left', va='bottom')
 
     plt.savefig(OUT_DIR / 'animal_losses.png')
     plt.close()
@@ -276,9 +276,9 @@ def chart4_meat_income():
 
     # Direct end-labels
     label_x = merged['Year'].max() + 0.3
-    ax.text(label_x, merged['beef_pct'].iloc[-1], 'Beef', fontsize=10,
+    ax.text(label_x, merged['beef_pct'].iloc[-1], 'Beef', fontsize=12,
             fontweight='bold', color=ACCENT, va='center')
-    ax.text(label_x, merged['mutton_pct'].iloc[-1], 'Mutton', fontsize=10,
+    ax.text(label_x, merged['mutton_pct'].iloc[-1], 'Mutton', fontsize=12,
             fontweight='bold', color=SECONDARY, va='center')
 
     ax.set_xlim(2010.5, merged['Year'].max() + 2)
@@ -286,11 +286,11 @@ def chart4_meat_income():
     ax.set_ylim(0, None)
 
     fig.text(0.08, 0.95, "Meat is still getting cheaper relative to income",
-             fontsize=16, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
+             fontsize=18, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
     fig.text(0.08, 0.91, "Monthly meat cost as % of avg UB salary (family of 3, 250g/person/day) | 2011\u20132024",
-             fontsize=11, color=TEXT_MID, ha='left', va='top')
+             fontsize=13, color=TEXT_MID, ha='left', va='top')
     fig.text(0.08, 0.02, "Source: National Statistics Office of Mongolia (1212.mn)",
-             fontsize=8, color=TEXT_LIGHT, ha='left', va='bottom')
+             fontsize=9, color=TEXT_LIGHT, ha='left', va='bottom')
 
     plt.savefig(OUT_DIR / 'meat_income.png')
     plt.close()
@@ -357,7 +357,7 @@ def chart5_tsuivan_index():
         last = series.iloc[-1]
         offset = label_offsets.get(label, 0)
         ax.text(last['date'] + pd.Timedelta(days=30), last['index'] + offset,
-                f'{label}\n{last["index"]:.0f}', fontsize=8.5, fontweight='bold',
+                f'{label}\n{last["index"]:.0f}', fontsize=10.5, fontweight='bold',
                 color=color, va='center')
 
     ax.yaxis.grid(True, color=GRID, linewidth=0.6)
@@ -372,11 +372,11 @@ def chart5_tsuivan_index():
     ax.set_ylim(50, None)
 
     fig.text(0.08, 0.95, "The Tsuivan Index, revisited",
-             fontsize=16, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
+             fontsize=18, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
     fig.text(0.08, 0.91, "Price index (Dec 2010 = 100) for selected goods and services in Ulaanbaatar",
-             fontsize=11, color=TEXT_MID, ha='left', va='top')
+             fontsize=13, color=TEXT_MID, ha='left', va='top')
     fig.text(0.08, 0.02, "Source: National Statistics Office of Mongolia (1212.mn)",
-             fontsize=8, color=TEXT_LIGHT, ha='left', va='bottom')
+             fontsize=9, color=TEXT_LIGHT, ha='left', va='bottom')
 
     plt.savefig(OUT_DIR / 'tsuivan_index.png')
     plt.close()
@@ -459,7 +459,7 @@ def chart6_inflation_comparison():
     beef_plot = beef[beef['date'].dt.year >= 2011]
     ax1.plot(beef_plot['date'], beef_plot['value'], color=ACCENT, linewidth=2.5)
     ax1.plot(beef_cpi_df['date'], beef_cpi_df['cpi_price'], color=CONTEXT, linewidth=2, linestyle='--')
-    ax1.set_title('Beef', fontsize=13, fontweight='bold', color=TEXT_DARK, loc='left')
+    ax1.set_title('Beef', fontsize=15, fontweight='bold', color=TEXT_DARK, loc='left')
     ax1.yaxis.grid(True, color=GRID, linewidth=0.6)
     ax1.set_axisbelow(True)
     ax1.xaxis.set_major_locator(mdates.YearLocator(3))
@@ -470,15 +470,15 @@ def chart6_inflation_comparison():
     last_beef = beef_plot.iloc[-1]
     last_beef_cpi = beef_cpi_df.iloc[-1]
     ax1.text(last_beef['date'] + pd.Timedelta(days=15), last_beef['value'],
-             'Actual', fontsize=9, color=ACCENT, va='center', fontweight='bold')
+             'Actual', fontsize=11, color=ACCENT, va='center', fontweight='bold')
     ax1.text(last_beef_cpi['date'] + pd.Timedelta(days=15), last_beef_cpi['cpi_price'],
-             'If tracking\nCPI', fontsize=9, color=CONTEXT, va='center')
+             'If tracking\nCPI', fontsize=11, color=CONTEXT, va='center')
 
     # Mutton panel
     mutton_plot = mutton[mutton['date'].dt.year >= 2011]
     ax2.plot(mutton_plot['date'], mutton_plot['value'], color=SECONDARY, linewidth=2.5)
     ax2.plot(mutton_cpi_df['date'], mutton_cpi_df['cpi_price'], color=CONTEXT, linewidth=2, linestyle='--')
-    ax2.set_title('Mutton', fontsize=13, fontweight='bold', color=TEXT_DARK, loc='left')
+    ax2.set_title('Mutton', fontsize=15, fontweight='bold', color=TEXT_DARK, loc='left')
     ax2.yaxis.grid(True, color=GRID, linewidth=0.6)
     ax2.set_axisbelow(True)
     ax2.xaxis.set_major_locator(mdates.YearLocator(3))
@@ -488,16 +488,16 @@ def chart6_inflation_comparison():
     last_mutton = mutton_plot.iloc[-1]
     last_mutton_cpi = mutton_cpi_df.iloc[-1]
     ax2.text(last_mutton['date'] + pd.Timedelta(days=15), last_mutton['value'],
-             'Actual', fontsize=9, color=SECONDARY, va='center', fontweight='bold')
+             'Actual', fontsize=11, color=SECONDARY, va='center', fontweight='bold')
     ax2.text(last_mutton_cpi['date'] + pd.Timedelta(days=15), last_mutton_cpi['cpi_price'],
-             'If tracking\nCPI', fontsize=9, color=CONTEXT, va='center')
+             'If tracking\nCPI', fontsize=11, color=CONTEXT, va='center')
 
     fig.text(0.08, 0.95, "Meat prices finally outpaced inflation",
-             fontsize=16, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
+             fontsize=18, fontweight='bold', color=TEXT_DARK, ha='left', va='top')
     fig.text(0.08, 0.91, "Actual prices vs. estimated CPI-adjusted prices, MNT per kg | 2011\u20132026",
-             fontsize=11, color=TEXT_MID, ha='left', va='top')
+             fontsize=13, color=TEXT_MID, ha='left', va='top')
     fig.text(0.08, 0.02, "Source: National Statistics Office of Mongolia (1212.mn)",
-             fontsize=8, color=TEXT_LIGHT, ha='left', va='bottom')
+             fontsize=9, color=TEXT_LIGHT, ha='left', va='bottom')
 
     plt.tight_layout(rect=[0.05, 0.05, 0.98, 0.88])
     plt.savefig(OUT_DIR / 'inflation_comparison.png')

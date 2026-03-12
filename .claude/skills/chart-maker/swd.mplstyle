@@ -1,0 +1,71 @@
+# Storytelling With Data — matplotlib style
+# Harmonized with robertritz.com blog design system
+# Usage: plt.style.use('path/to/swd.mplstyle')
+
+# ── Figure ──────────────────────────────────────────────
+figure.figsize:     10, 6.5
+figure.dpi:         300
+figure.facecolor:   white
+figure.edgecolor:   white
+savefig.dpi:        300
+savefig.facecolor:  white
+savefig.bbox:       tight
+savefig.pad_inches: 0.3
+
+# ── Font ────────────────────────────────────────────────
+font.family:        sans-serif
+font.sans-serif:    Helvetica Neue, Helvetica, Arial, DejaVu Sans
+font.size:          14
+
+# ── Axes ────────────────────────────────────────────────
+axes.facecolor:     white
+axes.edgecolor:     c8cdd6
+axes.linewidth:     0.8
+axes.titlesize:     18
+axes.titleweight:   bold
+axes.titlepad:      12
+axes.labelsize:     13
+axes.labelcolor:    60739f
+axes.labelpad:      8
+axes.spines.top:    False
+axes.spines.right:  False
+axes.prop_cycle:    cycler('color', ['2b5cd6', 'd4502a', 'd4912a', '2a8f5a', '7b4ea3'])
+
+# ── Grid ────────────────────────────────────────────────
+axes.grid:          False
+grid.color:         e5e9f0
+grid.linewidth:     0.6
+grid.alpha:         1.0
+grid.linestyle:     -
+
+# ── Ticks ───────────────────────────────────────────────
+xtick.labelsize:    12
+xtick.color:        60739f
+xtick.direction:    out
+xtick.major.size:   0
+xtick.major.pad:    6
+
+ytick.labelsize:    12
+ytick.color:        60739f
+ytick.direction:    out
+ytick.major.size:   0
+ytick.major.pad:    6
+
+# ── Lines ───────────────────────────────────────────────
+lines.linewidth:    2.5
+lines.solid_capstyle: round
+lines.dash_capstyle:  round
+lines.markersize:   7
+
+# ── Bar ─────────────────────────────────────────────────
+patch.linewidth:    0
+
+# ── Legend ──────────────────────────────────────────────
+legend.frameon:     False
+legend.fontsize:    12
+
+# ── Layout ──────────────────────────────────────────────
+figure.subplot.top:    0.85
+figure.subplot.bottom: 0.12
+figure.subplot.left:   0.08
+figure.subplot.right:  0.95
