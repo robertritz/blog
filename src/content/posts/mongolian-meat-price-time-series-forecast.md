@@ -21,7 +21,7 @@ In Mongolia, meat prices are highly seasonal, with meat prices rising in the Spr
 
 ![](/images/meat_prices/ikon.png)
 
-In the *opinion* section of Ikon.mn. Headline translation: "The price of meat is skyrocketing and there is a shortage!"
+In the _opinion_ section of Ikon.mn. Headline translation: "The price of meat is skyrocketing and there is a shortage!"
 
 Here is a rough generalization of the behavior of herders. This, of course, does not speak for all herders but from what I have observed this is relatively typical behavior. In the Fall before winter sets in herders will slaughter or sell those animals which are likely to die in the coming winter. Then in the Spring during breeding season herders often restrict the amount they sell so as not to limit their potential growth that year. In the Summer the productive animals are known and herders are more willing to sell or slaughter those animals that are not pregnant.
 
@@ -85,10 +85,10 @@ To better understand the inflation of prices since 2011, I wanted to see how the
 
 From the above chart, you can see that beef is about 250% more expensive (2.5 times) than in December 2010. Mutton is about 240% more expensive. What is interesting is the increase in prices for the other items. Here is a description of each:
 
--   Restaurant Gulyash — This is the price of a typical goulash meal (including potato salad and tea) in Ulaanbaatar at a typical restaurant.
--   Tsuivan — This is the price of a plate of Tsuivan (including milk tea) at a 'tsainii gazar', which is a canteen style of food establishment common across Mongolia.
--   Men Haircut — The price of a men's haircut in Ulaanbaatar.
--   Women's Haircut — The price for a 'simple' women's haircut in Ulaanbaatar. For obvious reasons, they don't track more complicated haircuts.
+- Restaurant Gulyash — This is the price of a typical goulash meal (including potato salad and tea) in Ulaanbaatar at a typical restaurant.
+- Tsuivan — This is the price of a plate of Tsuivan (including milk tea) at a 'tsainii gazar', which is a canteen style of food establishment common across Mongolia.
+- Men Haircut — The price of a men's haircut in Ulaanbaatar.
+- Women's Haircut — The price for a 'simple' women's haircut in Ulaanbaatar. For obvious reasons, they don't track more complicated haircuts.
 
 The most shocking price increases were for haircuts. Haircutting is a service business, and there is little in the way of materials needed other than the expertise of the person. In addition, haircuts are not imported and could be said to be a "Mongolian" product.
 

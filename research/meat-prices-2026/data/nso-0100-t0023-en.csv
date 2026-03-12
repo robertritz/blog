@@ -1,0 +1,170 @@
+Indicator,Year,value
+"Average monthly wages and salaries, togrogs",1992,1449.0
+"Average monthly wages and salaries, togrogs",1991,1025.0
+"Average monthly wages and salaries, togrogs",1990,557.0
+"Average monthly wages and salaries, togrogs",1989,539.0
+"Average monthly wages and salaries, togrogs",1988,531.0
+"Average monthly wages and salaries, togrogs",1987,529.0
+"Average monthly wages and salaries, togrogs",1986,526.0
+"Average monthly wages and salaries, togrogs",1985,524.0
+"Average monthly wages and salaries, togrogs",1980,488.0
+"Average monthly wages and salaries, togrogs",1975,468.0
+"Average monthly wages and salaries, togrogs",1970,437.0
+"Average monthly wages and salaries, togrogs",1965,400.0
+"Average monthly wages and salaries, togrogs",1960,364.0
+ a) Material productive sphere,1992,1449.0
+ a) Material productive sphere,1991,974.0
+ a) Material productive sphere,1990,587.0
+ a) Material productive sphere,1989,568.0
+ a) Material productive sphere,1988,560.0
+ a) Material productive sphere,1987,551.0
+ a) Material productive sphere,1986,547.0
+ a) Material productive sphere,1985,544.0
+ a) Material productive sphere,1980,497.0
+ a) Material productive sphere,1975,481.0
+ a) Material productive sphere,1970,440.0
+ a) Material productive sphere,1965,397.0
+ a) Material productive sphere,1960,352.0
+ Argiculture,1992,841.0
+ Argiculture,1991,563.0
+ Argiculture,1990,466.0
+ Argiculture,1989,449.0
+ Argiculture,1988,464.0
+ Argiculture,1987,429.0
+ Argiculture,1986,425.0
+ Argiculture,1985,423.0
+ Argiculture,1980,381.0
+ Argiculture,1975,399.0
+ Argiculture,1970,360.0
+ Argiculture,1965,332.0
+ Argiculture,1960,233.0
+ Industry,1992,2169.0
+ Industry,1991,1424.0
+ Industry,1990,622.0
+ Industry,1989,618.0
+ Industry,1988,593.0
+ Industry,1987,586.0
+ Industry,1986,586.0
+ Industry,1985,584.0
+ Industry,1980,535.0
+ Industry,1975,488.0
+ Industry,1970,447.0
+ Industry,1965,401.0
+ Industry,1960,316.0
+ Construction,1992,1755.0
+ Construction,1991,1110.0
+ Construction,1990,602.0
+ Construction,1989,596.0
+ Construction,1988,585.0
+ Construction,1987,607.0
+ Construction,1986,586.0
+ Construction,1985,579.0
+ Construction,1980,522.0
+ Construction,1975,525.0
+ Construction,1970,445.0
+ Construction,1965,425.0
+ Construction,1960,414.0
+ Transport,1992,2071.0
+ Transport,1991,1255.0
+ Transport,1990,666.0
+ Transport,1989,653.0
+ Transport,1988,662.0
+ Transport,1987,687.0
+ Transport,1986,689.0
+ Transport,1985,687.0
+ Transport,1980,629.0
+ Transport,1975,630.0
+ Transport,1970,585.0
+ Transport,1965,536.0
+ Transport,1960,544.0
+ Communication,1992,1568.0
+ Communication,1991,1146.0
+ Communication,1990,477.0
+ Communication,1989,490.0
+ Communication,1988,485.0
+ Communication,1987,469.0
+ Communication,1986,474.0
+ Communication,1985,473.0
+ Communication,1980,425.0
+ Communication,1975,410.0
+ Communication,1970,412.0
+ Communication,1965,406.0
+ Communication,1960,340.0
+" Trade, procurement, material technical supply",1992,1692.0
+" Trade, procurement, material technical supply",1991,1143.0
+" Trade, procurement, material technical supply",1990,533.0
+" Trade, procurement, material technical supply",1989,485.0
+" Trade, procurement, material technical supply",1988,475.0
+" Trade, procurement, material technical supply",1987,449.0
+" Trade, procurement, material technical supply",1986,444.0
+" Trade, procurement, material technical supply",1985,446.0
+" Trade, procurement, material technical supply",1980,418.0
+" Trade, procurement, material technical supply",1975,412.0
+" Trade, procurement, material technical supply",1970,385.0
+" Trade, procurement, material technical supply",1965,343.0
+" Trade, procurement, material technical supply",1960,338.0
+ b) Non-productive sphere,1992,1635.0
+ b) Non-productive sphere,1991,1127.0
+ b) Non-productive sphere,1990,507.0
+ b) Non-productive sphere,1989,491.0
+ b) Non-productive sphere,1988,483.0
+ b) Non-productive sphere,1987,481.0
+ b) Non-productive sphere,1986,483.0
+ b) Non-productive sphere,1985,483.0
+ b) Non-productive sphere,1980,474.0
+ b) Non-productive sphere,1975,448.0
+ b) Non-productive sphere,1970,433.0
+ b) Non-productive sphere,1965,407.0
+ b) Non-productive sphere,1960,397.0
+ Housing and domestic services,1992,1656.0
+ Housing and domestic services,1991,1141.0
+ Housing and domestic services,1990,471.0
+ Housing and domestic services,1989,475.0
+ Housing and domestic services,1988,465.0
+ Housing and domestic services,1987,461.0
+ Housing and domestic services,1986,466.0
+ Housing and domestic services,1985,461.0
+ Housing and domestic services,1980,
+ Housing and domestic services,1975,
+ Housing and domestic services,1970,
+ Housing and domestic services,1965,
+ Housing and domestic services,1960,
+ Science,1992,1701.0
+ Science,1991,1411.0
+ Science,1990,667.0
+ Science,1989,591.0
+ Science,1988,566.0
+ Science,1987,555.0
+ Science,1986,566.0
+ Science,1985,564.0
+ Science,1980,
+ Science,1975,
+ Science,1970,
+ Science,1965,
+ Science,1960,
+" Public health, physical culture and social insurance",1992,
+" Public health, physical culture and social insurance",1991,1023.0
+" Public health, physical culture and social insurance",1990,434.0
+" Public health, physical culture and social insurance",1989,425.0
+" Public health, physical culture and social insurance",1988,421.0
+" Public health, physical culture and social insurance",1987,416.0
+" Public health, physical culture and social insurance",1986,412.0
+" Public health, physical culture and social insurance",1985,420.0
+" Public health, physical culture and social insurance",1980,
+" Public health, physical culture and social insurance",1975,
+" Public health, physical culture and social insurance",1970,
+" Public health, physical culture and social insurance",1965,
+" Public health, physical culture and social insurance",1960,
+" Culture, education and art",1992,
+" Culture, education and art",1991,1087.0
+" Culture, education and art",1990,498.0
+" Culture, education and art",1989,478.0
+" Culture, education and art",1988,473.0
+" Culture, education and art",1987,481.0
+" Culture, education and art",1986,479.0
+" Culture, education and art",1985,473.0
+" Culture, education and art",1980,
+" Culture, education and art",1975,
+" Culture, education and art",1970,
+" Culture, education and art",1965,
+" Culture, education and art",1960,

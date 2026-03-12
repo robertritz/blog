@@ -37,4 +37,5 @@ registry:
 # Configure builder setup.
 builder:
   arch: amd64
-  local: true
+  local: false
+  remote: ssh://ritz@omarchy-cmd

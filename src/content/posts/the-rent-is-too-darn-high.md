@@ -54,6 +54,7 @@ Putting it all together we can take the average price per square meter multiplie
 The result? 12.07. This is a bit above the Numbeo ratio, but not by much. We should consider their number reasonably accurate given the issues we outlined above. Put simply, the "average" Mongolian family, which isn't actually very average, will pay more for an apartment in relation to income than an average family in New York or San Francisco.
 
 ## 90 Square Meters? You rich bro?
+
 If you keep up with things in Mongolia, you will know there is also an issue with using the assumed 90 square meters for an apartment. First, the government mortgage program allows a maximum size of 80 square meters. Second, a 90 square meter apartment is considered to be on the larger side for many in Ulaanbaatar.
 
 To address these issues I decided to take another pass at the price to income ratio using more realistic numbers for Ulaanbaatar. Here are the data assumptions I used.
@@ -62,7 +63,7 @@ To address these issues I decided to take another pass at the price to income ra
 - The same average price per square meter for apartments, Q2 2021: 2,647,076 MNT
 - 10% Income Tax + 13.5% Social Insurance = Tax rate of 23.5%
 - Average apartment size: 62 square meters
-	- Tenkhleg Zuuch currently [considers](https://twitter.com/Shoot91/status/1441320770391535620?s=20) this the median apartment size in Ulaanbaatar.
+  - Tenkhleg Zuuch currently [considers](https://twitter.com/Shoot91/status/1441320770391535620?s=20) this the median apartment size in Ulaanbaatar.
 
 ![](/images/apartment-price-income-ratio/price_income_ratio_median_62.png)
 

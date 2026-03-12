@@ -13,9 +13,9 @@ The current election saw a switch back to the block voting system used in 1992 a
 
 To put all of the data together and make it user friendly, I built an interactive data explorer that allows the reader to see key indicators of election districts. The indicators covered in the app include:
 
--   **Population indicators**: population, household size, herder percent, age group breakdown
--   **Economic indicators (self-reported)**: salary, household loans, employment, education levels
--   **Quality of life indicators**: crime, house type, toilet & water type, heating type
+- **Population indicators**: population, household size, herder percent, age group breakdown
+- **Economic indicators (self-reported)**: salary, household loans, employment, education levels
+- **Quality of life indicators**: crime, house type, toilet & water type, heating type
 
 The data was collected from [1212.mn](http://1212.mn) and also the [Household Socioeconomic Survey of 2016](http://web.nso.mn/nada/index.php/catalog/115), which is the latest survey that contains precise geographic labeling. Both data sources are maintained by the National Statistics Office of Mongolia.
 

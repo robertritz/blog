@@ -16,7 +16,7 @@ Numbers mean a lot to most Mongolians. Generally, 1, 3, 8, and 9 are considered 
 Unfortunately, license plate numbers are assigned to a vehicle and can't be transferred between individuals. In addition, up until recently, you couldn't pay for a better license plate number. This caused a situation where the "best" license plates (think 0001-УБА) _somehow_ ended up on Mercedes G-Wagon's and Land Cruisers. I wonder how that happened?
 
 ![](/images/mongolias-150000-license-plate/g-wagon.jpeg)
-*The G-Wagon. [Source: Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mercedes-Benz_G_63_AMG_2012.JPG)*
+_The G-Wagon. [Source: Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mercedes-Benz_G_63_AMG_2012.JPG)_
 
 The general public always knew what was really happening. At one point frustration was so high that there was discussion of giving these lucky numbers to garbage trucks or other city vehicles. It seems their voice was heard when the new [Motor Vehicle Registration Country Number Procedure](https://www.legalinfo.mn/annex/details/11395?lawid=15748) was approved in late 2020. This procedure set up a system to allow "lucky" numbers to be auctioned on the Vehicle Registration Department's website. This has been generally viewed as a positive development, as those willing to pay for this special license plate could pay legally for the privilege and contribute to government revenue and social programs.
 

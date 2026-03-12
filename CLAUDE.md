@@ -161,9 +161,11 @@ blog/
 │   │   └── index.ts         # Site configuration
 │   ├── styles/              # Global styles
 │   └── types/               # TypeScript types
+├── research/                # In-progress research (not necessarily posts)
 ├── public/
 │   ├── avatar.png           # Profile picture (used as favicon too)
-│   └── fonts/               # Custom fonts
+│   ├── fonts/               # Custom fonts
+│   └── images/              # Post images (organized by post slug)
 ├── config/
 │   └── deploy.yml           # Kamal deployment config
 ├── Dockerfile               # Multi-stage Docker build
@@ -172,6 +174,34 @@ blog/
 ├── package.json
 └── CLAUDE.md                # This file
 ```
+
+## Images
+
+Images live in `public/images/` organized by post slug:
+
+```
+public/images/
+├── fuel-shortage/          # Images for mongolia-is-running-on-fumes post
+├── meat_prices/            # Images for mongolian-meat-price-time-series-forecast post
+├── market_prices/          # Images for which-grocery-store post
+└── ...
+```
+
+**Convention**: Each post gets its own subdirectory under `public/images/`. Reference images using absolute paths from the public root:
+
+- **Hero image** (frontmatter): `heroImage: "/images/post-slug/cover.jpg"`
+- **Inline image** (markdown): `![](/images/post-slug/filename.png)`
+
+## Research Directory
+
+The `research/` directory contains in-progress research projects that may or may not become blog posts. These are exploratory analyses, data investigations, and working notebooks.
+
+Current projects: `consumer-confidence-mongolia`, `mongolia-data-governance`, `usd-mnt-forecast`
+
+## Skills
+
+- **`roberts-voice`** — Use this skill when writing or drafting blog posts. It captures Robert's writing voice and style for data stories, articles, and written content.
+- **`chart-maker`** — Use this skill when creating charts or data visualizations for blog posts. It follows *Storytelling With Data* principles with a blog-harmonized color palette. Always use the `chart-maker` skill and its templates instead of writing matplotlib code from scratch.
 
 ## Design Philosophy
 

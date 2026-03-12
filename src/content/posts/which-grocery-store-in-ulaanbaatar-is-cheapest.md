@@ -92,7 +92,7 @@ I built a dumbbell chart for each of the eight products. Here is a gallery showi
 
 ![](/images/market_prices/eggs_dumbbell.png)
 
-After looking at these, you can come to some pretty easy conclusions. For most products, supermarkets are more expensive than at the zakh. Also, pretty much everything has gotten more expensive in the past two years. The exception is potatoes, specifically at Emart. For some reason, those got cheaper. *Insert sinister conspiracy theory here.*
+After looking at these, you can come to some pretty easy conclusions. For most products, supermarkets are more expensive than at the zakh. Also, pretty much everything has gotten more expensive in the past two years. The exception is potatoes, specifically at Emart. For some reason, those got cheaper. _Insert sinister conspiracy theory here._
 
 I also think it's worth it to look at the supermarket you usually shop at and ask yourself why you shop there? Are you sensitive to small changes in price, or do you choose your store because of convenience? If you are very price-sensitive, you now have some better information to make your decision. If not, well, then you at least know what the price picture is in other places.
 
@@ -139,7 +139,6 @@ Finally, we can look at the frequency of prices ending in one zero ('0).
 The clear psychological pricing outlier of all supermarkets and zakhs in Ulaanbaatar is Nomin. Imagine a product priced at 1,479 vs 1,400. This doesn't mean much to the consumer, but it could be a significant revenue boost across many products to the store. If 1,000 products are sold a day with an extra 79 tugriks added, that's 2.37 million tugriks extra each month across many stores. That can equal a significant revenue difference.
 
 Note that Saruul is lower here just because they didn't have as many records in our data.
-
 
 ## Did you change your mind?
 

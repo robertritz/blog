@@ -11,16 +11,16 @@ In 2016 a pivotal book in the field of data science was released. [Weapons of Ma
 
 In this book and in a forthcoming research paper, O'Neil proposes that algorithms don't just predict the future, they can also _create it._ As such she proposes the use of an "Ethical Matrix" be completed before such an algorithm is implemented. This matrix is designed to understand the real impact of an algorithm. It aims to explicitly answer _who the algorithm is impacting and how_ in the following ways:
 
--   Fairness: is the algorithm truly fair to all those impacted?
--   Transparency: do we have visibility as to how the algorithm is making its decisions?
--   False Negatives: how are stakeholders impacted by false negatives?
--   False Positives: how are stakeholders impacted by false positives?
+- Fairness: is the algorithm truly fair to all those impacted?
+- Transparency: do we have visibility as to how the algorithm is making its decisions?
+- False Negatives: how are stakeholders impacted by false negatives?
+- False Positives: how are stakeholders impacted by false positives?
 
 Why is this matrix important? As algorithms are being applied in more areas of our lives, there is often little regard to their full impact. Here are just a few examples of algorithms and their unintended consequences.
 
--   In 2015 Google's auto-tagging photo feature embarrassed the company by labeling a black person a gorilla. [Google still has this problem.](https://www.wired.com/story/when-it-comes-to-gorillas-google-photos-remains-blind/)
--   Recently a significant amount of scrutiny was placed on [algorithmic credit scoring](https://qz.com/1276781/algorithms-are-making-the-same-mistakes-assessing-credit-scores-that-humans-did-a-century-ago/). These supposedly fair algorithms show a surprising bias in areas such as race. In one example an algorithm reduced credit scores for customers that had a bank charge for "counseling".
--   Amazon has used an algorithm to assess recruits applying for jobs at the company. [This algorithm](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women-idUSKCN1MK08G) appeared to have a strong gender bias against women. Amazon says they never put it in production.
+- In 2015 Google's auto-tagging photo feature embarrassed the company by labeling a black person a gorilla. [Google still has this problem.](https://www.wired.com/story/when-it-comes-to-gorillas-google-photos-remains-blind/)
+- Recently a significant amount of scrutiny was placed on [algorithmic credit scoring](https://qz.com/1276781/algorithms-are-making-the-same-mistakes-assessing-credit-scores-that-humans-did-a-century-ago/). These supposedly fair algorithms show a surprising bias in areas such as race. In one example an algorithm reduced credit scores for customers that had a bank charge for "counseling".
+- Amazon has used an algorithm to assess recruits applying for jobs at the company. [This algorithm](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women-idUSKCN1MK08G) appeared to have a strong gender bias against women. Amazon says they never put it in production.
 
 Given these potential consequences, it's a good idea to evaluate any potential new algorithm to better understand how it could hurt those it impacts. A recently released algorithm in Mongolia inspired me to do just this.
 
@@ -36,11 +36,11 @@ In the paper, the authors make clear that this index is not intended to be a for
 
 To assess the algorithm we will look at four areas: **fairness, transparency, false negatives,** and **false positives**. To quickly summarize the algorithm, it uses 7 indicators to create a score from 0–5 (ex. 0.1, 1.4, 2.3, 4, 4.4) for each aimag. The higher the number the higher the risk. The indicators are:
 
--   Winter temperature anomaly
--   Snowfall anomaly
--   Biomass anomaly
--   Pasture use anomaly
--   Zootechnical scores (a combination of past mortality and female reproductivity)
+- Winter temperature anomaly
+- Snowfall anomaly
+- Biomass anomaly
+- Pasture use anomaly
+- Zootechnical scores (a combination of past mortality and female reproductivity)
 
 #### Fairness
 
@@ -80,16 +80,16 @@ In general, when optimizing a machine learning model it is good to ask whether f
 
 The authors of the study made available the predicted risk scores and the livestock mortality numbers for the years in question. With this data, we can create a confusion matrix that will allow us to visualize our false positives and negatives. As the authors did not give bins for the index values, we will simplify things a bit and bin them ourselves. The bins are as follows:
 
--   Index, Mortality %
--   0–1, \[0%-3%\]
--   1–2, (3%-6%\]
--   2–3, (6%-17%\]
--   3+, (17%+)
+- Index, Mortality %
+- 0–1, \[0%-3%\]
+- 1–2, (3%-6%\]
+- 2–3, (6%-17%\]
+- 3+, (17%+)
 
 Here is the corresponding confusion matrix. TP = True Positive, TN = True Negative, FP = False Positive, FN = False Negative.
 
 ![](/images/ethical-matrix-dzud-forecasting/confusion-matrix.png)
-*Confusion matrix derived from MVDI risk scores*
+_Confusion matrix derived from MVDI risk scores_
 
 Viewing this confusion matrix we see a relatively small number of true positives or negatives (about 15% of the total). If this were a classification task this would be quite undesirable. However, the model is set up as a regression task, so this isn't necessarily bad. Of more interest are the FP's and FN's.
 

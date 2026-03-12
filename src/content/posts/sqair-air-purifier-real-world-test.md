@@ -16,10 +16,10 @@ Winter is coming, and we know what that means in Ulaanbaatar. Extremely high lev
 During these months a pollution mask and air purifier are essential equipment to protect yourself and your family. Air purifiers can cost anywhere from $150-$500 or more. This means many families choose to forgo air purifiers completely, at the cost of their entire families health. Smart Air, a social enterprise founded in 2013, wants to change this situation with the launch of their new no-nonsense air purifier, the Sqair. Funded through a [Kickstarter campaign](https://www.kickstarter.com/projects/smartair/the-sqair-the-worlds-most-cost-effective-air-purifier/description) in June, the Sqair purports to be the world's most cost effective air purifier.
 
 ![](/images/sqair-real-world-test/top.jpeg)
-*Top view of the Sqair. Simple rotating controls.*
+_Top view of the Sqair. Simple rotating controls._
 
 ![](/images/sqair-real-world-test/left.jpeg)
-*The Sqair in our small 10m² test room.*
+_The Sqair in our small 10m² test room._
 
 Sqair was kind enough to lend me a unit for a few days to test it out. I'll first give my general thoughts on the device and then present my experiment to show how effective the Sqair is at removing PM2.5 from a room.
 
@@ -32,20 +32,20 @@ One thing I really wanted to test was how effective the Sqair is at clearing pol
 At my school we have a quiet study room that is 10m² and has ceilings of 3 meters. That makes 30 cubic meters of air in the room. The room has a door that seals completely and has no air vents. This made the perfect room to conduct an experiment with an air purifier. The only problem is that in early September there is essentially no air pollution outside, and inside PM2.5 levels hover around 5 µg/m³. So I had to get creative and make some air pollution.
 
 ![](/images/sqair-real-world-test/camera-sensor.jpeg)
-*Timelapse camera pointing at a laser PM2.5 sensor.*
+_Timelapse camera pointing at a laser PM2.5 sensor._
 
 ![](/images/sqair-real-world-test/pollution-source.jpeg)
-*Artificial pollution source (арц).*
+_Artificial pollution source (арц)._
 
 In Mongolia арц (ground Juniper leaf) is commonly burned for religious purposes. It turns out it also is a great source of PM2.5! I poured a few grams of the green powder in a cup and lit it up. The sensor I was using maxes out around 1,500 µg/m³, and after only a few minutes of burning it reached the max! Keep in mind that air is considered "good" by the US EPA if the PM2.5 level is below an average of 12 µg/m³ over 24 hours (the Mongolian standard states that the air is clean below an average of 50 µg/m³ over 24 hours)
 
 I used the following process to run the experiment:
 
--   The air purifier and air quality sensor were placed on opposite sides of the room.
--   Burn the арц for a few minutes until the PM2.5 level spikes.
--   Set the air purifier to a speed.
--   Wait for 90 minutes while the camera records a timelapse of the air quality sensor.
--   I also ran a separate test with the air purifier off for 90 minutes to set a baseline.
+- The air purifier and air quality sensor were placed on opposite sides of the room.
+- Burn the арц for a few minutes until the PM2.5 level spikes.
+- Set the air purifier to a speed.
+- Wait for 90 minutes while the camera records a timelapse of the air quality sensor.
+- I also ran a separate test with the air purifier off for 90 minutes to set a baseline.
 
 The results were quite amazing! It's one thing to know that your air purifier is keeping your air clean, it's another to see it working in real-time. Let's take a look at the results:
 
