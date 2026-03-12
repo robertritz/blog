@@ -5,6 +5,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 ## Git Workflow (IMPORTANT)
 
 **Before starting work:**
+
 ```bash
 git fetch origin
 git status  # Check if behind remote
@@ -12,6 +13,7 @@ git pull    # Pull any changes from other machine
 ```
 
 **When work is complete:**
+
 ```bash
 git add -A
 git commit -m "Description of changes"
@@ -196,12 +198,12 @@ public/images/
 
 The `research/` directory contains in-progress research projects that may or may not become blog posts. These are exploratory analyses, data investigations, and working notebooks.
 
-Current projects: `consumer-confidence-mongolia`, `mongolia-data-governance`, `usd-mnt-forecast`
+Current projects: `consumer-confidence-mongolia`, `mongolia-data-governance`, `sentencing-bias`, `usd-mnt-forecast`
 
 ## Skills
 
 - **`roberts-voice`** — Use this skill when writing or drafting blog posts. It captures Robert's writing voice and style for data stories, articles, and written content.
-- **`chart-maker`** — Use this skill when creating charts or data visualizations for blog posts. It follows *Storytelling With Data* principles with a blog-harmonized color palette. Always use the `chart-maker` skill and its templates instead of writing matplotlib code from scratch.
+- **`chart-maker`** — Use this skill when creating charts or data visualizations for blog posts. It follows _Storytelling With Data_ principles with a blog-harmonized color palette. Always use the `chart-maker` skill and its templates instead of writing matplotlib code from scratch.
 
 ## Design Philosophy
 
