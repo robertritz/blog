@@ -308,6 +308,15 @@ const { Content } = await post.render()
     cursor: zoom-in;
   }
 
+  /* Breakout images: 30% wider than text body on desktop */
+  @media (min-width: 900px) {
+    .content :global(img) {
+      width: 130%;
+      max-width: 130%;
+      margin-left: -15%;
+    }
+  }
+
   /* Post footer */
   .post-footer {
     margin-top: 80px;
@@ -396,7 +405,8 @@ const { Content } = await post.render()
     overlay.style.cssText =
       "display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;cursor:zoom-out;justify-content:center;align-items:center"
     const lbImg = document.createElement("img")
-    lbImg.style.cssText = "max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px"
+    lbImg.style.cssText =
+      "max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px"
     overlay.appendChild(lbImg)
     document.body.appendChild(overlay)
 
