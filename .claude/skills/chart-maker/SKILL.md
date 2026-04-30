@@ -1,4 +1,18 @@
-# Chart Maker
+---
+name: chart-maker
+description: >
+  DEPRECATED. Old matplotlib-based chart skill, kept only so old posts that
+  reference its templates still build. For any new chart on robertritz.com,
+  use the `blog-charts` skill (Datawrapper-based) instead. Do not trigger
+  this skill on chart, charts, visualization, or data viz requests.
+---
+
+# Chart Maker (DEPRECATED)
+
+> **Use `blog-charts` for all new charts.** This matplotlib skill is kept
+> in place only so older posts that reference its templates and
+> `swd.mplstyle` still build. The blog-charts skill (Datawrapper API,
+> interactive iframes, slug registry) is the default for new work.
 
 Create publication-quality charts using matplotlib, following *Storytelling With Data* (SWD) by Cole Nussbaumer Knaflic. Charts are visually harmonized with Robert's blog (robertritz.com).
 
