@@ -1,18 +1,23 @@
 ---
 name: blog-post
 description: >
-  Scaffold and structure new blog posts for robertritz.com. Creates
-  `src/content/posts/<slug>.mdx` with prefilled Astro frontmatter,
+  Scaffold and structure new blog posts for robertritz.com. The
+  `new_post.py` script creates `src/content/posts/<slug>.mdx` with
+  prefilled Astro frontmatter (`draft: true` by default),
   `public/images/<slug>/` for the hero and inline charts, and optionally
-  `research/<slug>/` for data and analysis scripts. Encodes the 5-part
-  post pattern Robert actually uses (hook → claim → data → analysis →
-  close), the data sources he reaches for first (NSO 1212.mn, Mongolbank,
-  MRPAM, World Bank, data.mn), and the distinctive "X years later"
-  follow-up structure. Composes with `roberts-voice` (prose) and
-  `blog-charts` (Datawrapper). Does NOT generate prose or build charts —
-  those are the job of the companion skills. Triggers on: new post, blog
-  post, draft post, write a post, scaffold post, blog-post, new_post,
-  start a post, claim test, data story.
+  `research/<slug>/` for raw data. The `migrate_post.py` script renames
+  legacy image folders on old posts to match their slug (use lazily, only
+  when editing an old post for another reason — see CLAUDE.md). Encodes
+  the 5-part post pattern (hook → claim → data → analysis → close), the
+  data sources Robert uses (NSO 1212.mn, Mongolbank, MRPAM, World Bank,
+  data.mn), and the distinctive "X years later" follow-up structure
+  (`--follow-up <old-slug>` flag). Composes with `roberts-voice` (prose)
+  and `blog-charts` (Datawrapper). Does NOT generate prose or build
+  charts — those belong to the companion skills. Triggers on: new post,
+  blog post, draft post, write a post, scaffold post, start a post,
+  publish a post, claim test, data story, follow-up post, X years later,
+  blog-post, new_post, migrate post, rename image folder, fix legacy
+  image folder, migrate_post.
 ---
 
 # Blog Post

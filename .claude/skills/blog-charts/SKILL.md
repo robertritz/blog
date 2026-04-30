@@ -2,15 +2,27 @@
 name: blog-charts
 description: >
   Publish charts for robertritz.com through the Datawrapper API. Creates,
-  updates, styles, publishes, and PNG-exports charts from a CSV. Default
-  embed is Datawrapper's responsive interactive iframe (paste into an .mdx
-  post); a PNG export drops to disk so Claude can read it back and visually
-  verify before publishing. Uses a local slug registry so repeated calls
-  update the same chart instead of duplicating it. Applies the blog's
-  harmonized style (palette, byline, caption conventions) automatically.
-  Triggers on: chart, charts, datawrapper, dw_create, dw_update, dw_publish,
-  dw_export, blog-charts, embed chart, line chart, bar chart, column chart,
-  scatter, area chart, visualize, publish chart, refresh chart.
+  updates, styles, publishes, and PNG-exports charts from a CSV. **Every
+  `dw_create` and `dw_update` auto-exports a preview PNG to
+  `/tmp/blog-charts/<slug>.png`** — Claude must Read that file each time
+  so the user sees the chart inline and can iterate. Default embed is
+  Datawrapper's responsive interactive iframe (paste into an `.mdx` post);
+  PNG fallback is documented in `references/embeds.md` for `.md` posts.
+  Supports first-class flags for text and range annotations
+  (`--annotate-text`, `--annotate-range`, with auto-paired band labels
+  and CSV-derived label positioning) and direct-label collision control
+  (`--no-direct-labels`, `--label-margin`). Local slug registry at
+  `~/.cache/blog-charts/registry.json` prevents duplicate charts. Applies
+  the blog's harmonized style (accent `#2b5cd6`, byline "Robert Ritz",
+  off-white plot bg) automatically. The validated `metadata.visualize`
+  schema reference lives in `references/datawrapper-fields.md` (some
+  fields, like range-annotation `opacity`, behave differently from the
+  TS types — that doc is empirical truth). Triggers on: chart, charts,
+  datawrapper, dw_create, dw_update, dw_publish, dw_export, blog-charts,
+  embed chart, line chart, bar chart, column chart, scatter, area chart,
+  visualize, publish chart, refresh chart, annotate chart, range
+  annotation, text annotation, callout, recession bar, shaded band,
+  iterate on chart, preview chart.
 ---
 
 # Blog Charts (Datawrapper)
