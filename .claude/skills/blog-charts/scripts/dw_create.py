@@ -107,6 +107,11 @@ def main() -> int:
     )
     p.add_argument("--folder-id", type=int, default=None, help="Datawrapper folder ID.")
     p.add_argument("--replace", action="store_true", help="Delete existing chart and recreate.")
+    p.add_argument(
+        "--no-preview",
+        action="store_true",
+        help="Skip the auto-preview PNG export (default: writes /tmp/blog-charts/<slug>.png).",
+    )
     args = p.parse_args()
 
     if not _registry.is_valid_slug(args.slug):
@@ -193,12 +198,18 @@ def main() -> int:
         },
     )
     edit_url = f"https://app.datawrapper.de/chart/{chart_id}/visualize"
+    preview_msg = ""
+    if not args.no_preview:
+        try:
+            preview_path = _client.auto_preview(chart_id, args.slug)
+            preview_msg = f"\n         preview PNG: {preview_path}  ← Read this to see the chart."
+        except Exception as e:
+            preview_msg = f"\n         (preview export failed: {e})"
     print(
         f"[create] {chart_id}: registered as slug {args.slug!r}\n"
         f"         edit:    {edit_url}\n"
-        f"         preview: https://datawrapper.dwcdn.net/{chart_id}/ (after publish)\n"
-        f"         Next: dw_export.py --slug {args.slug} --out ./preview.png "
-        f"to visually check before publishing.",
+        f"         live URL after publish: https://datawrapper.dwcdn.net/{chart_id}/"
+        f"{preview_msg}",
         file=sys.stderr,
     )
     print(chart_id)

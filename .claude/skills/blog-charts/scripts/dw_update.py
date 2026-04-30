@@ -108,6 +108,11 @@ def main() -> int:
     p.add_argument("--number-prepend", help="Text prepended to every number (e.g. '$').")
     p.add_argument("--publish", action="store_true", help="Republish after update.")
     p.add_argument("--restyle", action="store_true", help="Re-apply blog styling defaults (overwrites visualize settings).")
+    p.add_argument(
+        "--no-preview",
+        action="store_true",
+        help="Skip the auto-preview PNG export (default: writes /tmp/blog-charts/<slug>.png).",
+    )
     args = p.parse_args()
 
     chart_id, entry = _resolve(args.slug, args.chart_id)
@@ -261,12 +266,14 @@ def main() -> int:
         version = data.get("publicVersion")
         print(f"[update] {chart_id}: published v{version} → {public_url}", file=sys.stderr)
 
+    slug_for_preview = args.slug
     if args.slug or (entry is not None):
         slug = args.slug
         if slug is None:
             hit = _registry.get_by_id(chart_id)
             slug = hit[0] if hit else None
         if slug is not None:
+            slug_for_preview = slug
             updates = {}
             if args.csv:
                 updates["source_csv"] = str(args.csv.resolve())
@@ -285,6 +292,13 @@ def main() -> int:
                 updates["public_version"] = version
             if updates:
                 _registry.upsert(slug, updates)
+
+    if not args.no_preview and slug_for_preview:
+        try:
+            preview_path = _client.auto_preview(chart_id, slug_for_preview)
+            print(f"[update] {chart_id}: preview PNG: {preview_path}  ← Read this to see the chart.", file=sys.stderr)
+        except Exception as e:
+            print(f"[update] {chart_id}: (preview export failed: {e})", file=sys.stderr)
     return 0
 
 

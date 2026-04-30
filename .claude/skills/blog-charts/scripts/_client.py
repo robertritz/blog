@@ -200,3 +200,35 @@ def me() -> dict:
     if status != 200:
         raise RuntimeError(f"me: {status}: {raw[:200]}")
     return json.loads(raw)
+
+
+# ---------- preview ----------
+
+import os as _os
+import pathlib as _pathlib
+import time as _time
+
+
+def preview_path_for(slug: str) -> _pathlib.Path:
+    """Where auto-preview PNGs land. Override with $BLOG_CHARTS_PREVIEW_DIR."""
+    base = _pathlib.Path(_os.environ.get("BLOG_CHARTS_PREVIEW_DIR", "/tmp/blog-charts"))
+    return base / f"{slug}.png"
+
+
+def auto_preview(chart_id: str, slug: str, settle_seconds: float = 1.0) -> _pathlib.Path:
+    """Export a PNG to the conventional preview path so the agent can Read it.
+
+    Used by dw_create.py and dw_update.py to make the iteration loop default:
+    every create/update writes a fresh PNG to /tmp/blog-charts/<slug>.png so
+    the calling agent can immediately Read it and show it to the user.
+
+    A short settle delay before export reduces the chance of the export
+    service serving a cached pre-PATCH render.
+    """
+    if settle_seconds > 0:
+        _time.sleep(settle_seconds)
+    path = preview_path_for(slug)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    png = export_png(chart_id)
+    path.write_bytes(png)
+    return path

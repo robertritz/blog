@@ -25,10 +25,29 @@ and exports a PNG for visual verification.
 |---|---|
 | New chart for a blog post | `dw_create.py` |
 | Refresh a chart's data | `dw_update.py --slug <slug> --csv new.csv --publish` |
-| See the chart before publishing | `dw_export.py --slug <slug> --out ./preview.png`, then Read the PNG |
+| See the chart before publishing | Auto-exported by `dw_create.py` and `dw_update.py` to `/tmp/blog-charts/<slug>.png`. **Read that file every time.** |
 | Publish a draft | `dw_publish.py` (prints the responsive iframe to paste into the post) |
 | See all charts | `dw_list.py` (local registry) or `dw_list.py --remote` |
 | Delete a chart | `dw_delete.py` |
+
+## The iteration loop (DO THIS EVERY TIME)
+
+Charting is iterative. After **every** `dw_create.py` and **every**
+`dw_update.py`, the script auto-exports a PNG to `/tmp/blog-charts/<slug>.png`
+and prints the path. **You must Read that file** so the user sees the chart
+inline and can react.
+
+The loop:
+
+1. Run `dw_create.py` (or `dw_update.py`).
+2. Read the auto-exported PNG path printed to stderr.
+3. Show the user. Ask what to change.
+4. Apply the change with `dw_update.py` (which auto-exports again).
+5. Read again. Repeat until the user is happy.
+6. Then `dw_publish.py`.
+
+Do NOT skip the Read step, even when you think the chart is correct.
+The user wants to see every revision.
 
 Old posts that used the matplotlib `chart-maker` skill stay as-is. New
 charts default to this skill — interactive embeds work well on mobile and
