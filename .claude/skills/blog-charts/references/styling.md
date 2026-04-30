@@ -66,8 +66,25 @@ Datawrapper's `describe.number-format` accepts patterns like `0.0`,
 | Dollars (millions+) | `0.0a` | — | `$` | `$1.2B` |
 | Plain count with thousands | `0,0` | — | — | `12,340` |
 | Index | `0.0` | — | — | `142.3` |
-| Mongolian Tugrik | `0,0` | ` ₮` | — | `12,340 ₮` |
+| Mongolian Tugrik | `0,0` | — | — | `12,340` (put ₮ in intro) |
 
 `number-divisor` divides input before formatting (use 0.01 to convert
 `37` to `0.37` before percent formatting). Be careful — easy to
 double-divide.
+
+### Where number-append and number-prepend actually apply
+
+Empirically observed: `number-append` and `number-prepend` apply to
+**tooltips** and **inline value labels** (labels rendered next to bars
+or above columns). They do **not** modify y-axis tick labels — those
+remain bare numbers regardless.
+
+The convention this skill follows is to put units in the intro/subtitle
+("Annual average exchange rate, MNT per USD, 2014–2025") rather than
+trying to suffix every tick. Reads cleaner, takes less ink, and matches
+how the Economist's data team handles units.
+
+If you really need units on tick labels, the Datawrapper visualize
+field is `y-grid-format` — but it accepts numeral.js patterns, not
+arbitrary suffixes. For most cases: don't fight it. Put the unit in
+the intro.

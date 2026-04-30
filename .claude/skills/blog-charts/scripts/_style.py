@@ -197,6 +197,8 @@ def style_for(
     series_colors: dict | None = None,
     text_annotations: list | None = None,
     range_annotations: list | None = None,
+    labeling: str | None = None,
+    label_margin: int | None = None,
     number_format: str | None = None,
     number_append: str | None = None,
     number_prepend: str | None = None,
@@ -251,6 +253,10 @@ def style_for(
         meta["visualize"]["text-annotations"] = list(text_annotations)
     if range_annotations:
         meta["visualize"]["range-annotations"] = list(range_annotations)
+    if labeling is not None:
+        meta["visualize"]["labeling"] = labeling
+    if label_margin is not None:
+        meta["visualize"]["label-margin"] = label_margin
     if extra_visualize:
         meta["visualize"].update(extra_visualize)
 
@@ -300,12 +306,178 @@ def parse_series_colors(pairs: list[str] | None) -> dict:
     return out
 
 
-def parse_text_annotation(raw: str) -> dict:
-    """Parse ``--annotate-text "X|Y|TEXT"`` into Datawrapper's text-annotation shape.
+_DEFAULT_CONNECTOR_LINE = {
+    "enabled": False,
+    "type": "straight",
+    "circle": False,
+    "circleStyle": "solid",
+    "circleRadius": 15,
+    "stroke": 1,
+    "arrowHead": "lines",
+    "inheritColor": False,
+    "targetPadding": 4,
+}
 
-    Format: three pipe-separated fields — x position, y position, text.
-    X is a string (works for date axes too). Y is a number. Text can contain
-    spaces but not pipes.
+
+def _ann_id(prefix: str) -> str:
+    """Generate a short unique id for an annotation."""
+    import secrets
+    return f"{prefix}-{secrets.token_hex(4)}"
+
+
+def _text_annotation(
+    x: str | float,
+    y: str | float,
+    text: str,
+    *,
+    color: str | None = None,
+    size: int = 11,
+    align: str = "mc",
+    dx: int = 0,
+    dy: int = 0,
+    italic: bool = False,
+    bold: bool = False,
+) -> dict:
+    """Build a Datawrapper text-annotation with all required fields populated.
+
+    Schema source: ``chartTypes.ts`` in datawrapper/datawrapper. All listed
+    fields are required for the annotation to render correctly.
+    """
+    return {
+        "id": _ann_id("txt"),
+        "text": text,
+        "position": {"x": x, "y": y},
+        "align": align,
+        "dx": dx,
+        "dy": dy,
+        "size": size,
+        "bold": bold,
+        "italic": italic,
+        "underline": False,
+        "color": color if color is not None else BLOG_COLORS["text_muted"],
+        "bg": False,
+        "width": 20,
+        "showMobile": True,
+        "showDesktop": True,
+        "mobileFallback": True,
+        "connectorLine": dict(_DEFAULT_CONNECTOR_LINE),
+    }
+
+
+def _range_annotation(
+    x0: str | float,
+    x1: str | float,
+    *,
+    color: str | None = None,
+    opacity: int = 15,
+    type_: str = "x",
+    display: str = "range",
+) -> dict:
+    """Build a Datawrapper range-annotation with all required fields populated.
+
+    Schema notes — confirmed empirically against Datawrapper's render service:
+
+    - ``opacity`` is treated as a percentage 0-100 by the renderer, even though
+      the TypeScript types declare it as 0-1. ``opacity: 15`` renders a faint
+      band; ``opacity: 0.15`` renders nothing. Stick with 15.
+    - ``position.y0`` / ``position.y1`` accept the strings ``"-Infinity"`` /
+      ``"Infinity"`` to extend the band to the plot edges.
+    - Range annotations have NO ``text`` field. To label a range, pair with a
+      separate text-annotation — see ``label_for_range``.
+    """
+    return {
+        "id": _ann_id("rng"),
+        "position": {
+            "x0": x0,
+            "x1": x1,
+            "y0": "-Infinity",
+            "y1": "Infinity",
+        },
+        "display": display,
+        "type": type_,
+        "color": color if color is not None else BLOG_COLORS["context"],
+        "opacity": opacity,
+        "strokeWidth": 1,
+        "strokeType": "solid",
+    }
+
+
+def label_for_range(
+    x0: str | float,
+    x1: str | float,
+    text: str,
+    *,
+    y: float | int,
+    color: str | None = None,
+) -> dict:
+    """Return a text-annotation positioned to label a range band.
+
+    Datawrapper range annotations carry no text. The convention (per the
+    line-chart Academy article) is to overlay a separate text annotation.
+    This helper places the label inside the band, anchored at the left edge
+    near the top of the data range.
+
+    ``y`` must be a finite numeric value in **data space** — Datawrapper's
+    renderer ignores text annotations whose y is non-numeric (``"95%"``,
+    ``"Infinity"``, etc.). The caller computes y from the chart's data
+    (typically the global max). See ``max_y_from_csv``.
+    """
+    return _text_annotation(
+        x=x0,
+        y=y,
+        text=text,
+        color=color if color is not None else BLOG_COLORS["text_muted"],
+        size=11,
+        align="tl",
+        dx=4,
+        dy=0,
+        italic=True,
+    )
+
+
+def max_y_from_csv(csv_bytes: bytes) -> float | None:
+    """Find the maximum numeric value across all columns in a CSV.
+
+    Used to position auto-paired range labels. Returns ``None`` if no numeric
+    values are found (e.g., the CSV is all strings or empty).
+
+    Defensively skips:
+    - The header row (first row)
+    - Cells that don't parse as floats
+    - Common formatting characters (commas, percent, dollar signs, spaces)
+    """
+    import csv as _csv
+    import io as _io
+
+    try:
+        text = csv_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        text = csv_bytes.decode("latin-1", errors="replace")
+
+    reader = _csv.reader(_io.StringIO(text))
+    max_val: float | None = None
+    for i, row in enumerate(reader):
+        if i == 0:
+            continue  # skip header
+        for cell in row:
+            cleaned = cell.strip().replace(",", "").replace("$", "").replace("%", "").replace("₮", "").strip()
+            if not cleaned:
+                continue
+            try:
+                v = float(cleaned)
+            except ValueError:
+                continue
+            if max_val is None or v > max_val:
+                max_val = v
+    return max_val
+
+
+def parse_text_annotation(raw: str) -> dict:
+    """Parse ``--annotate-text "X|Y|TEXT"`` into a text-annotation dict.
+
+    Format: pipe-separated — x position, y position, text. X is a string
+    (works for date axes too). Y is parsed as a number when possible, kept
+    as a string otherwise (for category axes or "95%" plot-relative values).
 
     Examples::
 
@@ -313,10 +485,10 @@ def parse_text_annotation(raw: str) -> dict:
         "USA|72|United States"
 
     Optional 4th and 5th fields override color and size:
-    ``"2024-03|145000|Peak imports|#c53030|12"``.
+    ``"2024-03|145000|Peak imports|#c53030|13"``.
 
-    For richer annotations (alignment, dx/dy, italic, etc.) use the raw API —
-    see references/api.md.
+    For richer annotations (italic/bold, dx/dy, connector lines), edit the
+    returned dict — see references/datawrapper-fields.md for the full schema.
     """
     parts = [p.strip() for p in raw.split("|")]
     if len(parts) < 3:
@@ -326,41 +498,40 @@ def parse_text_annotation(raw: str) -> dict:
         )
     x, y_raw, text, *rest = parts
     try:
-        # Y is usually numeric. Keep as string if it doesn't parse — works
-        # for category axes.
         y: float | str = float(y_raw)
     except ValueError:
-        y = y_raw
-    out: dict = {
-        "x": x,
-        "y": y,
-        "text": text,
-        "color": BLOG_COLORS["text_muted"],
-        "size": 11,
-        "align": "mc",
-        "showMobile": True,
-        "showDesktop": True,
-    }
-    if rest:
-        out["color"] = rest[0] if rest[0] else out["color"]
+        y = y_raw  # accept "95%" or category strings verbatim
+    color = rest[0] if rest and rest[0] else None
+    size = 11
     if len(rest) >= 2 and rest[1]:
         try:
-            out["size"] = int(rest[1])
+            size = int(rest[1])
         except ValueError:
             pass
-    return out
+    return _text_annotation(x=x, y=y, text=text, color=color, size=size)
 
 
-def parse_range_annotation(raw: str) -> dict:
-    """Parse ``--annotate-range "X0|X1|TEXT"`` into a range-annotation dict.
+def parse_range_annotation(raw: str, *, label_y: float | int | None = None) -> tuple[dict, dict | None]:
+    """Parse ``--annotate-range "X0|X1|TEXT"`` into (range, optional label).
 
-    Format: pipe-separated x0, x1, optional text. Default fill is light gray
-    at ~15% opacity — reads as context, not data.
+    Returns a 2-tuple:
+
+    - The range-annotation dict (always returned).
+    - A paired text-annotation dict with the label, OR ``None`` if TEXT was
+      empty (just a plain shaded band).
+
+    Datawrapper range annotations carry NO text field of their own — the
+    canonical pattern is to overlay a separate text annotation. This parser
+    automates that: when you pass TEXT, you get both objects back.
+
+    ``label_y`` — required when TEXT is non-empty. The y position of the
+    paired text label, in data space. The CLI computes this from the chart's
+    CSV (typically the global max value) and passes it in.
 
     Examples::
 
-        "2022-02-24|2022-12-31|Russia invades Ukraine"
-        "2008-09|2009-06|"   # no text, just a shaded band
+        "2022-02-24|2022-12-31|Russia invades Ukraine"  → (range, label)
+        "2008-09|2009-06|"                              → (range, None)
 
     Optional 4th field overrides the fill color.
     """
@@ -372,18 +543,20 @@ def parse_range_annotation(raw: str) -> dict:
         )
     x0, x1, *rest = parts
     text = rest[0] if rest else ""
-    color = rest[1] if len(rest) >= 2 and rest[1] else BLOG_COLORS["context"]
-    out: dict = {
-        "x0": x0,
-        "x1": x1,
-        "type": "x",
-        "color": color,
-        "opacity": 15,
-        "display": "range",
-    }
+    color = rest[1] if len(rest) >= 2 and rest[1] else None
+    range_obj = _range_annotation(x0=x0, x1=x1, color=color)
     if text:
-        out["text"] = text
-    return out
+        if label_y is None:
+            raise ValueError(
+                f"--annotate-range with TEXT requires the caller to provide a "
+                f"label y position. Got TEXT={text!r} but no label_y. "
+                f"For dw_update, pass --csv so the parser can compute y from "
+                f"the chart data."
+            )
+        label = label_for_range(x0=x0, x1=x1, text=text, y=label_y)
+    else:
+        label = None
+    return range_obj, label
 
 
 def palette_for_n(n: int) -> list[str]:

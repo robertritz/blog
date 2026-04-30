@@ -121,8 +121,25 @@ policy windows, sanctions, conflicts:
 --annotate-range "2008-09|2009-06|"   # plain shaded band, no text
 ```
 
-For richer annotations (alignment, dx/dy nudges, italic, multi-line),
-use the raw API — see `api.md`.
+Datawrapper range annotations carry no native text field; the skill
+auto-pairs each non-empty TEXT with a text-annotation label positioned
+at the band's left edge near the top of the plot. Pass a 4th field to
+override the band's color. See `datawrapper-fields.md` for the full
+schema if you need a custom label position.
+
+**Avoiding collisions with direct line labels** — line charts auto-place
+the series name at each line's endpoint. If your text annotation lands
+near the endpoint, they'll overlap. Two fixes:
+
+```bash
+--no-direct-labels   # suppress auto labels entirely (labeling=off)
+--label-margin 25    # keep labels but push them further right
+```
+
+For richer annotations (italic, bold, dx/dy nudges, connector lines,
+multi-line text), edit the dict produced by `parse_text_annotation` or
+PATCH directly via `_client.update_metadata`. See `api.md` and
+`datawrapper-fields.md`.
 
 ## Series colors
 

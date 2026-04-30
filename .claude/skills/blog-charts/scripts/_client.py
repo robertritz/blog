@@ -127,6 +127,16 @@ def upload_data(chart_id: str, csv_bytes: bytes) -> None:
         raise RuntimeError(f"upload_data: {status}: {raw[:200]}")
 
 
+def get_data(chart_id: str) -> bytes:
+    """GET /charts/{id}/data — returns the raw CSV bytes uploaded to the chart."""
+    status, raw, _ = _request(
+        "GET", f"/charts/{chart_id}/data", accept="text/csv"
+    )
+    if status != 200:
+        raise RuntimeError(f"get_data: {status}: {raw[:200]}")
+    return raw
+
+
 def publish(chart_id: str) -> dict:
     """POST /charts/{id}/publish — returns embed codes and publicUrl."""
     status, raw, _ = _request("POST", f"/charts/{chart_id}/publish")

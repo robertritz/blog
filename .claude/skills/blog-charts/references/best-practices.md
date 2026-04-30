@@ -61,6 +61,37 @@ Shaded range annotations are useful for recession bars, policy windows,
 shortage periods, election years. Light gray with ~15% opacity so they
 read as context, not data.
 
+### Range annotations carry no built-in label
+
+This bit me once: Datawrapper range annotations have **no `text` field**.
+A shaded band is purely visual. To label a range, overlay a separate
+text-annotation positioned inside the band — see
+`references/datawrapper-fields.md` for the schema.
+
+The skill handles this automatically: when you pass
+`--annotate-range "X0|X1|TEXT"` with non-empty TEXT, the CLI auto-pairs
+the band with a text label anchored at the left edge of the range, near
+the top of the plot. Pass an empty TEXT (`X0|X1|`) for a plain band.
+
+### Annotation vs direct line label collision
+
+Line charts default to `labeling: "right"` — series names appear at the
+right end of each line. If you place a text annotation near the line
+endpoint, the two will overlap.
+
+Two ways to fix:
+
+- `--no-direct-labels` — suppress all auto-placed line labels (sets
+  `labeling: "off"`). Use when you're hand-placing labels via text
+  annotations or the line is already obvious from the title.
+- `--label-margin 25` — keep auto labels but push them further right of
+  the endpoint (default is ~5 px). Often enough to clear a nearby
+  annotation without losing the labels.
+
+Avoid placing text annotations at exactly the line endpoint when direct
+labels are on. Move the annotation inboard (an interior data point) or
+disable direct labels.
+
 ## Small multiples > busy chart
 
 If a single chart has more than 5 lines, or the lines have very different

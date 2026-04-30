@@ -80,9 +80,29 @@ def main() -> int:
         action="append",
         default=[],
         metavar="X0|X1|TEXT",
-        help="Replace range annotations. Pipe-separated. Repeatable. TEXT can be empty.",
+        help=(
+            "Replace range annotations. Pipe-separated. Repeatable. "
+            "TEXT can be empty. When TEXT is non-empty, the skill auto-pairs "
+            "a text-annotation label with the band."
+        ),
     )
     p.add_argument("--clear-annotations", action="store_true", help="Remove all annotations.")
+    p.add_argument(
+        "--no-direct-labels",
+        action="store_true",
+        help="Suppress direct line-end labels (sets visualize.labeling='off').",
+    )
+    p.add_argument(
+        "--direct-labels",
+        action="store_true",
+        help="Restore direct line-end labels (sets visualize.labeling='right').",
+    )
+    p.add_argument(
+        "--label-margin",
+        type=int,
+        default=None,
+        help="Pixels between line endpoint and direct label.",
+    )
     p.add_argument("--number-format", help="Datawrapper number format (e.g. '0.0').")
     p.add_argument("--number-append", help="Text appended to every number (e.g. '%').")
     p.add_argument("--number-prepend", help="Text prepended to every number (e.g. '$').")
@@ -93,6 +113,7 @@ def main() -> int:
     chart_id, entry = _resolve(args.slug, args.chart_id)
     touched = False
 
+    csv_bytes: bytes | None = None
     if args.csv:
         if not args.csv.exists():
             raise SystemExit(f"CSV not found: {args.csv}")
@@ -101,13 +122,34 @@ def main() -> int:
         print(f"[update] {chart_id}: uploaded {len(csv_bytes)} bytes of data", file=sys.stderr)
         touched = True
 
+    label_y: float | None = None
+    if args.annotate_range and any("|" in a and a.count("|") >= 2 and a.split("|")[2].strip() for a in args.annotate_range):
+        # We need a label_y. Prefer the just-uploaded CSV; otherwise GET the
+        # chart's current data from the API.
+        if csv_bytes is None:
+            csv_bytes = _client.get_data(chart_id)
+        label_y = _style.max_y_from_csv(csv_bytes) if csv_bytes else None
+
     try:
         series_labels = _style.parse_series_labels(args.series_label)
         series_colors = _style.parse_series_colors(args.series_color)
         text_annotations = [_style.parse_text_annotation(a) for a in args.annotate_text]
-        range_annotations = [_style.parse_range_annotation(a) for a in args.annotate_range]
+        range_annotations: list[dict] = []
+        for a in args.annotate_range:
+            range_obj, label = _style.parse_range_annotation(a, label_y=label_y)
+            range_annotations.append(range_obj)
+            if label is not None:
+                text_annotations.append(label)
     except ValueError as e:
         raise SystemExit(str(e))
+
+    if args.no_direct_labels and args.direct_labels:
+        raise SystemExit("Pass --no-direct-labels OR --direct-labels, not both.")
+    labeling_change: str | None = None
+    if args.no_direct_labels:
+        labeling_change = "off"
+    elif args.direct_labels:
+        labeling_change = "right"
 
     metadata_patch_args = {
         "title": args.title,
@@ -123,6 +165,8 @@ def main() -> int:
         or bool(text_annotations)
         or bool(range_annotations)
         or args.clear_annotations
+        or labeling_change is not None
+        or args.label_margin is not None
         or args.number_format is not None
         or args.number_append is not None
         or args.number_prepend is not None
@@ -146,6 +190,8 @@ def main() -> int:
                 series_colors=series_colors or None,
                 text_annotations=text_annotations or None,
                 range_annotations=range_annotations or None,
+                labeling=labeling_change,
+                label_margin=args.label_margin,
                 number_format=args.number_format,
                 number_append=args.number_append,
                 number_prepend=args.number_prepend,
@@ -178,6 +224,10 @@ def main() -> int:
                 visualize["text-annotations"] = text_annotations
             if range_annotations or args.clear_annotations:
                 visualize["range-annotations"] = range_annotations
+            if labeling_change is not None:
+                visualize["labeling"] = labeling_change
+            if args.label_margin is not None:
+                visualize["label-margin"] = args.label_margin
             metadata: dict = {}
             if describe:
                 metadata["describe"] = describe

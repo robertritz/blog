@@ -84,9 +84,26 @@ def main() -> int:
         metavar="X0|X1|TEXT",
         help=(
             "Add a shaded range annotation (recession bar, policy window). "
-            "Repeatable. TEXT can be empty. Example: "
-            "--annotate-range '2022-02-24|2022-12-31|Russia invades Ukraine'."
+            "Repeatable. TEXT can be empty. When TEXT is non-empty, the skill "
+            "automatically pairs the band with a text-annotation label "
+            "(Datawrapper range annotations carry no text field). "
+            "Example: --annotate-range '2022-02-24|2022-12-31|Russia invades Ukraine'."
         ),
+    )
+    p.add_argument(
+        "--no-direct-labels",
+        action="store_true",
+        help=(
+            "Suppress direct line-end labels (sets visualize.labeling='off'). "
+            "Use when text annotations near the line endpoint would collide "
+            "with the auto-placed series label."
+        ),
+    )
+    p.add_argument(
+        "--label-margin",
+        type=int,
+        default=None,
+        help="Pixels between line endpoint and direct label. Increase to reduce collisions (default ~5).",
     )
     p.add_argument("--folder-id", type=int, default=None, help="Datawrapper folder ID.")
     p.add_argument("--replace", action="store_true", help="Delete existing chart and recreate.")
@@ -116,6 +133,7 @@ def main() -> int:
         _registry.remove(args.slug)
 
     csv_bytes = args.csv.read_bytes()
+    label_y = _style.max_y_from_csv(csv_bytes)
 
     # 1. Create (POST).
     chart = _client.create_chart(args.title, args.chart_type, folder_id=args.folder_id)
@@ -131,7 +149,12 @@ def main() -> int:
         series_labels = _style.parse_series_labels(args.series_label)
         series_colors = _style.parse_series_colors(args.series_color)
         text_annotations = [_style.parse_text_annotation(a) for a in args.annotate_text]
-        range_annotations = [_style.parse_range_annotation(a) for a in args.annotate_range]
+        range_annotations: list[dict] = []
+        for a in args.annotate_range:
+            range_obj, label = _style.parse_range_annotation(a, label_y=label_y)
+            range_annotations.append(range_obj)
+            if label is not None:
+                text_annotations.append(label)
     except ValueError as e:
         raise SystemExit(str(e))
     patch = _style.style_for(
@@ -146,6 +169,8 @@ def main() -> int:
         series_colors=series_colors or None,
         text_annotations=text_annotations or None,
         range_annotations=range_annotations or None,
+        labeling="off" if args.no_direct_labels else None,
+        label_margin=args.label_margin,
         number_format=args.number_format,
         number_append=args.number_append,
         number_prepend=args.number_prepend,

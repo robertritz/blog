@@ -100,6 +100,7 @@ when you reach that decision.
 | Pre-publish checklist | `references/best-practices.md` | Before every `--publish`. Always. |
 | Understand / repair the registry | `references/registry.md` | Registry errors |
 | Raw API calls | `references/api.md` | Something's not in the CLI |
+| **Validated schema for `metadata.visualize`** (annotations, axes, line settings) | `references/datawrapper-fields.md` | Building a richer annotation, debugging "field doesn't render", picking up an unfamiliar `visualize` key |
 | Set up the API token | `references/secrets.md` | First time, or "missing token" error |
 | Debug | `references/troubleshooting.md` | Any 4xx / 5xx |
 

@@ -101,13 +101,22 @@ def main() -> int:
         n_pre = d.get("number-prepend", "")
         n_app = d.get("number-append", "")
         print(f"numbers:       format={n_format!r} prepend={n_pre!r} append={n_app!r}")
+        labeling = v.get("labeling", "(default — right)")
+        label_margin = v.get("label-margin", "(default)")
+        print(f"line labels:   labeling={labeling!r} label-margin={label_margin}")
         text_anns = v.get("text-annotations") or []
         range_anns = v.get("range-annotations") or []
         print(f"annotations:   {len(text_anns)} text, {len(range_anns)} range")
         for i, ann in enumerate(text_anns):
-            print(f"  text[{i}]:  x={ann.get('x')!r} y={ann.get('y')!r} text={ann.get('text','')!r}")
+            pos = ann.get("position") or {}
+            x = pos.get("x", ann.get("x"))
+            y = pos.get("y", ann.get("y"))
+            print(f"  text[{i}]:  x={x!r} y={y!r} text={ann.get('text','')!r}")
         for i, ann in enumerate(range_anns):
-            print(f"  range[{i}]: x0={ann.get('x0')!r} x1={ann.get('x1')!r} text={ann.get('text','')!r}")
+            pos = ann.get("position") or {}
+            x0 = pos.get("x0", ann.get("x0"))
+            x1 = pos.get("x1", ann.get("x1"))
+            print(f"  range[{i}]: x0={x0!r} x1={x1!r} display={ann.get('display')!r} opacity={ann.get('opacity')}")
     return 0
 
 
