@@ -202,6 +202,7 @@ Current projects: `consumer-confidence-mongolia`, `mongolia-data-governance`, `s
 
 ## Skills
 
+- **`blog-post`** — Use this skill when starting a new post. Scaffolds `src/content/posts/<slug>.mdx` with prefilled frontmatter (`draft: true`), `public/images/<slug>/`, and optionally `research/<slug>/`. Encodes the 5-part post pattern (hook → claim → data → analysis → close), the data sources Robert uses (NSO 1212.mn, Mongolbank, MRPAM, World Bank, data.mn), and the "X years later" follow-up structure. Composes with `roberts-voice` and `blog-charts`.
 - **`roberts-voice`** — Use this skill when writing or drafting blog posts. It captures Robert's writing voice and style for data stories, articles, and written content.
 - **`blog-charts`** — Use this skill when creating any chart or data visualization for new blog posts. Wraps the Datawrapper API: creates, styles, publishes, and PNG-exports charts from a CSV. Default output is a responsive interactive iframe for `.mdx` posts; PNG fallback works in `.md`. Slug registry at `~/.cache/blog-charts/registry.json` prevents duplicates. Read `references/principles.md` (SWD + Economist data team) before drafting any chart's title.
 - **`chart-maker`** (deprecated) — Old matplotlib-based skill. Kept only so old posts that reference its templates still build. **Do not use for new charts** — use `blog-charts` instead.
