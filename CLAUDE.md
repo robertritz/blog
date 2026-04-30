@@ -202,8 +202,35 @@ Current projects: `consumer-confidence-mongolia`, `mongolia-data-governance`, `s
 
 ## Skills
 
+- **`blog-post`** — Use this skill when starting a new post. Scaffolds `src/content/posts/<slug>.mdx` with prefilled frontmatter (`draft: true`), `public/images/<slug>/`, and optionally `research/<slug>/`. Encodes the 5-part post pattern (hook → claim → data → analysis → close), the data sources Robert uses (NSO 1212.mn, Mongolbank, MRPAM, World Bank, data.mn), and the "X years later" follow-up structure. Composes with `roberts-voice` and `blog-charts`.
+
+## Image folder migration policy
+
+16 pre-Astro-migration posts have legacy `public/images/<folder>/` names that don't match the post slug (e.g. `mongolia-is-running-on-fumes` references `/images/fuel-shortage/`). The new convention is to keep `<post-slug>` and `<image-folder>` matched, but the legacy posts are kept as-is.
+
+**Do not sweep-migrate.** Renaming public asset paths breaks external hot-links, social media OG cards, and search-engine image indexing. Astro's `redirects` config only handles routes, not static files, so there's no clean redirect-based fix without Nginx changes. The cost is real; the gain (repo consistency) is invisible to readers.
+
+**Migrate lazily.** When touching an old post for some other reason (a follow-up, a content edit, a chart update), run `python .claude/skills/blog-post/scripts/migrate_post.py --post <slug> --apply` for just that post and commit the rename alongside the edit. Dry-run is the default; review the diff before applying. Over time the inconsistency fades naturally without breaking external links in a single big sweep.
 - **`roberts-voice`** — Use this skill when writing or drafting blog posts. It captures Robert's writing voice and style for data stories, articles, and written content.
-- **`chart-maker`** — Use this skill when creating charts or data visualizations for blog posts. It follows _Storytelling With Data_ principles with a blog-harmonized color palette. Always use the `chart-maker` skill and its templates instead of writing matplotlib code from scratch.
+- **`blog-charts`** — Use this skill when creating any chart or data visualization for new blog posts. Wraps the Datawrapper API: creates, styles, publishes, and PNG-exports charts from a CSV. Default output is a responsive interactive iframe for `.mdx` posts; PNG fallback works in `.md`. Slug registry at `~/.cache/blog-charts/registry.json` prevents duplicates. Read `references/principles.md` (SWD + Economist data team) before drafting any chart's title.
+- **`chart-maker`** (deprecated) — Old matplotlib-based skill. Kept only so old posts that reference its templates still build. **Do not use for new charts** — use `blog-charts` instead.
+
+## Secrets
+
+`/Users/ritz/projects/blog/.env` (gitignored) carries:
+
+| Var | Used by | Notes |
+|---|---|---|
+| `DATAWRAPPER_API_TOKEN` | `blog-charts` skill | Free-tier Datawrapper. See `.claude/skills/blog-charts/references/secrets.md` for required scopes and smoke-test. |
+
+## Charts and MDX
+
+The `blog-charts` skill emits a responsive iframe with an inline resize
+script. Astro's plain markdown integration may strip script tags — for
+posts that include interactive Datawrapper embeds, save the post as
+`.mdx` (Astro's MDX integration is loaded in `astro.config.mjs`). Plain
+`.md` posts can fall back to a PNG export — see
+`.claude/skills/blog-charts/references/embeds.md`.
 
 ## Design Philosophy
 
