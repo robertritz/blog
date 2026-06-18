@@ -6,7 +6,7 @@ export const siteConfig = {
     url: "https://robertritz.com",
     title: "Robert Ritz",
     description:
-      "Builder based in Mongolia. Making data accessible, writing about AI and economics, running AUM and Precision Kraft.",
+      "The personal site of Robert Ritz, builder and writer. Thirteen years in Mongolia, I have a habit of chasing questions and answering with data, and now working on American Metrics on Substack.",
   },
   social: {
     github: "https://github.com/robertritz",

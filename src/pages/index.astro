@@ -23,14 +23,34 @@ const posts = (await getCollection("posts", ({ data }) => !data.draft))
 
       <section class="bio">
         <p>
-          Data scientist, builder, and accidental Mongolian. I moved to
-          Ulaanbaatar over a decade ago and now run a university, co-founded a
-          furniture company, and build tools to make Mongolia's data accessible.
+          I'm a builder and a writer. I've spent the last thirteen years in
+          Mongolia, where I co-founded a furniture company and a university, and
+          am raising a family. I write about whatever question I can't let go
+          of, and usually I can't let it go until the data answers it. For eight
+          years those questions were about Mongolia. Now they're about America,
+          at <a
+            href="https://americanmetrics.org"
+            target="_blank"
+            rel="noopener noreferrer">American Metrics</a
+          >.
         </p>
       </section>
 
       <section class="projects" id="projects">
         <h2>Projects</h2>
+
+        <div class="featured-project">
+          <h3>American Metrics</h3>
+          <p class="project-desc">
+            Stress-testing the claims people make about America, with data.
+          </p>
+          <a
+            href="https://americanmetrics.org"
+            class="project-link"
+            target="_blank"
+            rel="noopener noreferrer">americanmetrics.org &rarr;</a
+          >
+        </div>
 
         <div class="featured-project">
           <h3>Mongolia Newsletter</h3>
@@ -84,6 +104,12 @@ const posts = (await getCollection("posts", ({ data }) => !data.draft))
       </section>
 
       <footer class="site-footer">
+        <a
+          href="https://americanmetrics.org"
+          target="_blank"
+          rel="noopener noreferrer">American Metrics</a
+        >
+        <span class="separator">&middot;</span>
         <a
           href="https://x.com/RobertERitz"
           target="_blank"
