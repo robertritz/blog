@@ -212,6 +212,7 @@ Current projects: `consumer-confidence-mongolia`, `mongolia-data-governance`, `s
 **Do not sweep-migrate.** Renaming public asset paths breaks external hot-links, social media OG cards, and search-engine image indexing. Astro's `redirects` config only handles routes, not static files, so there's no clean redirect-based fix without Nginx changes. The cost is real; the gain (repo consistency) is invisible to readers.
 
 **Migrate lazily.** When touching an old post for some other reason (a follow-up, a content edit, a chart update), run `python .claude/skills/blog-post/scripts/migrate_post.py --post <slug> --apply` for just that post and commit the rename alongside the edit. Dry-run is the default; review the diff before applying. Over time the inconsistency fades naturally without breaking external links in a single big sweep.
+
 - **`roberts-voice`** — Use this skill when writing or drafting blog posts. It captures Robert's writing voice and style for data stories, articles, and written content.
 - **`blog-charts`** — Use this skill when creating any chart or data visualization for new blog posts. Wraps the Datawrapper API: creates, styles, publishes, and PNG-exports charts from a CSV. Default output is a responsive interactive iframe for `.mdx` posts; PNG fallback works in `.md`. Slug registry at `~/.cache/blog-charts/registry.json` prevents duplicates. Read `references/principles.md` (SWD + Economist data team) before drafting any chart's title.
 - **`chart-maker`** (deprecated) — Old matplotlib-based skill. Kept only so old posts that reference its templates still build. **Do not use for new charts** — use `blog-charts` instead.
@@ -220,8 +221,8 @@ Current projects: `consumer-confidence-mongolia`, `mongolia-data-governance`, `s
 
 `/Users/ritz/projects/blog/.env` (gitignored) carries:
 
-| Var | Used by | Notes |
-|---|---|---|
+| Var                     | Used by             | Notes                                                                                                             |
+| ----------------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `DATAWRAPPER_API_TOKEN` | `blog-charts` skill | Free-tier Datawrapper. See `.claude/skills/blog-charts/references/secrets.md` for required scopes and smoke-test. |
 
 ## Charts and MDX
