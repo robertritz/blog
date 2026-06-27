@@ -1,0 +1,150 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content"
+import Layout from "@layouts/Layout.astro"
+import Container from "@components/Container.astro"
+import FormattedDate from "@components/FormattedDate.astro"
+import { readingTime } from "@lib/utils"
+import BackToPrevious from "@components/BackToPrevious.astro"
+import PostNavigation from "@components/PostNavigation.astro"
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("posts"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: post,
+  }))
+}
+type Props = CollectionEntry<"posts">
+
+const posts = (await getCollection("posts"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+
+function getNextPost() {
+  for (const post of posts) {
+    if (post.id === Astro.params.id) {
+      return posts[posts.indexOf(post) + 1]
+    }
+  }
+}
+
+function getPrevPost() {
+  for (const post of posts) {
+    if (post.id === Astro.params.id) {
+      return posts[posts.indexOf(post) - 1]
+    }
+  }
+}
+
+const nextPost = getNextPost()
+const prevPost = getPrevPost()
+
+const post = Astro.props
+const { Content } = await render(post)
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <Container>
+    <div class="animate">
+      <BackToPrevious href="/archive">Back to archive</BackToPrevious>
+    </div>
+    <div class="my-10 space-y-1">
+      <div class="animate flex items-center gap-1.5">
+        <div class="font-base text-sm">
+          <FormattedDate date={post.data.pubDate} />
+        </div>
+        &bull;
+        {
+          post.body && (
+            <div class="font-base text-sm">{readingTime(post.body)}</div>
+          )
+        }
+      </div>
+      <h1 class="animate text-3xl font-semibold text-black dark:text-white">
+        {post.data.title}
+      </h1>
+      {
+        post.data.description && (
+          <p class="animate text-base text-black/65 dark:text-white/65">
+            {post.data.description}
+          </p>
+        )
+      }
+      {
+        post.data.tags && post.data.tags.length > 0 ? (
+          <div class="animate flex flex-wrap gap-2 pt-1">
+            {post.data.tags.map((tag) => (
+              <a
+                href={`/tags/${tag}`}
+                class="rounded-sm border border-black/15 px-2 py-1 text-sm transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"
+              >
+                {tag}
+              </a>
+            ))}
+          </div>
+        ) : null
+      }
+    </div>
+    <article class="animate">
+      <Content />
+      <div class="mt-24">
+        <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+      </div>
+    </article>
+  </Container>
+</Layout>
+
+<script>
+  function enhancePost() {
+    const article = document.querySelector("article")
+    if (!article) return
+
+    // External links open in a new tab
+    article
+      .querySelectorAll<HTMLAnchorElement>('a[href^="http"]')
+      .forEach((link) => {
+        if (!link.href.includes("robertritz.com")) {
+          link.target = "_blank"
+          link.rel = "noopener noreferrer"
+        }
+      })
+
+    // Click-to-zoom lightbox for images
+    let overlay = document.getElementById("img-lightbox")
+    let lbImg: HTMLImageElement
+    if (!overlay) {
+      overlay = document.createElement("div")
+      overlay.id = "img-lightbox"
+      overlay.style.cssText =
+        "display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;cursor:zoom-out;align-items:center;justify-content:center"
+      lbImg = document.createElement("img")
+      lbImg.style.cssText =
+        "max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px"
+      overlay.appendChild(lbImg)
+      document.body.appendChild(overlay)
+      const el = overlay
+      el.addEventListener("click", () => {
+        el.style.display = "none"
+      })
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") el.style.display = "none"
+      })
+    } else {
+      lbImg = overlay.querySelector("img") as HTMLImageElement
+    }
+
+    const el = overlay
+    article.querySelectorAll<HTMLImageElement>("img").forEach((img) => {
+      img.style.cursor = "zoom-in"
+      img.addEventListener("click", () => {
+        lbImg.src = img.src
+        el.style.display = "flex"
+      })
+    })
+  }
+
+  document.addEventListener("DOMContentLoaded", enhancePost)
+  document.addEventListener("astro:after-swap", enhancePost)
+</script>

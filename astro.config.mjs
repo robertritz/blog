@@ -1,33 +1,24 @@
-import mdx from "@astrojs/mdx"
-import react from "@astrojs/react"
-import sitemap from "@astrojs/sitemap"
-import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections"
-import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers"
-import tailwindcss from "@tailwindcss/vite"
-import expressiveCode from "astro-expressive-code"
 import { defineConfig } from "astro/config"
 
+import react from "@astrojs/react"
+import sitemap from "@astrojs/sitemap"
+import mdx from "@astrojs/mdx"
+import pagefind from "astro-pagefind"
 import robotsTxt from "astro-robots-txt"
+import tailwindcss from "@tailwindcss/vite"
 
 // https://astro.build/config
 export default defineConfig({
   output: "static",
   prefetch: true,
   site: "https://robertritz.com",
+  integrations: [react(), sitemap(), mdx(), pagefind(), robotsTxt()],
+  markdown: {
+    shikiConfig: {
+      theme: "css-variables",
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [
-    react(),
-    sitemap(),
-    expressiveCode({
-      plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
-      themes: ["material-theme-lighter", "material-theme-darker"],
-      defaultProps: {
-        showLineNumbers: true,
-      },
-    }),
-    mdx(),
-    robotsTxt(),
-  ],
 })

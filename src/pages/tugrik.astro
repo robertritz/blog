@@ -1,9 +1,8 @@
 ---
 import { readFile } from "node:fs/promises"
 
-import BaseHead from "../components/BaseHead.astro"
-import SiteHeader from "../components/SiteHeader.astro"
-import { siteConfig } from "../config"
+import Head from "@components/Head.astro"
+import { SITE } from "@consts"
 import { TugrikDashboard } from "../components/tugrik/TugrikDashboard"
 import type { TugrikDashboardData } from "../types/tugrik"
 import "../styles/tugrik.css"
@@ -19,14 +18,14 @@ const dashboard = JSON.parse(dashboardRaw) as TugrikDashboardData
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead
-      title={`Tugrik Forecast | ${siteConfig.siteName}`}
+    <Head
+      title={`Tugrik Forecast | ${SITE.TITLE}`}
       description="USD/MNT forecast research note with horizon controls, chart views, and supporting raw detail panels."
     />
   </head>
   <body class="tugrik-route">
     <main class="tugrik-page">
-      <SiteHeader showNav={false} showThemeToggle={false} />
+      <a href="/" class="site-name">{SITE.TITLE}</a>
       <TugrikDashboard client:load data={dashboard} />
     </main>
   </body>

@@ -29,7 +29,8 @@ Robert Ritz's personal blog (robertritz.com) - a minimalist static site built wi
 ## Technology Stack
 
 - **Framework**: Astro (static site generator)
-- **Styling**: Tailwind CSS with custom styles
+- **Theme**: [Astro Micro](https://github.com/trevortylerlee/astro-micro) (minimal weblog), customized — **pure-white background**, Geist fonts, Pagefind search. Chrome lives in `src/components/` (Micro's) + `src/layouts/Layout.astro`; site constants in `src/consts.ts`; global styles in `src/styles/global.css`. Posts render at `/posts/<slug>/` via `src/pages/posts/[...id].astro`; `/archive` lists all by year; `/tags` is on. The `/tugrik` USD-MNT dashboard is a **standalone React/visx page** kept outside the theme (`src/pages/tugrik.astro` + `src/components/tugrik/`). No `expressive-code` (no post uses code blocks) and no comments. The content schema (`src/content.config.ts`) is unchanged from before the swap, so the `blog-post`/`blog-charts` skills still work as-is.
+- **Styling**: Tailwind CSS **v4** (`@tailwindcss/vite`)
 - **Deployment**: Kamal (Docker-based)
 - **Server**: Nginx (serving static files)
 
